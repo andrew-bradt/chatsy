@@ -18,8 +18,22 @@ const io = socketio(server, {
   }
 });
 
+io.on('connection', socket => {
+  const onlineUser = [];
+
+  console.log('Client connected');
+
+  socket.on('peerId', msg => {
+    onlineUser.push(msg.peerId);
+    console.log(msg);
+    socket.broadcast.emit('new_user', { onlineUser });
+  });
+
+});
+
 app.use(cors());
 
+app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
