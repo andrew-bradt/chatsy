@@ -3,19 +3,19 @@ import { useEffect, useRef } from "react";
 import Peer from "peerjs"
 import socketIOClient from "socket.io-client"
 
-const connection = socketIOClient('/');
+const socket = socketIOClient('/');
 
 function App() {
 
-  let videoRef = useRef();
-  let remoteVideoRef = useRef();
+  const videoRef = useRef();
+  const remoteVideoRef = useRef();
 
   
   useEffect(() => {
     const constraints = {
       'video': true,
       'audio': false
-  }
+    }
   navigator.mediaDevices.getUserMedia(constraints)
       .then(stream => {
         videoRef.current.srcObject = stream;
@@ -31,7 +31,7 @@ function App() {
       console.log('My peer ID is ' + id)
 
       // send to server
-      connection.emit('peerId', {peerId: id})
+      socket.emit('peerId', {peerId: id})
     })
 
     peer.on('call', (call) => {
@@ -41,7 +41,7 @@ function App() {
       })
     })
 
-    connection.on('new_user', msg => {
+    socket.on('new_user', msg => {
       const peerId = msg.onlineUser.pop();
       console.log(videoRef.current.srcObject)
       const call = peer.call(peerId, videoRef.current.srcObject)
