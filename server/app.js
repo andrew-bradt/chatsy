@@ -18,6 +18,19 @@ app.use(cors());
 const users = require("./routes/users");
 const contactInfo = require("./routes/contact-info");
 
+// socket io
+const {v4: uuidv4} = require('uuid');
+
+const userIDs = {};
+
+io.on('connection', (socket) => {
+  const userID = uuidv4();
+  userIDs[userID] = null;
+  socket.send(`Your id is ${userID}`);
+});
+
+// middleware, routes
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
