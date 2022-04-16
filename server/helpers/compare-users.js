@@ -17,7 +17,7 @@ module.exports = (users) => {
     .filter(id => id !== userId);
   };
     
-  const findCompatibleUsers = (user) => {
+  const updateCompatibleUsers = (user) => {
     const userIds = getOtherUserIds(user.userId);
 
     for (const userId of userIds) {
@@ -39,7 +39,7 @@ module.exports = (users) => {
   };
   
   return {
-    findCompatibleUsers,
+    updateCompatibleUsers,
     removeCompatibleUser
   };
 };
