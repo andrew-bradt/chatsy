@@ -12,7 +12,13 @@ const db = require('./configs/db.config');
 
 // Helper Imports
 const {getUserId, getUserInterests} = require('./helpers/queries')(db);
-getUserInterests('link@yahoo.com').then(console.log);
+const parseUser = require('./helpers/parsers');
+
+getUserInterests('link@yahoo.com')
+  .then(user => {
+    const parsedUser = parseUser(user);
+    console.log(parsedUser);
+  });
 const app = express();
 const server = http.createServer(app);
 const io = socketio(server, {
