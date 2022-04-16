@@ -17,9 +17,15 @@ const toggleLooking = (userId) => {
   users[userId].isLookingForPeer = !isLookingForPeer;
 };
 
+const toggleInCall = (userId) => {
+  const isInCall = users[userId].isInCall;
+  users[userId].isInCall = !isInCall;
+};
+
 module.exports = {
   users,
   addUser,
   removeUser,
-  toggleLooking
+  toggleLooking,
+  toggleInCall
 };

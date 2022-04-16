@@ -13,7 +13,7 @@ const db = require('./configs/db.config');
 // Users Code
 const {getUserInterests} = require('./helpers/queries')(db);
 const {parseUser} = require('./helpers/parsers');
-const {users, addUser, removeUser, toggleLooking} = require('./users');
+const {users, addUser, removeUser, toggleLooking, toggleInCall} = require('./users');
 
 const app = express();
 const server = http.createServer(app);
@@ -59,11 +59,10 @@ getUserInterests('lisa.simpson@gmail.com')
   });
 
 getUserInterests('mario@mushroomkindom.jp')
-.then(res => {
-  const peerId = 882837842;
-  const newUser = parseUser(res, peerId);
-  addUser(newUser);
+  .then(res => {
+    const peerId = 882837842;
+    const newUser = parseUser(res, peerId);
+    addUser(newUser);
 
-  removeUser(newUser);
-  toggleLooking(newUser.userId);
+    toggleInCall(newUser.userId);
 });
