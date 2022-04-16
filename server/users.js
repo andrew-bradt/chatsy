@@ -3,8 +3,8 @@ const users = {};
 const {findCompatibleUsers, removeCompatibleUser} = require('./helpers/compare-users')(users);
 
 const addUser = (user) => {
-  findCompatibleUsers(user);
   users[user.userId] = user;
+  findCompatibleUsers(user);
 };
 
 const removeUser = (id) => {
