@@ -1,7 +1,7 @@
 const users = {};
 const compatibleUsers = {};
 
-const {findCompatibleUsers} = require('./helpers/compare-users')(users, compatibleUsers);
+const {findCompatibleUsers, removeCompatibleUser} = require('./helpers/compare-users')(users, compatibleUsers);
 
 const addUser = (user) => {
   // TODO: should also modify compatibleUsers with a helper
