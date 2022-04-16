@@ -30,8 +30,8 @@ io.on('connection', socket => {
   });
 
   socket.on('endCall', () => {
-    socket.broadcast.emit('endCall')
-  })
+    socket.broadcast.emit('endCall');
+  });
 
 });
 

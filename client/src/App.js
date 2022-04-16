@@ -11,6 +11,10 @@ function App() {
   const remoteVideoRef = useRef();
   const currentCall = useRef();
 
+  const endCall = () => {
+    currentCall.current.close();
+    remoteVideoRef.current.srcObject = null;
+  };
   
   useEffect(() => {
     const constraints = {
@@ -53,9 +57,7 @@ function App() {
       })
     })
 
-    socket.on('endCall', () => {
-      remoteVideoRef.current.srcObject = null
-    })
+    socket.on('endCall', endCall)
 
   }, [])
 
@@ -64,8 +66,7 @@ function App() {
       <video width="500" height="500" ref={videoRef} autoPlay ></video>
       <video width="500" height="500" ref={remoteVideoRef} autoPlay ></video>
       <button onClick={() => {
-        currentCall.current.close();
-        remoteVideoRef.current.srcObject = null;
+        endCall();
         socket.emit('endCall');
       }}>End Call</button>
     </div>
