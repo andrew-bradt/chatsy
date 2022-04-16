@@ -14,9 +14,10 @@ module.exports = (db) => ({
 
   getUserInterests(email) {
     const queryString = `
-      SELECT *
+      SELECT users.id, email, label
       FROM users
       JOIN users_interests ON users.id = users_interests.user_id
+      JOIN interests ON interest_id = interests.id
       WHERE email = $1
     `;
     const queryParams = [email];

@@ -13,7 +13,6 @@ const db = require('./configs/db.config');
 // Helper Imports
 const {getUserId, getUserInterests} = require('./helpers/queries')(db);
 getUserInterests('link@yahoo.com').then(console.log);
-
 const app = express();
 const server = http.createServer(app);
 const io = socketio(server, {
