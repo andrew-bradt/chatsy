@@ -10,15 +10,8 @@ const cors = require('cors');
 
 const db = require('./configs/db.config');
 
-// Helper Imports
-const {getUserId, getUserInterests} = require('./helpers/queries')(db);
-const parseUser = require('./helpers/parsers');
+const manageUsers = require('./users')(db);
 
-getUserInterests('link@yahoo.com')
-  .then(user => {
-    const parsedUser = parseUser(user);
-    console.log(parsedUser);
-  });
 const app = express();
 const server = http.createServer(app);
 const io = socketio(server, {
