@@ -50,12 +50,17 @@ function App() {
         console.log("incoming", remoteVidoStream)
       })
     })
+
+    return () => {
+      peer.destroy()
+    }
   }, [])
 
   return (
     <div className="App">
       <video width="500" height="500" ref={videoRef} autoPlay ></video>
       <video width="500" height="500" ref={remoteVideoRef} autoPlay ></video>
+      <button>End Call</button>
     </div>
   );
 }
