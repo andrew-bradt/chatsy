@@ -7,9 +7,9 @@ const addUser = (user) => {
   findCompatibleUsers(user);
 };
 
-const removeUser = (id) => {
-  removeCompatibleUser(id);
-  delete users[id];
+const removeUser = (userId) => {
+  removeCompatibleUser(userId);
+  delete users[userId];
 };
 
 const toggleLooking = (userId) => {
