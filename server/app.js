@@ -10,6 +10,11 @@ const cors = require('cors');
 
 const db = require('./configs/db.config');
 
+// Users Code
+const {getUserInterests} = require('./helpers/queries')(db);
+const {parseUser} = require('./helpers/parsers');
+const {users, compatibleUsers, addUser, removeUser} = require('./users');
+
 const app = express();
 const server = http.createServer(app);
 const io = socketio(server, {
