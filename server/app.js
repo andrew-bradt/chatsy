@@ -21,7 +21,6 @@ getUserInterests('simon_bel123@mail.ca')
     addUser(parsedUser);
   });
 
-
 const app = express();
 const server = http.createServer(app);
 const io = socketio(server, {
