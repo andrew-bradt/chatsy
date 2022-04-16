@@ -1,7 +1,6 @@
 const users = {};
-const compatibleUsers = {};
 
-const {findCompatibleUsers, removeCompatibleUser} = require('./helpers/compare-users')(users, compatibleUsers);
+const {findCompatibleUsers, removeCompatibleUser} = require('./helpers/compare-users')(users);
 
 const addUser = (user) => {
   findCompatibleUsers(user);
@@ -15,7 +14,6 @@ const removeUser = (id) => {
 
 module.exports = {
   users,
-  compatibleUsers,
   addUser,
   removeUser
 };

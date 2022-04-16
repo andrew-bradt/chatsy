@@ -1,7 +1,6 @@
-module.exports = (users, compatibleUsers) => {
+module.exports = (users) => {
   const findCompatibleUsers = (user) => {
     console.log('TODO findCompatibleUsers');
-    compatibleUsers[user.userId] = {};
   };
 
   const removeCompatibleUser = (user) => {
