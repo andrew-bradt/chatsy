@@ -63,4 +63,7 @@ getUserInterests('mario@mushroomkindom.jp')
   const peerId = 882837842;
   const newUser = parseUser(res, peerId);
   addUser(newUser);
+
+  removeUser(newUser);
+  console.log(users);
 });
