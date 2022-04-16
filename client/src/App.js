@@ -37,10 +37,11 @@ function App() {
     peer.on('open', function (id) {
       console.log('My peer ID is ' + id)
 
-      // send to server
+      // send current user peer id to server
       socket.emit('peerId', {peerId: id})
     })
 
+    // listen for call event, and answer
     peer.on('call', (call) => {
       currentCall.current = call
       call.answer(videoRef.current.srcObject);
@@ -49,6 +50,7 @@ function App() {
       })
     })
 
+    // receive other user's peer id and call immediately
     socket.on('new_user', msg => {
       const peerId = msg.onlineUser.pop();
       const call = peer.call(peerId, videoRef.current.srcObject)
@@ -59,6 +61,7 @@ function App() {
       })
     })
 
+    // end the peer call after getting endCall event from server
     socket.on('endCall', endCall)
 
   }, [])
