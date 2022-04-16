@@ -10,7 +10,16 @@ const cors = require('cors');
 
 const db = require('./configs/db.config');
 
-const manageUsers = require('./users')(db);
+// Users Code
+const {getUserInterests} = require('./helpers/queries')(db);
+const {parseUser} = require('./helpers/parsers');
+const {users, addUser} = require('./users');
+
+getUserInterests('simon_bel123@mail.ca')
+  .then(user => {
+    const parsedUser = parseUser(user);
+    addUser(parsedUser);
+  });
 
 const app = express();
 const server = http.createServer(app);

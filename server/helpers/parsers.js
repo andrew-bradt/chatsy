@@ -4,4 +4,4 @@ const parseUser = (user) => ({
   interests: user.map(row => row.label)
 });
 
-module.exports = parseUser;
+module.exports = {parseUser};
