@@ -7,6 +7,8 @@ module.exports = (db) => ({
   `;
   const queryParams = [email];
   return db.query(queryString, queryParams)
-    .then(res => console.log(res.rows));
+    .then(res => {
+      return res.rows[0];
+    });
   }
 });

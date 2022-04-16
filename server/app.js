@@ -14,7 +14,11 @@ const db = require('./configs/db.config');
 
 // Helper Imports
 const {getUserId} = require('./helpers/db-helpers')(db);
-getUserId('link@yahoo.com');
+getUserId('link@yahoo.com')
+  .then(res => {
+    const {id, email} = res;
+    console.log(id, email);
+  });
 
 const app = express();
 const server = http.createServer(app);
