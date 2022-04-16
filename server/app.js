@@ -8,17 +8,11 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
 
-
-
 const db = require('./configs/db.config');
 
 // Helper Imports
-const {getUserId} = require('./helpers/db-helpers')(db);
-getUserId('link@yahoo.com')
-  .then(res => {
-    const {id, email} = res;
-    console.log(id, email);
-  });
+const {getUserId, getUserInterests} = require('./helpers/queries')(db);
+getUserInterests('link@yahoo.com').then(console.log);
 
 const app = express();
 const server = http.createServer(app);

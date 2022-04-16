@@ -1,0 +1,28 @@
+module.exports = (db) => ({
+  getUserId(email) {
+    const queryString = `
+      SELECT *
+      FROM users
+      WHERE email = $1
+    `;
+    const queryParams = [email];
+    return db.query(queryString, queryParams)
+      .then(res => {
+        return res.rows[0];
+    });
+  }, 
+
+  getUserInterests(email) {
+    const queryString = `
+      SELECT *
+      FROM users
+      JOIN users_interests ON users.id = users_interests.user_id
+      WHERE email = $1
+    `;
+    const queryParams = [email];
+    return db.query(queryString, queryParams)
+      .then(res => {
+        return res.rows;
+    });
+  }
+});
