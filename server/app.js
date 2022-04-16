@@ -34,6 +34,10 @@ io.on('connection', socket => {
     socket.broadcast.emit('new_user', { onlineUser });
   });
 
+  socket.on('endCall', () => {
+    socket.broadcast.emit('endCall');
+  });
+
 });
 
 app.use(cors());
