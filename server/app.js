@@ -8,7 +8,13 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
 
+
+
 const db = require('./configs/db.config');
+
+// Helper Imports
+const {getUserId} = require('./helpers/db-helpers')(db);
+getUserId('link@yahoo.com');
 
 const app = express();
 const server = http.createServer(app);
