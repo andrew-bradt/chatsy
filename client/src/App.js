@@ -16,7 +16,7 @@ function App() {
     remoteVideoRef.current.srcObject = null;
   };
   
-  // get local user video stream on page
+  // get local user video stream on page, does not have to be in useEffect
   useEffect(() => {
     const constraints = {
       'video': true,
