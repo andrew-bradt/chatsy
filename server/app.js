@@ -13,7 +13,7 @@ const db = require('./configs/db.config');
 // Users Code
 const {getUserInterests} = require('./helpers/queries')(db);
 const {parseUser} = require('./helpers/parsers');
-const {users, addUser, removeUser} = require('./users');
+const {users, addUser, removeUser, toggleLooking} = require('./users');
 
 const app = express();
 const server = http.createServer(app);
@@ -65,5 +65,5 @@ getUserInterests('mario@mushroomkindom.jp')
   addUser(newUser);
 
   removeUser(newUser);
-  console.log(users);
+  toggleLooking(newUser.userId);
 });

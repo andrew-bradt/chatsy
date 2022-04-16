@@ -12,8 +12,14 @@ const removeUser = (id) => {
   delete users[id];
 };
 
+const toggleLooking = (userId) => {
+  const isLookingForPeer = users[userId].isLookingForPeer;
+  users[userId].isLookingForPeer = !isLookingForPeer;
+};
+
 module.exports = {
   users,
   addUser,
-  removeUser
+  removeUser,
+  toggleLooking
 };
