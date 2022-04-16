@@ -9,6 +9,7 @@ function App() {
 
   const videoRef = useRef();
   const remoteVideoRef = useRef();
+  const currentCall = useRef();
 
   
   useEffect(() => {
@@ -35,6 +36,7 @@ function App() {
     })
 
     peer.on('call', (call) => {
+      currentCall.current = call
       call.answer(videoRef.current.srcObject);
       call.on('stream', (remoteVidoStream) => {
         remoteVideoRef.current.srcObject = remoteVidoStream;
@@ -43,24 +45,29 @@ function App() {
 
     socket.on('new_user', msg => {
       const peerId = msg.onlineUser.pop();
-      console.log(videoRef.current.srcObject)
       const call = peer.call(peerId, videoRef.current.srcObject)
+
+      currentCall.current = call
       call.on('stream', (remoteVidoStream) => {
         remoteVideoRef.current.srcObject = remoteVidoStream;
-        console.log("incoming", remoteVidoStream)
       })
     })
 
-    return () => {
-      peer.destroy()
-    }
+    socket.on('endCall', () => {
+      remoteVideoRef.current.srcObject = null
+    })
+
   }, [])
 
   return (
     <div className="App">
       <video width="500" height="500" ref={videoRef} autoPlay ></video>
       <video width="500" height="500" ref={remoteVideoRef} autoPlay ></video>
-      <button>End Call</button>
+      <button onClick={() => {
+        currentCall.current.close();
+        remoteVideoRef.current.srcObject = null;
+        socket.emit('endCall');
+      }}>End Call</button>
     </div>
   );
 }
