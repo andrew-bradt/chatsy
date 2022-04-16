@@ -16,6 +16,7 @@ function App() {
     remoteVideoRef.current.srcObject = null;
   };
   
+  // get local user video stream on page
   useEffect(() => {
     const constraints = {
       'video': true,
@@ -30,6 +31,7 @@ function App() {
       });
   }, [])
 
+  // Peer related logic
   useEffect(() => {
     const peer = new Peer();
     peer.on('open', function (id) {
