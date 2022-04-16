@@ -61,7 +61,7 @@ export default function usePeer(socket) {
   
     // end the peer call after getting endCall event from server
     socket.on("endCall", endCall);
-  }, []);
+  }, [socket]);
   
   return { videoRef, remoteVideoRef, endCall }
 }
