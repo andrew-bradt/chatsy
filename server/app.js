@@ -49,3 +49,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 module.exports = {app, server};
+
+// DRIVER CODE - USERS
+const peerId = 190228392;
+
+getUserInterests('lisa.simpson@gmail.com')
+  .then(res => {
+    const newUser = parseUser(res, peerId);
+    console.log(newUser);
+  });
