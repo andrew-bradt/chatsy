@@ -4,12 +4,12 @@ const compatibleUsers = {};
 const {findCompatibleUsers, removeCompatibleUser} = require('./helpers/compare-users')(users, compatibleUsers);
 
 const addUser = (user) => {
-  // TODO: should also modify compatibleUsers with a helper
+  findCompatibleUsers(user);
   users[user.userId] = user;
 };
 
 const removeUser = (id) => {
-  // TODO: should also modify compatibleUsers a helper
+  removeCompatibleUser(id);
   delete users[id];
 };
 
