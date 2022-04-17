@@ -35,6 +35,3 @@ class Call {
   _getSharedInterests(...User)
 }
 ```
-
-
-
