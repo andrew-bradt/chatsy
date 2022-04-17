@@ -15,6 +15,9 @@ const {getUserInterests} = require('./helpers/queries')(db);
 const {parseUser} = require('./helpers/parsers');
 const {users, addUser, removeUser, toggleLooking, toggleInCall} = require('./users');
 
+// Users Code - OOP
+const ActiveUsers = require('./entities/ActiveUsers');
+
 const app = express();
 const server = http.createServer(app);
 const io = socketio(server, {
@@ -51,18 +54,27 @@ app.use(cookieParser());
 module.exports = {app, server};
 
 // DRIVER CODE - USERS
+// getUserInterests('lisa.simpson@gmail.com')
+//   .then(res => {
+//     const peerId = 190228392;
+//     const newUser = parseUser(res, peerId);
+//     addUser(newUser);
+//   });
+
+// getUserInterests('mario@mushroomkindom.jp')
+//   .then(res => {
+//     const peerId = 882837842;
+//     const newUser = parseUser(res, peerId);
+//     addUser(newUser);
+
+//     toggleInCall(newUser.userId);
+// });
+
+// DRIVER CODE - USERS OOP
+const activeUsers = new ActiveUsers();
 getUserInterests('lisa.simpson@gmail.com')
-  .then(res => {
-    const peerId = 190228392;
-    const newUser = parseUser(res, peerId);
-    addUser(newUser);
+  .then(userData => {
+    const peerId = 19392891;
+    activeUsers.addUser(userData, peerId);
+    console.log(activeUsers.users);
   });
-
-getUserInterests('mario@mushroomkindom.jp')
-  .then(res => {
-    const peerId = 882837842;
-    const newUser = parseUser(res, peerId);
-    addUser(newUser);
-
-    toggleInCall(newUser.userId);
-});

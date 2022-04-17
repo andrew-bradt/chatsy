@@ -1,3 +1,5 @@
+const ActiveUser = require('./ActiveUser');
+
 class ActiveUsers {
   constructor() {
     this.users = {};
@@ -11,7 +13,9 @@ class ActiveUsers {
 
   };
 
-  addUser() {
+  addUser(userData, peerId) {
+    const newUser = new ActiveUser(userData, peerId);
+    this.users[newUser.userId] = newUser;
   };
 
   removeUser(){
