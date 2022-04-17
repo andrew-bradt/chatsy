@@ -61,10 +61,16 @@ Promise.all([getUserInterests('link@yahoo.com'), getUserInterests('lisa.simpson@
     const user1Obj = activeUsers.addUser(user1, 81293892);
     const user2Obj = activeUsers.addUser(user2, 9918283);
 
-    const call = new Call(user1Obj, user2Obj);
+    // const call = new Call(user1Obj, user2Obj);
     // console.log(user1Obj);
     // console.log(user2Obj);
     // console.log(call);
+    lobby.addUser(user1Obj);
+    lobby.addUser(user2Obj);
+
+    
+    console.log(lobby);
+    lobby.removeUser(user2Obj);
+    console.log(lobby);
   });
 
-console.log(lobby);
