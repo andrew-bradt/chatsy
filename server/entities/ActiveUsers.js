@@ -1,6 +1,6 @@
 class ActiveUsers {
   constructor() {
-    users = {};
+    this.users = {};
   };
 
   _updateCompatibleUsers() {
@@ -26,3 +26,5 @@ class ActiveUsers {
 
   };
 }
+
+module.exports = ActiveUsers;
