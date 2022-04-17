@@ -24,6 +24,20 @@ const io = socketio(server, {
   }
 });
 
+app.use(cors());
+
+app.use(cors());
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+
+// Routes
+const loginRoute = require('./routes/login')({db, getUserInterests});
+
+app.use('/login', loginRoute);
+
+// Socket
 io.on('connection', socket => {
   const onlineUser = [];
 
@@ -41,13 +55,7 @@ io.on('connection', socket => {
 
 });
 
-app.use(cors());
 
-app.use(cors());
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
 
 module.exports = {app, server};
 
