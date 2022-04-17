@@ -1,11 +1,14 @@
 const router = require("express").Router();
 
 module.exports = (dependencies) => {
-  const {db, getUserInterests} = dependencies;
+  const {db, getUserInterests, activeUsers} = dependencies;
 
   router.post('/', (req, res) => {
-    getUserInterests(req.body.email).then(user => {
-      res.json(user);
+    const {email, peerId} = req.body;
+
+    getUserInterests(email).then(userData => {
+      const newUser = activeUsers.addUser(userData, peerId);
+      res.status(304).send();
     });
   });
 

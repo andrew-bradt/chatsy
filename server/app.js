@@ -16,6 +16,9 @@ const ActiveUsers = require('./entities/ActiveUsers');
 const Lobby = require('./entities/Lobby');
 const Call = require('./entities/Call');
 
+const activeUsers = new ActiveUsers();
+const lobby = new Lobby();
+
 const app = express();
 const server = http.createServer(app);
 const io = socketio(server, {
@@ -33,7 +36,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // Routes
-const loginRoute = require('./routes/login')({db, getUserInterests});
+const loginRoute = require('./routes/login')({
+  db, 
+  getUserInterests, 
+  activeUsers, 
+  lobby
+});
 
 app.use('/login', loginRoute);
 
@@ -55,30 +63,5 @@ io.on('connection', socket => {
 
 });
 
-
-
 module.exports = {app, server};
-
-// DRIVER CODE - USERS OOP
-
-// const activeUsers = new ActiveUsers();
-// const lobby = new Lobby();
-
-// Promise.all([getUserInterests('link@yahoo.com'), getUserInterests('lisa.simpson@gmail.com')])
-//   .then(([user1, user2]) => {
-//     const user1Obj = activeUsers.addUser(user1, 81293892);
-//     const user2Obj = activeUsers.addUser(user2, 9918283);
-
-//     // const call = new Call(user1Obj, user2Obj);
-//     // console.log(user1Obj);
-//     // console.log(user2Obj);
-//     // console.log(call);
-//     lobby.addUser(user1Obj);
-//     lobby.addUser(user2Obj);
-
-    
-//     console.log(lobby);
-//     lobby.removeUser(user2Obj);
-//     console.log(lobby);
-//   });
 
