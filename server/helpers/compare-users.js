@@ -13,8 +13,8 @@ const addCompatibleUser = (userOne, userTwo, interests) => {
 module.exports = (users) => {
   const getOtherUserIds = (userId) => {
     return Object.keys(users)
-    .map(id => Number(id))
-    .filter(id => id !== userId);
+      .map(id => Number(id))
+      .filter(id => id !== userId);
   };
     
   const updateCompatibleUsers = (user) => {
