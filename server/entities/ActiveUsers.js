@@ -1,4 +1,4 @@
-const ActiveUser = require('./ActiveUser');
+const User = require('./User');
 
 class ActiveUsers {
   constructor() {
@@ -14,12 +14,12 @@ class ActiveUsers {
   };
 
   addUser(userData, peerId) {
-    const newUser = new ActiveUser(userData, peerId);
+    const newUser = new User(userData, peerId);
     this.users[newUser.userId] = newUser;
   };
 
-  removeUser(){
-
+  removeUser(userId){
+    delete this.users[userId];
   };
 
   toggleLooking() {

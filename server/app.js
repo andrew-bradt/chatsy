@@ -76,5 +76,12 @@ getUserInterests('lisa.simpson@gmail.com')
   .then(userData => {
     const peerId = 19392891;
     activeUsers.addUser(userData, peerId);
-    console.log(activeUsers.users);
   });
+
+getUserInterests('link@yahoo.com')
+.then(userData => {
+  const peerId = 81289372;
+  activeUsers.addUser(userData, peerId);
+  console.log(activeUsers.users);
+  activeUsers.removeUser(2);
+});

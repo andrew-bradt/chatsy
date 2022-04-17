@@ -1,4 +1,4 @@
-class ActiveUser {
+class User {
   constructor(userData, peerId) {
     this.peerId = peerId
 
@@ -12,4 +12,4 @@ class ActiveUser {
   }
 }
 
-module.exports = ActiveUser;
+module.exports = User;
