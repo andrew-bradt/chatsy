@@ -14,14 +14,6 @@ class ActiveUsers {
     this.users[newUser.userId] = newUser;
     return newUser;
   };
-
-  toggleLookingForUser(userId) {
-    this.users[userId].toggleIsLooking();
-  };
-
-  toggleInCallForUser(userId) {
-    this.users[userId].toggleIsInCall();
-  };
 }
 
 module.exports = ActiveUsers;
