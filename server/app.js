@@ -72,16 +72,17 @@ module.exports = {app, server};
 
 // DRIVER CODE - USERS OOP
 const activeUsers = new ActiveUsers();
-getUserInterests('lisa.simpson@gmail.com')
-  .then(userData => {
-    const peerId = 19392891;
-    activeUsers.addUser(userData, peerId);
-  });
+// getUserInterests('lisa.simpson@gmail.com')
+//   .then(userData => {
+//     const peerId = 19392891;
+//     activeUsers.addUser(userData, peerId);
+//   });
 
 getUserInterests('link@yahoo.com')
 .then(userData => {
   const peerId = 81289372;
   activeUsers.addUser(userData, peerId);
-  console.log(activeUsers.users);
-  activeUsers.removeUser(2);
+  activeUsers.toggleLookingForUser(3);
+  activeUsers.toggleInCallForUser(3);
+  console.log(activeUsers);
 });

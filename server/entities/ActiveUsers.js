@@ -5,12 +5,8 @@ class ActiveUsers {
     this.users = {};
   };
 
-  _updateCompatibleUsers() {
-
-  };
-
-  _removeCompatibleUser() {
-
+  removeUser(userId){
+    delete this.users[userId];
   };
 
   addUser(userData, peerId) {
@@ -18,16 +14,12 @@ class ActiveUsers {
     this.users[newUser.userId] = newUser;
   };
 
-  removeUser(userId){
-    delete this.users[userId];
+  toggleLookingForUser(userId) {
+    this.users[userId].toggleIsLooking();
   };
 
-  toggleLooking() {
-
-  };
-
-  toggleInCall() {
-
+  toggleInCallForUser(userId) {
+    this.users[userId].toggleIsInCall();
   };
 }
 

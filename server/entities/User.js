@@ -10,6 +10,25 @@ class User {
     this.isInCall = false,
     this.compatibleUsers = {}
   }
+  _checkIfCompatible (user) {
+
+  }
+
+  removeCompatibleUser (userId) {
+    delete this.compatibleUsers[userId];
+  }
+
+  addCompatibleUser () {
+
+  }
+
+  toggleIsLooking() {
+    this.isLookingForPeer = !this.isInCall;
+  }
+
+  toggleIsInCall() {
+    this.isInCall = !this.isInCall;
+  }
 }
 
 module.exports = User;
