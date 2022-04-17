@@ -13,7 +13,7 @@ const db = require('./configs/db.config');
 // Users Code
 const {getUserInterests} = require('./helpers/queries')(db);
 const {parseUser} = require('./helpers/parsers');
-const {users, compatibleUsers, addUser, removeUser} = require('./users');
+const {users, addUser, removeUser, toggleLooking, toggleInCall} = require('./users');
 
 const app = express();
 const server = http.createServer(app);
@@ -49,3 +49,20 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 module.exports = {app, server};
+
+// DRIVER CODE - USERS
+getUserInterests('lisa.simpson@gmail.com')
+  .then(res => {
+    const peerId = 190228392;
+    const newUser = parseUser(res, peerId);
+    addUser(newUser);
+  });
+
+getUserInterests('mario@mushroomkindom.jp')
+  .then(res => {
+    const peerId = 882837842;
+    const newUser = parseUser(res, peerId);
+    addUser(newUser);
+
+    toggleInCall(newUser.userId);
+});

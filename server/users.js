@@ -1,21 +1,31 @@
 const users = {};
-const compatibleUsers = {};
 
-const {findCompatibleUsers, removeCompatibleUser} = require('./helpers/compare-users')(users, compatibleUsers);
+const {updateCompatibleUsers, removeCompatibleUser} = require('./helpers/compare-users')(users);
 
 const addUser = (user) => {
-  findCompatibleUsers(user);
   users[user.userId] = user;
+  updateCompatibleUsers(user);
 };
 
-const removeUser = (id) => {
-  removeCompatibleUser(id);
-  delete users[id];
+const removeUser = (userId) => {
+  removeCompatibleUser(userId);
+  delete users[userId];
+};
+
+const toggleLooking = (userId) => {
+  const isLookingForPeer = users[userId].isLookingForPeer;
+  users[userId].isLookingForPeer = !isLookingForPeer;
+};
+
+const toggleInCall = (userId) => {
+  const isInCall = users[userId].isInCall;
+  users[userId].isInCall = !isInCall;
 };
 
 module.exports = {
   users,
-  compatibleUsers,
   addUser,
-  removeUser
+  removeUser,
+  toggleLooking,
+  toggleInCall
 };
