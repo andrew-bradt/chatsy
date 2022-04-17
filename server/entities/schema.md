@@ -31,7 +31,18 @@ class Call {
     userIds = [userId],
     sharedInterests = [String]
   }
+}
 
-  _getSharedInterests(...User)
+class Lobby {
+  constructor() {
+    this.usersByInterest = {
+      interest: Set {
+        userId
+      }
+    };
+  };
+
+  addUser(user)
+  removeUser(user)
 }
 ```
