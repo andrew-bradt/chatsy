@@ -7,19 +7,7 @@ class User {
     this.interests = new Set(userData.map(row => row.label)),
 
     this.isLookingForPeer = false,
-    this.isInCall = false,
-    this.compatibleUsers = {}
-  }
-  _checkIfCompatible (user) {
-
-  }
-
-  removeCompatibleUser (userId) {
-    delete this.compatibleUsers[userId];
-  }
-
-  addCompatibleUser () {
-
+    this.isInCall = false
   }
 
   toggleIsLooking() {
