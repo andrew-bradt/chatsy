@@ -1,6 +1,6 @@
 class Interest {
   constructor(userId) {
-    this.users = new Map(userId);
+    this.users = new Set(userId);
   }
 
   addUser(userId) {
@@ -14,10 +14,9 @@ class Interest {
 
 class Lobby {
   constructor() {
-    this.usersByInterest = {
-
-    };
+    this.usersByInterest = {};
   };
+
   _deleteInterestIfEmpty(interest) {
     
   }
@@ -25,6 +24,7 @@ class Lobby {
   addUser(user) {
 
   }
+
   removeUser(user) {
 
   }
