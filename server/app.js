@@ -10,13 +10,10 @@ const cors = require('cors');
 
 const db = require('./configs/db.config');
 
-// Users Code
-const {getUserInterests} = require('./helpers/queries')(db);
-const {parseUser} = require('./helpers/parsers');
-const {users, addUser, removeUser, toggleLooking, toggleInCall} = require('./users');
-
 // Users Code - OOP
+const {getUserInterests} = require('./helpers/queries')(db);
 const ActiveUsers = require('./entities/ActiveUsers');
+const Call = require('./entities/Call');
 
 const app = express();
 const server = http.createServer(app);
@@ -53,36 +50,16 @@ app.use(cookieParser());
 
 module.exports = {app, server};
 
-// DRIVER CODE - USERS
-// getUserInterests('lisa.simpson@gmail.com')
-//   .then(res => {
-//     const peerId = 190228392;
-//     const newUser = parseUser(res, peerId);
-//     addUser(newUser);
-//   });
-
-// getUserInterests('mario@mushroomkindom.jp')
-//   .then(res => {
-//     const peerId = 882837842;
-//     const newUser = parseUser(res, peerId);
-//     addUser(newUser);
-
-//     toggleInCall(newUser.userId);
-// });
-
 // DRIVER CODE - USERS OOP
-const activeUsers = new ActiveUsers();
-getUserInterests('lisa.simpson@gmail.com')
-  .then(userData => {
-    const peerId = 19392891;
-    activeUsers.addUser(userData, peerId);
-  });
 
-getUserInterests('link@yahoo.com')
-.then(userData => {
-  const peerId = 81289372;
-  activeUsers.addUser(userData, peerId);
-  activeUsers.toggleLookingForUser(3);
-  activeUsers.toggleInCallForUser(3);
-  // console.log(activeUsers);
-});
+const activeUsers = new ActiveUsers();
+Promise.all([getUserInterests('link@yahoo.com'), getUserInterests('lisa.simpson@gmail.com')])
+  .then(([user1, user2]) => {
+    const user1Obj = activeUsers.addUser(user1, 81293892);
+    const user2Obj = activeUsers.addUser(user2, 9918283);
+
+    const call = new Call(user1Obj, user2Obj);
+    console.log(user1Obj);
+    console.log(user2Obj);
+    console.log(call);
+  });

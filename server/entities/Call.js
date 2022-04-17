@@ -1,5 +1,5 @@
 class Call {
-  constructor(users) {
+  constructor(...users) {
     this.userIds = users.map(user => user.userId);
     this.sharedInterests = this._getSharedInterests(users);
   }

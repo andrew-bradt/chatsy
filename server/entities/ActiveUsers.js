@@ -12,6 +12,7 @@ class ActiveUsers {
   addUser(userData, peerId) {
     const newUser = new User(userData, peerId);
     this.users[newUser.userId] = newUser;
+    return newUser;
   };
 
   toggleLookingForUser(userId) {
