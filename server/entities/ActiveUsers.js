@@ -3,6 +3,14 @@ class ActiveUsers {
     users = {};
   };
 
+  _updateCompatibleUsers() {
+
+  };
+
+  _removeCompatibleUser() {
+
+  };
+
   addUser() {
   };
 
@@ -12,9 +20,9 @@ class ActiveUsers {
 
   toggleLooking() {
 
-  }
+  };
 
   toggleInCall() {
-    
-  }
+
+  };
 }
