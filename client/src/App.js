@@ -1,57 +1,64 @@
 import './App.css';
 import axios from 'axios';
+import Peer from "peerjs";
 import {useState, useEffect, useRef} from 'react';
 import socketIOClient from "socket.io-client"
+
+import useVideoCall from './hooks/useVideoCall';
 
 import LoginForm from './components/LoginForm';
 
 
-// import usePeer from './hooks/usePeer';
-
 function App() {
-  // const { videoRef, remoteVideoRef, endCall } = usePeer(socket);
   const [userId, setUserId] = useState(null);
   const [interests, setInterests] = useState([]);
+  const [peerId, setPeerId] = useState(null);
+
   const socket = useRef(null);
+  const peer = useRef(null);
+
+  const { videoRef, remoteVideoRef, endCall } = useVideoCall(socket.current, peer.current);
 
   useEffect(() => {
     if (userId) {
-      socket.current = socketIOClient('/');
+      socket.current = socketIOClient("/");
+      peer.current = new Peer();
+
+      peer.current.on("open", id => {
+        setPeerId(id);
+      });
     }
   }, [userId]);
 
-  const handleLogin = (email, peerId) => {
-    axios.post('/login', {email})
-      .then(res => {
-        const {userId, interestsArray} = res.data;
-        setUserId(userId);
-        setInterests(interestsArray);
-      });
-
-    console.log('userId: ', userId);
+  const handleLogin = (email) => {
+    axios.post("/login", { email, peerId }).then(res => {
+      const { userId, interestsArray } = res.data;
+      setUserId(userId);
+      setInterests(interestsArray);
+    });
   };
 
   return (
     <>
-      <LoginForm onClick = {handleLogin}/>
+      <LoginForm onSubmit={handleLogin} />
       <button
-        onClick = {() => {
-          socket.current.emit('enter-lobby');
+        onClick={() => {
+          socket.current.emit("enter-lobby");
         }}
       >
         send socket msg
       </button>
+      <video width="500" height="500" ref={videoRef} autoPlay></video>
+      <video width="500" height="500" ref={remoteVideoRef} autoPlay></video>
+      <button
+        onClick={() => {
+          endCall();
+          socket.current.emit("endCall");
+        }}
+      >
+        End Call
+      </button>
     </>
-    
-    // <div className="App">
-    //   <video width="500" height="500" ref={videoRef} autoPlay ></video>
-    //   <video width="500" height="500" ref={remoteVideoRef} autoPlay ></video>
-    //   <button onClick={() => {
-    //     endCall();
-    //     socket.emit('endCall');
-    //   }}>End Call</button>
-    // </div>
-    // <LoginForm/>
   );
 }
 
