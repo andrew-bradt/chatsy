@@ -46,20 +46,49 @@ const loginRoute = require('./routes/login')({
 app.use('/login', loginRoute);
 
 // Socket
-io.on('connection', socket => {
-  const onlineUser = [];
+io.on('connection', (socket) => {
 
-  console.log('Client connected');
+  socket.on('disconnect', () => {
 
-  socket.on('peerId', msg => {
-    onlineUser.push(msg.peerId);
-    console.log(msg);
-    socket.broadcast.emit('new_user', { onlineUser });
   });
 
-  socket.on('endCall', () => {
-    socket.broadcast.emit('endCall');
+  socket.on('enter-lobby', () => {
+    
   });
+
+  socket.on('remove-criteria', () => {
+
+  });
+
+  socket.on('add-criteria', () => {
+
+  });
+
+  socket.on('call-established', ()=>{
+
+  });
+
+  socket.on('call-end', ()=>{
+
+  });
+
+  socket.on('send-msg', ()=>{
+    
+  });
+
+  // const onlineUser = [];
+
+  // console.log('Client connected');
+
+  // socket.on('peerId', msg => {
+  //   onlineUser.push(msg.peerId);
+  //   console.log(msg);
+  //   socket.broadcast.emit('new_user', { onlineUser });
+  // });
+
+  // socket.on('endCall', () => {
+  //   socket.broadcast.emit('endCall');
+  // });
 
 });
 
