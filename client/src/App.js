@@ -47,6 +47,7 @@ function App() {
       >
         send socket msg
       </button>
+      
       <video width="500" height="500" ref={videoRef} autoPlay></video>
       <video width="500" height="500" ref={remoteVideoRef} autoPlay></video>
       <button

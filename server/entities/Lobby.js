@@ -3,10 +3,16 @@ class Lobby {
     this.usersByInterest = {};
   };
 
-  _addInterest(interest, userId) {
-    const newInterest = new Set();
-    newInterest.add(userId);
-    this.usersByInterest[interest] = newInterest;
+  addInterest(interest, userId) {
+    // const newInterest = this.userByInterest[interest] || new Set();
+    // newInterest.add(userId);
+    // this.usersByInterest[interest] = newInterest;
+    if (this.usersByInterest[interest]) {
+      this.usersByInterest[interest].add(userId);
+    } else {
+      this.usersByInterest[interest] = new Set().add(interest);
+    }
+    console.log(this.usersByInterest);
   }
 
   addUser(user) {
@@ -14,7 +20,7 @@ class Lobby {
       if (this.usersByInterest[interest]) {
         this.usersByInterest[interest].add(user.userId);
       } else {
-        this._addInterest(interest, user.userId);
+        this.addInterest(interest, user.userId);
       }
     });
   }
