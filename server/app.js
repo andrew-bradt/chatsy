@@ -27,7 +27,7 @@ const io = socketio(server, {
     origin: '*'
   }
 });
-
+ 
 // Socket Listeners
 const enterLobby = require('./socket-listeners/enter-lobby')(activeUsers, lobby);
 const leaveLobby = require('./socket-listeners/leave-lobby')(activeUsers, lobby);
@@ -42,9 +42,8 @@ io.on('connection', (socket) => {
   socket.on('add-criteria', ({userId, interest}) => addCriteria(interest, userId));
   socket.on('remove-criteria', ({userId, interest}) => {removeCriteria(interest, userId)});
   
-  socket.on('call-established', ()=> {});
-  socket.on('call-end', ()=> {});
-  socket.on('send-msg', ()=> {});
+  socket.on('send-msg', ({msg})=> {});
+  socket.on('send-contact-info', ({userId}) => {});
 });
 
 app.use(cors());
