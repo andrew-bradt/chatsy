@@ -1,12 +1,24 @@
 import React, {useState} from 'react'
 
-export default function LoginForm({handleLogin}) {
+export default function LoginForm({onClick}) {
+  const [email, setEmail] = useState('');
+  const peerId = Math.floor(Math.random()*100000);
 
+  const login = (e) => {
+    e.preventDefault();
+    onClick(email, peerId);
+  };
+  
   return (
     <form>
-      <input type='email' name='email'/>
-      <input type='text' name='peerId'/>
-      <input type='submit' onClick={(e) => handleLogin(e)}/>
+      <input 
+        type='email' 
+        name='email' 
+        placeholder='enter your email' 
+        value = {email}
+        onChange = {(e) => setEmail(e.target.value)}
+      />
+      <input type='submit' onClick = {login}/>
     </form>
   );
 }

@@ -1,6 +1,6 @@
 import './App.css';
 import axios from 'axios';
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useRef} from 'react';
 import socketIOClient from "socket.io-client"
 
 import LoginForm from './components/LoginForm';
@@ -8,19 +8,31 @@ import LoginForm from './components/LoginForm';
 
 // import usePeer from './hooks/usePeer';
 
-// const socket = socketIOClient('/');
-
 function App() {
   // const { videoRef, remoteVideoRef, endCall } = usePeer(socket);
   const [userId, setUserId] = useState(null);
   const [interests, setInterests] = useState([]);
-  const [socket, setSocket] = useState(null);
-  
+  const socket = useRef(null);
+
   useEffect(() => {
-    userId && setSocket(socketIOClient('/'));
+    if (userId) {
+      socket.current = socketIOClient('/');
+    }
   }, [userId]);
 
+  const handleLogin = (email, peerId) => {
+    axios.post('/login', {email})
+      .then(res => {
+        const {userId, interestsArray} = res.data;
+        setUserId(userId);
+        setInterests(interestsArray);
+      });
+
+    console.log('userId: ', userId);
+  };
+
   return (
+    <LoginForm onClick = {handleLogin}/>
     // <div className="App">
     //   <video width="500" height="500" ref={videoRef} autoPlay ></video>
     //   <video width="500" height="500" ref={remoteVideoRef} autoPlay ></video>
@@ -30,7 +42,6 @@ function App() {
     //   }}>End Call</button>
     // </div>
     // <LoginForm/>
-    <></>
   );
 }
 
