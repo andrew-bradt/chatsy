@@ -8,7 +8,9 @@ module.exports = (dependencies) => {
 
     getUserInterests(email).then(userData => {
       const newUser = activeUsers.addUser(userData, peerId);
-      res.status(304).send();
+      const {userId, interests} = newUser;
+      const interestsArray = [...interests];
+      res.json({userId, interestsArray});
     });
   });
 
