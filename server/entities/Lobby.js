@@ -9,7 +9,6 @@ class Lobby {
     } else {
       this.usersByInterest[interest] = new Set().add(userId);
     }
-    console.log('addInterest', this.usersByInterest);
   }
 
   removeUserInterest(interest, userId) {
@@ -20,8 +19,6 @@ class Lobby {
     } else {
       delete this.usersByInterest[interest];
     }
-
-    console.log('removeUserInterest', this.usersByInterest);
   }
 
   addUser(user) {
@@ -30,7 +27,6 @@ class Lobby {
 
   removeUser(user) {
     user.interests.forEach(interest => this.removeUserInterest(interest, user.userId));
-    console.log(this.usersByInterest);
   }
 }
 
