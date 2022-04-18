@@ -29,11 +29,13 @@ const io = socketio(server, {
 });
 
 // Socket Listeners
-const enterLobby = require('./socket-listeners/enter-lobby')(activeUsers);
+const enterLobby = require('./socket-listeners/enter-lobby')(activeUsers, lobby);
 
 io.on('connection', (socket) => {
   socket.on('disconnect', () => {});
-  socket.on('enter-lobby', enterLobby);
+
+  socket.on('enter-lobby', ({userId}) => enterLobby(userId));
+
   socket.on('remove-criteria', () => {});
   socket.on('add-criteria', () => {});
   socket.on('call-established', ()=> {});

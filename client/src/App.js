@@ -21,7 +21,7 @@ function App() {
   }, [userId]);
 
   const handleLogin = (email, peerId) => {
-    axios.post('/login', {email})
+    axios.post('/login', {email, peerId})
       .then(res => {
         const {userId, interestsArray} = res.data;
         setUserId(userId);
@@ -36,7 +36,7 @@ function App() {
       <LoginForm onClick = {handleLogin}/>
       <button
         onClick = {() => {
-          socket.current.emit('enter-lobby');
+          socket.current.emit('enter-lobby', {userId});
         }}
       >
         send socket msg

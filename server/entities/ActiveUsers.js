@@ -14,6 +14,10 @@ class ActiveUsers {
     this.users[newUser.userId] = newUser;
     return newUser;
   };
+
+  getUserById (userId) {
+    return this.users[userId];
+  }
 }
 
 module.exports = ActiveUsers;
