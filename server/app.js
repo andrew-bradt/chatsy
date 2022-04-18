@@ -10,10 +10,11 @@ const cors = require('cors');
 
 const db = require('./configs/db.config');
 
-// Users Code
+// Users Code - OOP
 const {getUserInterests} = require('./helpers/queries')(db);
-const {parseUser} = require('./helpers/parsers');
-const {users, addUser, removeUser, toggleLooking, toggleInCall} = require('./users');
+const ActiveUsers = require('./entities/ActiveUsers');
+const Lobby = require('./entities/Lobby');
+const Call = require('./entities/Call');
 
 const app = express();
 const server = http.createServer(app);
@@ -50,19 +51,26 @@ app.use(cookieParser());
 
 module.exports = {app, server};
 
-// DRIVER CODE - USERS
-getUserInterests('lisa.simpson@gmail.com')
-  .then(res => {
-    const peerId = 190228392;
-    const newUser = parseUser(res, peerId);
-    addUser(newUser);
+// DRIVER CODE - USERS OOP
+
+const activeUsers = new ActiveUsers();
+const lobby = new Lobby();
+
+Promise.all([getUserInterests('link@yahoo.com'), getUserInterests('lisa.simpson@gmail.com')])
+  .then(([user1, user2]) => {
+    const user1Obj = activeUsers.addUser(user1, 81293892);
+    const user2Obj = activeUsers.addUser(user2, 9918283);
+
+    // const call = new Call(user1Obj, user2Obj);
+    // console.log(user1Obj);
+    // console.log(user2Obj);
+    // console.log(call);
+    lobby.addUser(user1Obj);
+    lobby.addUser(user2Obj);
+
+    
+    console.log(lobby);
+    lobby.removeUser(user2Obj);
+    console.log(lobby);
   });
 
-getUserInterests('mario@mushroomkindom.jp')
-  .then(res => {
-    const peerId = 882837842;
-    const newUser = parseUser(res, peerId);
-    addUser(newUser);
-
-    toggleInCall(newUser.userId);
-});
