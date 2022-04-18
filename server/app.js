@@ -28,6 +28,9 @@ const io = socketio(server, {
   }
 });
 
+// matching function
+const matchUsers = require('./helpers/matchUsers');
+
 // Socket Listeners
 const enterLobby = require('./socket-listeners/enter-lobby')(activeUsers, lobby);
 
@@ -40,7 +43,9 @@ io.on('connection', (socket) => {
   socket.on('add-criteria', () => {});
   socket.on('call-established', ()=> {});
   socket.on('call-end', ()=> {});
-  socket.on('send-msg', ()=> {});
+  socket.on('send-msg', () => { });
+  
+  matchUsers(lobby, socket);
 });
 
 app.use(cors());
@@ -52,10 +57,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // Routes
-const loginRoute = require('./routes/login')({
+const loginRoute = require("./routes/login")({
   db,
-  getUserInterests, 
-  activeUsers, 
+  getUserInterests,
+  activeUsers,
   lobby
 });
 
