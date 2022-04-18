@@ -53,7 +53,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on('enter-lobby', () => {
-    
+    console.log('enter lobby clicked from client');
   });
 
   socket.on('remove-criteria', () => {

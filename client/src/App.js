@@ -32,7 +32,17 @@ function App() {
   };
 
   return (
-    <LoginForm onClick = {handleLogin}/>
+    <>
+      <LoginForm onClick = {handleLogin}/>
+      <button
+        onClick = {() => {
+          socket.current.emit('enter-lobby');
+        }}
+      >
+        send socket msg
+      </button>
+    </>
+    
     // <div className="App">
     //   <video width="500" height="500" ref={videoRef} autoPlay ></video>
     //   <video width="500" height="500" ref={remoteVideoRef} autoPlay ></video>
