@@ -47,6 +47,14 @@ function App() {
       >
         send socket msg
       </button>
+
+      <button
+        onClick = {() => {
+          socket.current.emit('add-criteria', {userId, interest: 'cycling'});
+        }}
+      >
+        add interest
+      </button>
       
       <video width="500" height="500" ref={videoRef} autoPlay></video>
       <video width="500" height="500" ref={remoteVideoRef} autoPlay></video>
