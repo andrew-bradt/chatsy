@@ -21,10 +21,26 @@ const lobby = new Lobby();
 
 const app = express();
 const server = http.createServer(app);
+
 const io = socketio(server, {
   cors: {
     origin: '*'
   }
+});
+
+// Socket Listeners
+const enterLobby = require('./socket-listeners/enter-lobby')(activeUsers, lobby);
+
+io.on('connection', (socket) => {
+  socket.on('disconnect', () => {});
+
+  socket.on('enter-lobby', ({userId}) => enterLobby(userId));
+
+  socket.on('remove-criteria', () => {});
+  socket.on('add-criteria', () => {});
+  socket.on('call-established', ()=> {});
+  socket.on('call-end', ()=> {});
+  socket.on('send-msg', ()=> {});
 });
 
 app.use(cors());
@@ -37,59 +53,13 @@ app.use(cookieParser());
 
 // Routes
 const loginRoute = require('./routes/login')({
-  db, 
+  db,
   getUserInterests, 
   activeUsers, 
   lobby
 });
 
 app.use('/login', loginRoute);
-
-// Socket
-io.on('connection', (socket) => {
-  socket.on('disconnect', () => {
-
-  });
-
-  socket.on('enter-lobby', () => {
-    console.log('enter lobby clicked from client');
-  });
-
-  socket.on('remove-criteria', () => {
-
-  });
-
-  socket.on('add-criteria', () => {
-
-  });
-
-  socket.on('call-established', ()=>{
-
-  });
-
-  socket.on('call-end', ()=>{
-
-  });
-
-  socket.on('send-msg', ()=>{
-    
-  });
-
-  // const onlineUser = [];
-
-  // console.log('Client connected');
-
-  // socket.on('peerId', msg => {
-  //   onlineUser.push(msg.peerId);
-  //   console.log(msg);
-  //   socket.broadcast.emit('new_user', { onlineUser });
-  // });
-
-  // socket.on('endCall', () => {
-  //   socket.broadcast.emit('endCall');
-  // });
-
-});
 
 module.exports = {app, server};
 

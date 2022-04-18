@@ -23,7 +23,6 @@ function App() {
     if (userId) {
       socket.current = socketIOClient("/");
       peer.current = new Peer();
-
       peer.current.on("open", id => {
         setPeerId(id);
       });
@@ -42,8 +41,8 @@ function App() {
     <>
       <LoginForm onSubmit={handleLogin} />
       <button
-        onClick={() => {
-          socket.current.emit("enter-lobby");
+        onClick = {() => {
+          socket.current.emit('enter-lobby', {userId});
         }}
       >
         send socket msg
