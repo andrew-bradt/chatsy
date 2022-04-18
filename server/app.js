@@ -21,13 +21,25 @@ const lobby = new Lobby();
 
 const app = express();
 const server = http.createServer(app);
+
 const io = socketio(server, {
   cors: {
     origin: '*'
   }
 });
 
-require('./sockets')({io, activeUsers});
+// Socket Listeners
+const enterLobby = require('./socket-listeners/enter-lobby')(activeUsers);
+
+io.on('connection', (socket) => {
+  socket.on('disconnect', () => {});
+  socket.on('enter-lobby', enterLobby);
+  socket.on('remove-criteria', () => {});
+  socket.on('add-criteria', () => {});
+  socket.on('call-established', ()=> {});
+  socket.on('call-end', ()=> {});
+  socket.on('send-msg', ()=> {});
+});
 
 app.use(cors());
 
@@ -39,7 +51,7 @@ app.use(cookieParser());
 
 // Routes
 const loginRoute = require('./routes/login')({
-  db, 
+  db,
   getUserInterests, 
   activeUsers, 
   lobby
