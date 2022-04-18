@@ -40,7 +40,7 @@ io.on('connection', (socket) => {
   socket.on('enter-lobby', ({userId}) => enterLobby(userId));
   socket.on('leave-lobby', ({userId}) => leaveLobby(userId));
   socket.on('add-criteria', ({userId, interest}) => addCriteria(interest, userId));
-  socket.on('remove-criteria', ({userId, interest}) => {removeCriteria(interest, userId)});
+  socket.on('remove-criteria', ({userId, interest}) => removeCriteria(interest, userId));
   
   socket.on('send-msg', ({msg})=> {});
   socket.on('send-contact-info', ({userId}) => {});
