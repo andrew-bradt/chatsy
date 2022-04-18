@@ -45,7 +45,15 @@ function App() {
           socket.current.emit('enter-lobby', {userId});
         }}
       >
-        send socket msg
+        enter lobby
+      </button>
+
+      <button
+        onClick = {() => {
+          socket.current.emit('leave-lobby', {userId});
+        }}
+      >
+        leave lobby
       </button>
 
       <button
@@ -63,6 +71,8 @@ function App() {
       >
         remove interest
       </button>
+
+      
       
       <video width="500" height="500" ref={videoRef} autoPlay></video>
       <video width="500" height="500" ref={remoteVideoRef} autoPlay></video>

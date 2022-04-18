@@ -30,6 +30,7 @@ const io = socketio(server, {
 
 // Socket Listeners
 const enterLobby = require('./socket-listeners/enter-lobby')(activeUsers, lobby);
+const leaveLobby = require('./socket-listeners/leave-lobby')(activeUsers, lobby);
 const addCriteria = require('./socket-listeners/add-criteria')(lobby);
 const removeCriteria = require('./socket-listeners/remove-criteria')(lobby);
 
@@ -37,6 +38,7 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => {});
 
   socket.on('enter-lobby', ({userId}) => enterLobby(userId));
+  socket.on('leave-lobby', ({userId}) => leaveLobby(userId));
   socket.on('add-criteria', ({userId, interest}) => addCriteria(interest, userId));
   socket.on('remove-criteria', ({userId, interest}) => {removeCriteria(interest, userId)});
   
