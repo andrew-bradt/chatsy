@@ -1,7 +1,6 @@
 const http = require('http');
 const express = require('express');
 const socketio = require('socket.io');
-const {v4: uuidv4} = require('uuid');
 
 const path = require('path');
 const cookieParser = require('cookie-parser');
@@ -11,7 +10,6 @@ const cors = require('cors');
 const db = require('./configs/db.config');
 
 // Users Code - OOP
-const {getUserInterests} = require('./helpers/queries')(db);
 const ActiveUsers = require('./entities/ActiveUsers');
 const Lobby = require('./entities/Lobby');
 const Call = require('./entities/Call');
@@ -59,7 +57,6 @@ app.use(cookieParser());
 // Routes
 const loginRoute = require("./routes/login")({
   db,
-  getUserInterests,
   activeUsers,
   lobby
 });
