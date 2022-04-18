@@ -47,13 +47,12 @@ app.use('/login', loginRoute);
 
 // Socket
 io.on('connection', (socket) => {
-
   socket.on('disconnect', () => {
 
   });
 
   socket.on('enter-lobby', () => {
-    
+    console.log('enter lobby clicked from client');
   });
 
   socket.on('remove-criteria', () => {
