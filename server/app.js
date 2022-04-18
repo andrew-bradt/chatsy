@@ -27,6 +27,8 @@ const io = socketio(server, {
   }
 });
 
+require('./sockets')({io, activeUsers});
+
 app.use(cors());
 
 app.use(cors());
@@ -44,52 +46,6 @@ const loginRoute = require('./routes/login')({
 });
 
 app.use('/login', loginRoute);
-
-// Socket
-io.on('connection', (socket) => {
-  socket.on('disconnect', () => {
-
-  });
-
-  socket.on('enter-lobby', () => {
-    console.log('enter lobby clicked from client');
-  });
-
-  socket.on('remove-criteria', () => {
-
-  });
-
-  socket.on('add-criteria', () => {
-
-  });
-
-  socket.on('call-established', ()=>{
-
-  });
-
-  socket.on('call-end', ()=>{
-
-  });
-
-  socket.on('send-msg', ()=>{
-    
-  });
-
-  // const onlineUser = [];
-
-  // console.log('Client connected');
-
-  // socket.on('peerId', msg => {
-  //   onlineUser.push(msg.peerId);
-  //   console.log(msg);
-  //   socket.broadcast.emit('new_user', { onlineUser });
-  // });
-
-  // socket.on('endCall', () => {
-  //   socket.broadcast.emit('endCall');
-  // });
-
-});
 
 module.exports = {app, server};
 
