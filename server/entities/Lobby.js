@@ -4,9 +4,6 @@ class Lobby {
   };
 
   addInterest(interest, userId) {
-    // const newInterest = this.userByInterest[interest] || new Set();
-    // newInterest.add(userId);
-    // this.usersByInterest[interest] = newInterest;
     if (this.usersByInterest[interest]) {
       this.usersByInterest[interest].add(userId);
     } else {
@@ -16,13 +13,7 @@ class Lobby {
   }
 
   addUser(user) {
-    user.interests.forEach(interest => {
-      if (this.usersByInterest[interest]) {
-        this.usersByInterest[interest].add(user.userId);
-      } else {
-        this.addInterest(interest, user.userId);
-      }
-    });
+    user.interests.forEach((interest) => this.addInterest(interest, user.userId));;
   }
 
   removeUser(user) {
