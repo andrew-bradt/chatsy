@@ -43,7 +43,7 @@ io.on('connection', (socket) => {
   socket.on('call-end', ()=> {});
   socket.on('send-msg', () => { });
   
-  matchUsers(activeUsers, lobby, socket);
+  matchUsers(activeUsers, lobby, Call);
 });
 
 app.use(cors());
