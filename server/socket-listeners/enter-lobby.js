@@ -1,0 +1,1 @@
+module.exports = (activeUsers) => () => console.log(activeUsers);
