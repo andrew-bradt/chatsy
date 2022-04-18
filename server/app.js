@@ -31,14 +31,15 @@ const io = socketio(server, {
 // Socket Listeners
 const enterLobby = require('./socket-listeners/enter-lobby')(activeUsers, lobby);
 const addCriteria = require('./socket-listeners/add-criteria')(lobby);
+const removeCriteria = require('./socket-listeners/remove-criteria')(lobby);
 
 io.on('connection', (socket) => {
   socket.on('disconnect', () => {});
 
   socket.on('enter-lobby', ({userId}) => enterLobby(userId));
   socket.on('add-criteria', ({userId, interest}) => addCriteria(interest, userId));
-
-  socket.on('remove-criteria', () => {});
+  socket.on('remove-criteria', ({userId, interest}) => {removeCriteria(interest, userId)});
+  
   socket.on('call-established', ()=> {});
   socket.on('call-end', ()=> {});
   socket.on('send-msg', ()=> {});

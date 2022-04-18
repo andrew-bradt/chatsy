@@ -55,6 +55,14 @@ function App() {
       >
         add interest
       </button>
+
+      <button
+        onClick = {() => {
+          socket.current.emit('remove-criteria', {userId, interest: interests[3]});
+        }}
+      >
+        remove interest
+      </button>
       
       <video width="500" height="500" ref={videoRef} autoPlay></video>
       <video width="500" height="500" ref={remoteVideoRef} autoPlay></video>

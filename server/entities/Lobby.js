@@ -7,9 +7,21 @@ class Lobby {
     if (this.usersByInterest[interest]) {
       this.usersByInterest[interest].add(userId);
     } else {
-      this.usersByInterest[interest] = new Set().add(interest);
+      this.usersByInterest[interest] = new Set().add(userId);
     }
-    console.log(this.usersByInterest);
+    console.log('addInterest', this.usersByInterest);
+  }
+
+  removeUserInterest(interest, userId) {
+    const usersWithInterest = this.usersByInterest[interest];
+
+    if (usersWithInterest.length) {
+      usersWithInterest.delete(userId);
+    } else {
+      delete this.usersByInterest[interest];
+    }
+
+    console.log('removeUserInterest', this.usersByInterest);
   }
 
   addUser(user) {
@@ -17,14 +29,8 @@ class Lobby {
   }
 
   removeUser(user) {
-    user.interests.forEach(interest => {
-      const usersWithInterest = this.usersByInterest[interest];
-      if (usersWithInterest.length) {
-        usersWithInterest.delete(user.userId);
-      } else {
-        delete this.usersByInterest[interest];
-      }
-    });
+    user.interests.forEach(interest => this.removeUserInterest(interest, user.userId));
+    console.log(this.usersByInterest);
   }
 }
 
