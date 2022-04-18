@@ -47,7 +47,6 @@ app.use('/login', loginRoute);
 
 // Socket
 io.on('connection', (socket) => {
-
   socket.on('disconnect', () => {
 
   });
