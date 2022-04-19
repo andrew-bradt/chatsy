@@ -12,7 +12,6 @@ const db = require('./configs/db.config');
 // Users Code
 const ActiveUsers = require('./entities/ActiveUsers');
 const Lobby = require('./entities/Lobby');
-const Call = require('./entities/Call');
 
 const activeUsers = new ActiveUsers();
 const lobby = new Lobby();
