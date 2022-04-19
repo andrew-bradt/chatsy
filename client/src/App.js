@@ -22,8 +22,8 @@ function App() {
   useEffect(() => {
     if (userId) {
       socket.current = socketIOClient("/");
-      socket.current.on('connect', () => {
-        console.log(socket.current.id);
+      socket.current.on('connect', ()=>{
+        socket.current.emit('add-user-id', ({userId}));
       });
       peer.current = new Peer();
       peer.current.on("open", id => {

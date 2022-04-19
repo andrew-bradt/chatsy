@@ -33,10 +33,11 @@ const enterLobby = require('./socket-listeners/enter-lobby')(activeUsers, lobby)
 const leaveLobby = require('./socket-listeners/leave-lobby')(activeUsers, lobby);
 const addCriteria = require('./socket-listeners/add-criteria')(lobby);
 const removeCriteria = require('./socket-listeners/remove-criteria')(lobby);
+const addUserId = require('./socket-listeners/add-user-id')(activeUsers);
 
 io.on('connection', (socket) => {
   socket.on('disconnect', () => {});
-
+  socket.on('add-user-id', ({userId}) => addUserId(userId, socket.id));
   socket.on('enter-lobby', ({userId}) => enterLobby(userId));
   socket.on('leave-lobby', ({userId}) => leaveLobby(userId));
 
