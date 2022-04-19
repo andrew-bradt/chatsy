@@ -16,12 +16,15 @@ function App() {
 
   const socket = useRef(null);
   const peer = useRef(null);
-
+  
   const { videoRef, remoteVideoRef, endCall } = useVideoCall(socket.current, peer.current);
 
   useEffect(() => {
     if (userId) {
       socket.current = socketIOClient("/");
+      socket.current.on('connect', () => {
+        console.log(socket.current.id);
+      });
       peer.current = new Peer();
       peer.current.on("open", id => {
         setPeerId(id);

@@ -10,7 +10,7 @@ const cors = require('cors');
 
 const db = require('./configs/db.config');
 
-// Users Code - OOP
+// Users Code
 const {getUserInterests} = require('./helpers/queries')(db);
 const ActiveUsers = require('./entities/ActiveUsers');
 const Lobby = require('./entities/Lobby');
@@ -39,7 +39,7 @@ io.on('connection', (socket) => {
 
   socket.on('enter-lobby', ({userId}) => enterLobby(userId));
   socket.on('leave-lobby', ({userId}) => leaveLobby(userId));
-  
+
   socket.on('add-criteria', ({userId, interest}) => addCriteria(interest, userId));
   socket.on('remove-criteria', ({userId, interest}) => removeCriteria(interest, userId));
   
