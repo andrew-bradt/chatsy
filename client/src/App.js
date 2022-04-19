@@ -11,10 +11,11 @@ function App() {
   const [userId, setUserId] = useState(null);
   const [interests, setInterests] = useState([]);
   const [peerId, setPeerId] = useState(null);
+  const [remoteSocketId, setRemoteSocketId] = useState(null);
 
   const socket = useRef(null);
   
-  const { videoRef, remoteVideoRef, endCall } = useVideoCall(socket, userId, peerId);
+  const { videoRef, remoteVideoRef, endCall } = useVideoCall(socket, userId, peerId, setRemoteSocketId);
 
   const handleLogin = (email) => {
     axios.post("/login", { email }).then(res => {
@@ -67,7 +68,7 @@ function App() {
       <button
         onClick={() => {
           endCall();
-          socket.current.emit("endCall");
+          socket.current.emit("end-call", {remoteSocketId});
         }}
       >
         End Call
