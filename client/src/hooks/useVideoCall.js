@@ -56,9 +56,10 @@ export default function useVideoCall(socket,  userId, peerId, setRemoteSocketId)
     
       // receive other user's peer id and call immediately
       socket.current.on("callThisPeer", msg => {
-        const { peerId, socketId, sharedInterests } = msg;
+        const { peerId, remoteSocketId, sharedInterests } = msg;
 
-        setRemoteSocketId(socketId);        
+        const socketId = socket.current.id
+        setRemoteSocketId(remoteSocketId);        
 
         const data = {metadata: {"sharedInterests":sharedInterests[0],"remoteSocketId":socketId}}
 
@@ -71,7 +72,10 @@ export default function useVideoCall(socket,  userId, peerId, setRemoteSocketId)
       });
     
       // end the peer call after getting endCall event from server
-      socket.current.on("endCall", endCall);
+      socket.current.on("endCall", () => {
+        console.log('the other user ended the call')
+        endCall();
+      });
     }
   }, [userId, peerId, socket, setRemoteSocketId]);
 
