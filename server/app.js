@@ -35,6 +35,7 @@ const leaveLobby = require('./socket-listeners/leave-lobby')(activeUsers, lobby)
 const addCriteria = require('./socket-listeners/add-criteria')(lobby);
 const removeCriteria = require('./socket-listeners/remove-criteria')(lobby);
 const addSocketId = require('./socket-listeners/add-socket-id')(activeUsers);
+const sendMsg = require('./socket-listeners/send-msg')(io);
 
 io.on('connection', (socket) => {
   socket.on('add-socket-id', ({userId}) => addSocketId(userId, socket.id));
@@ -44,7 +45,7 @@ io.on('connection', (socket) => {
   socket.on('remove-criteria', ({userId, interest}) => removeCriteria(interest, userId));
   
   socket.on('disconnect', () => {});
-  socket.on('send-msg', ({msg})=> {});
+  socket.on('send-msg', ({msg, remoteSocketId}) => sendMsg(remoteSocketId, msg));
   socket.on("send-contact-info", ({ userId }) => { });
   
   socket.on("end-call", ({ remoteSocketId }) => {
