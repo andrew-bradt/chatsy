@@ -4,7 +4,7 @@ import {useState} from 'react';
 import useConnections from './hooks/useConnections';
 
 import LoginForm from './components/LoginForm';
-
+import Chat from './components/Chat';
 
 function App() {
   const [userId, setUserId] = useState(null);
@@ -15,6 +15,7 @@ function App() {
 
   return (
     <>
+      <Chat />
       <LoginForm onSubmit={handleLogin} />
       <button
         onClick = {() => {
