@@ -2,13 +2,13 @@ import { useEffect, useRef } from "react";
 import socketIOClient from "socket.io-client"
 import Peer from "peerjs"
 
-export default function useVideoCall(socket,  userId, peerId, setRemoteSocketId) {
+export default function useVideoCall(socket, peer, userId, setRemoteSocketId) {
   
   const videoRef = useRef();
   const remoteVideoRef = useRef();
 
   const currentCall = useRef();
-  const peer = useRef(null);
+  // const peer = useRef(null);
 
   const endCall = () => {
     currentCall.current.close();
@@ -35,7 +35,6 @@ export default function useVideoCall(socket,  userId, peerId, setRemoteSocketId)
   useEffect(() => {
     if (userId) {
       socket.current = socketIOClient("/");
-      peer.current = new Peer(peerId);
       socket.current.on('connect', ()=>{
         socket.current.emit('add-socket-id', ({userId}));
       });
@@ -77,7 +76,7 @@ export default function useVideoCall(socket,  userId, peerId, setRemoteSocketId)
         endCall();
       });
     }
-  }, [userId, peerId, socket, setRemoteSocketId]);
+  }, [userId, peer, socket, setRemoteSocketId]);
 
   
   return { videoRef, remoteVideoRef, endCall }

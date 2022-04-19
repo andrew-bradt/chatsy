@@ -1,5 +1,6 @@
 import './App.css';
 import axios from 'axios';
+import Peer from 'peerjs';
 import {useState, useRef} from 'react';
 
 import useVideoCall from './hooks/useVideoCall';
@@ -7,22 +8,23 @@ import useVideoCall from './hooks/useVideoCall';
 import LoginForm from './components/LoginForm';
 
 
+
 function App() {
   const [userId, setUserId] = useState(null);
   const [interests, setInterests] = useState([]);
-  const [peerId, setPeerId] = useState(null);
   const [remoteSocketId, setRemoteSocketId] = useState(null);
 
   const socket = useRef(null);
+  const peer = useRef(null);
   
-  const { videoRef, remoteVideoRef, endCall } = useVideoCall(socket, userId, peerId, setRemoteSocketId);
+  const { videoRef, remoteVideoRef, endCall } = useVideoCall(socket, peer, userId, setRemoteSocketId);
 
   const handleLogin = (email) => {
     axios.post("/login", { email }).then(res => {
       const { userId, interestsArray, peerId } = res.data;
       setUserId(userId);
       setInterests(interestsArray);
-      setPeerId(peerId);
+      peer.current = new Peer(peerId);
     });
   };
 
