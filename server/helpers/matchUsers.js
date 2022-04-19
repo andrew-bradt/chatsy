@@ -21,7 +21,7 @@ const matchUsers = (activeUsers, lobby, Call, io) => {
         const call = new Call(...usersInCall);
         io.to(usersInCall[0].socketId).emit("callThisPeer", {
           peerId: usersInCall[1].peerId,
-          socketId: usersInCall[0].socketId,
+          remoteSocketId: usersInCall[1].socketId,
           sharedInterests: call.sharedInterests
         });
 

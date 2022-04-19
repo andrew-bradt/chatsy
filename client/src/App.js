@@ -1,8 +1,7 @@
 import './App.css';
-import axios from 'axios';
-import {useState, useRef} from 'react';
+import {useState} from 'react';
 
-import useVideoCall from './hooks/useVideoCall';
+import useConnections from './hooks/useConnections';
 
 import LoginForm from './components/LoginForm';
 
@@ -10,21 +9,9 @@ import LoginForm from './components/LoginForm';
 function App() {
   const [userId, setUserId] = useState(null);
   const [interests, setInterests] = useState([]);
-  const [peerId, setPeerId] = useState(null);
   const [remoteSocketId, setRemoteSocketId] = useState(null);
 
-  const socket = useRef(null);
-  
-  const { videoRef, remoteVideoRef, endCall } = useVideoCall(socket, userId, peerId, setRemoteSocketId);
-
-  const handleLogin = (email) => {
-    axios.post("/login", { email }).then(res => {
-      const { userId, interestsArray, peerId } = res.data;
-      setUserId(userId);
-      setInterests(interestsArray);
-      setPeerId(peerId);
-    });
-  };
+  const { videoRef, remoteVideoRef, endCall, handleLogin, socket } = useConnections(userId, setRemoteSocketId, setUserId, setInterests);
 
   return (
     <>
