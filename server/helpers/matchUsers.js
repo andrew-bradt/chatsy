@@ -19,10 +19,9 @@ const matchUsers = (activeUsers, lobby, Call, io) => {
         }
         // use socket.io to send one user the other user's peerId to start call
         const call = new Call(...usersInCall);
-
         io.to(usersInCall[0].socketId).emit("callThisPeer", {
           peerId: usersInCall[1].peerId,
-          shardInterests: call.sharedInterests
+          sharedInterests: call.sharedInterests
         });
 
         // remove the two users from lobby

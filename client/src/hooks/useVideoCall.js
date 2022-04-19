@@ -35,7 +35,6 @@ export default function useVideoCall(socket,  userId, peerId) {
   useEffect(() => {
     if (userId) {
       socket.current = socketIOClient("/");
-
       peer.current = new Peer(peerId);
       socket.current.on('connect', ()=>{
         socket.current.emit('add-socket-id', ({userId}));
@@ -43,6 +42,9 @@ export default function useVideoCall(socket,  userId, peerId) {
 
       // listen for call event, and answer
       peer.current.on("call", call => {
+
+        console.log(call.metadata);
+
         currentCall.current = call;
         call.answer(videoRef.current.srcObject);
         call.on("stream", remoteVidoStream => {
@@ -52,10 +54,11 @@ export default function useVideoCall(socket,  userId, peerId) {
     
       // receive other user's peer id and call immediately
       socket.current.on("callThisPeer", msg => {
-        console.log('peerId received')
-        const {peerId} = msg
-        const call = peer.current.call(peerId, videoRef.current.srcObject);
-    
+        const { peerId, sharedInterests } = msg;
+        const data = {metadata: {"sharedInterests":sharedInterests[0]}}
+
+        // start calling the other peer and send shared interests to that peer
+        const call = peer.current.call(peerId, videoRef.current.srcObject, data);
         currentCall.current = call;
         call.on("stream", remoteVidoStream => {
           remoteVideoRef.current.srcObject = remoteVidoStream;
