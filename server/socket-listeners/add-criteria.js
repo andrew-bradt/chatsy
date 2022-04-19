@@ -1,0 +1,1 @@
+module.exports = (lobby) => (interest, userId) => lobby.addInterest(interest, userId);

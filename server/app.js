@@ -9,7 +9,7 @@ const cors = require('cors');
 
 const db = require('./configs/db.config');
 
-// Users Code - OOP
+// Users Code
 const ActiveUsers = require('./entities/ActiveUsers');
 const Lobby = require('./entities/Lobby');
 const Call = require('./entities/Call');
@@ -31,17 +31,21 @@ const matchUsers = require('./helpers/matchUsers');
 
 // Socket Listeners
 const enterLobby = require('./socket-listeners/enter-lobby')(activeUsers, lobby);
+const leaveLobby = require('./socket-listeners/leave-lobby')(activeUsers, lobby);
+const addCriteria = require('./socket-listeners/add-criteria')(lobby);
+const removeCriteria = require('./socket-listeners/remove-criteria')(lobby);
+const addSocketId = require('./socket-listeners/add-socket-id')(activeUsers);
 
 io.on('connection', (socket) => {
-  socket.on('disconnect', () => {});
-
+  socket.on('add-socket-id', ({userId}) => addSocketId(userId, socket.id));
   socket.on('enter-lobby', ({userId}) => enterLobby(userId));
-
-  socket.on('remove-criteria', () => {});
-  socket.on('add-criteria', () => {});
-  socket.on('call-established', ()=> {});
-  socket.on('call-end', ()=> {});
-  socket.on('send-msg', () => { });
+  socket.on('leave-lobby', ({userId}) => leaveLobby(userId));
+  socket.on('add-criteria', ({userId, interest}) => addCriteria(interest, userId));
+  socket.on('remove-criteria', ({userId, interest}) => removeCriteria(interest, userId));
+  
+  socket.on('disconnect', () => {});
+  socket.on('send-msg', ({msg})=> {});
+  socket.on('send-contact-info', ({userId}) => {});
   
   matchUsers(activeUsers, lobby, Call);
 });

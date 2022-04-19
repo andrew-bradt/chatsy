@@ -1,6 +1,7 @@
 class User {
   constructor(userData, peerId) {
     this.peerId = peerId
+    this.socketId = null;
 
     this.userId = userData[0].id,
     this.email = userData[0].email,

@@ -3,31 +3,30 @@ class Lobby {
     this.usersByInterest = {};
   };
 
-  _addInterest(interest, userId) {
-    const newInterest = new Set();
-    newInterest.add(userId);
-    this.usersByInterest[interest] = newInterest;
+  addInterest(interest, userId) {
+    if (this.usersByInterest[interest]) {
+      this.usersByInterest[interest].add(userId);
+    } else {
+      this.usersByInterest[interest] = new Set().add(userId);
+    }
+  }
+
+  removeUserInterest(interest, userId) {
+    const usersWithInterest = this.usersByInterest[interest];
+
+    if (usersWithInterest.length) {
+      usersWithInterest.delete(userId);
+    } else {
+      delete this.usersByInterest[interest];
+    }
   }
 
   addUser(user) {
-    user.interests.forEach(interest => {
-      if (this.usersByInterest[interest]) {
-        this.usersByInterest[interest].add(user.userId);
-      } else {
-        this._addInterest(interest, user.userId);
-      }
-    });
+    user.interests.forEach((interest) => this.addInterest(interest, user.userId));;
   }
 
   removeUser(user) {
-    user.interests.forEach(interest => {
-      const usersWithInterest = this.usersByInterest[interest];
-      if (usersWithInterest.length) {
-        usersWithInterest.delete(user.userId);
-      } else {
-        delete this.usersByInterest[interest];
-      }
-    });
+    user.interests.forEach(interest => this.removeUserInterest(interest, user.userId));
   }
 }
 
