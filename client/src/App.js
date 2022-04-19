@@ -4,6 +4,7 @@ import {useState} from 'react';
 import useConnections from './hooks/useConnections';
 
 import LoginForm from './components/LoginForm';
+import InterestsList from './components/InterestsList';
 
 
 function App() {
@@ -23,8 +24,10 @@ function App() {
       >
         enter lobby
       </button>
-
-      <button
+      <video width="500" height="500" ref={videoRef} autoPlay></video>
+      <video width="500" height="500" ref={remoteVideoRef} autoPlay></video>
+      <InterestsList interests={interests} />
+      {/* <button
         onClick = {() => {
           socket.current.emit('leave-lobby', {userId});
         }}
@@ -64,8 +67,7 @@ function App() {
           send contact info
         </button>
       
-      <video width="500" height="500" ref={videoRef} autoPlay></video>
-      <video width="500" height="500" ref={remoteVideoRef} autoPlay></video>
+
       <button
         onClick={() => {
           endCall();
@@ -73,7 +75,7 @@ function App() {
         }}
       >
         End Call
-      </button>
+      </button> */}
     </>
   );
 }
