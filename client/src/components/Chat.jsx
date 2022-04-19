@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+
 import ChatListItem from './ChatListItem';
 
 const testMsgs = [
@@ -22,7 +23,7 @@ export default function Chat() {
   return (
     <ul>
       {
-        messages.map(message => <ChatListItem message={message}/>)
+        messages.map(message => <ChatListItem message = {message}/>)
       }
     </ul>
   )
