@@ -1,11 +1,15 @@
 import { useEffect, useRef } from "react";
+import socketIOClient from "socket.io-client"
+import Peer from "peerjs"
 
-export default function useVideoCall(socket, peer, peerId) {
+export default function useVideoCall(socket,  userId, peerId) {
   
   const videoRef = useRef();
   const remoteVideoRef = useRef();
+
   const currentCall = useRef();
-  
+  const peer = useRef(null);
+
   const endCall = () => {
     currentCall.current.close();
     remoteVideoRef.current.srcObject = null;
@@ -27,12 +31,18 @@ export default function useVideoCall(socket, peer, peerId) {
       });
   }, [])
   
-  // Peer related logic
+  // Connection related logic
   useEffect(() => {
-    if (peer) {
-      
+    if (userId) {
+      socket.current = socketIOClient("/");
+
+      peer.current = new Peer(peerId);
+      socket.current.on('connect', ()=>{
+        socket.current.emit('add-socket-id', ({userId}));
+      });
+
       // listen for call event, and answer
-      peer.on("call", call => {
+      peer.current.on("call", call => {
         currentCall.current = call;
         call.answer(videoRef.current.srcObject);
         call.on("stream", remoteVidoStream => {
@@ -41,9 +51,10 @@ export default function useVideoCall(socket, peer, peerId) {
       });
     
       // receive other user's peer id and call immediately
-      socket.on("new_user", msg => {
-        const peerId = msg.onlineUser.pop();
-        const call = peer.call(peerId, videoRef.current.srcObject);
+      socket.current.on("callThisPeer", msg => {
+        console.log('peerId received')
+        const {peerId} = msg
+        const call = peer.current.call(peerId, videoRef.current.srcObject);
     
         currentCall.current = call;
         call.on("stream", remoteVidoStream => {
@@ -52,9 +63,10 @@ export default function useVideoCall(socket, peer, peerId) {
       });
     
       // end the peer call after getting endCall event from server
-      socket.on("endCall", endCall);
+      socket.current.on("endCall", endCall);
     }
-  }, [socket, peer]);
+  }, [userId, peerId, socket]);
+
   
   return { videoRef, remoteVideoRef, endCall }
 }
