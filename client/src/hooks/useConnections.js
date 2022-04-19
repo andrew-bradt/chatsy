@@ -1,18 +1,29 @@
 import { useEffect, useRef } from "react";
 import socketIOClient from "socket.io-client"
 import Peer from "peerjs"
+import axios from "axios";
 
-export default function useVideoCall(socket,  userId, peerId, setRemoteSocketId) {
+export default function useConnections(userId, setRemoteSocketId, setUserId, setInterests) {
   
   const videoRef = useRef();
   const remoteVideoRef = useRef();
 
-  const currentCall = useRef();
+  const socket = useRef(null);
   const peer = useRef(null);
+  const currentCall = useRef();
 
   const endCall = () => {
     currentCall.current.close();
     remoteVideoRef.current.srcObject = null;
+  };
+
+  const handleLogin = (email) => {
+    axios.post("/login", { email }).then(res => {
+      const { userId, interestsArray, peerId } = res.data;
+      setUserId(userId);
+      setInterests(interestsArray);
+      peer.current = new Peer(peerId);
+    });
   };
   
   // get local user video stream on page
@@ -35,7 +46,6 @@ export default function useVideoCall(socket,  userId, peerId, setRemoteSocketId)
   useEffect(() => {
     if (userId) {
       socket.current = socketIOClient("/");
-      peer.current = new Peer(peerId);
       socket.current.on('connect', ()=>{
         socket.current.emit('add-socket-id', ({userId}));
       });
@@ -58,9 +68,10 @@ export default function useVideoCall(socket,  userId, peerId, setRemoteSocketId)
     
       // receive other user's peer id and call immediately
       socket.current.on("callThisPeer", msg => {
-        const { peerId, socketId, sharedInterests } = msg;
+        const { peerId, remoteSocketId, sharedInterests } = msg;
 
-        setRemoteSocketId(socketId);        
+        const socketId = socket.current.id
+        setRemoteSocketId(remoteSocketId);        
 
         const data = {metadata: {"sharedInterests":sharedInterests[0],"remoteSocketId":socketId}}
 
@@ -73,10 +84,13 @@ export default function useVideoCall(socket,  userId, peerId, setRemoteSocketId)
       });
     
       // end the peer call after getting endCall event from server
-      socket.current.on("endCall", endCall);
+      socket.current.on("endCall", () => {
+        console.log('the other user ended the call')
+        endCall();
+      });
     }
-  }, [userId, peerId, socket, setRemoteSocketId]);
+  }, [userId, peer, socket, setRemoteSocketId]);
 
   
-  return { videoRef, remoteVideoRef, endCall }
+  return { videoRef, remoteVideoRef, endCall, handleLogin, socket }
 }
