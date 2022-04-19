@@ -1,30 +1,40 @@
+/** @jsxImportSource @emotion/react */
+
+import {css} from '@emotion/react';
 import React, {useState} from 'react'
 
 import ChatListItem from './ChatListItem';
+import Box from '@mui/material/Box';
 
-const testMsgs = [
+const testMessages = [
   {
-    msg: 'ahsdhf',
+    text: 'Hello',
     fromPeer: true
   },
   {
-    msg: 'ahdjsha',
+    text: 'Hi',
     fromPeer: false
   },
   {
-    msg: 'hha',
+    text: 'ok',
     fromPeer: true
   }
 ];
 
-export default function Chat() {
-  const [messages, setMessages] = useState(testMsgs);
+const styles = () => css`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border-style: solid;
+`;
 
+export default function Chat() {
+  const [messages, setMessages] = useState(testMessages);
   return (
-    <ul>
-      {
-        messages.map(message => <ChatListItem message = {message}/>)
-      }
-    </ul>
+    <Box
+     css={styles()}
+    >
+      {messages.map(message => <ChatListItem text = {message.text} fromPeer = {message.fromPeer}/>)}
+    </Box>
   )
 };

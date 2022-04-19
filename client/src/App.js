@@ -7,16 +7,16 @@ import LoginForm from './components/LoginForm';
 import Chat from './components/Chat';
 
 function App() {
-  const [userId, setUserId] = useState(null);
-  const [interests, setInterests] = useState([]);
-  const [remoteSocketId, setRemoteSocketId] = useState(null);
+  // const [userId, setUserId] = useState(null);
+  // const [interests, setInterests] = useState([]);
+  // const [remoteSocketId, setRemoteSocketId] = useState(null);
 
-  const { videoRef, remoteVideoRef, endCall, handleLogin, socket } = useConnections(userId, setRemoteSocketId, setUserId, setInterests);
+  // const { videoRef, remoteVideoRef, endCall, handleLogin, socket } = useConnections(userId, setRemoteSocketId, setUserId, setInterests);
 
   return (
     <>
       <Chat />
-      <LoginForm onSubmit={handleLogin} />
+      {/* <LoginForm onSubmit={handleLogin} />
       <button
         onClick = {() => {
           socket.current.emit('enter-lobby', {userId});
@@ -74,7 +74,7 @@ function App() {
         }}
       >
         End Call
-      </button>
+      </button> */}
     </>
   );
 }
