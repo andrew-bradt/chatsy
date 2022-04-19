@@ -21,7 +21,7 @@ class ActiveUsers {
 
   getUserBySocketId (socketId) {
     const userIds = Object.keys(this.users);
-    for (const userId of usersIds) {
+    for (const userId of userIds) {
       const user = this.getUserById(userId);
       if (user.socketId === socketId) return user;
     }
