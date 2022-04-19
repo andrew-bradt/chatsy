@@ -51,6 +51,7 @@ export default function useConnections(userId, setRemoteSocketId, setUserId, set
       });
 
       socket.current.on('msg', ({msg}) => console.log(msg));
+      socket.current.on('contact-info', ({email}) => console.log(email));
 
       // listen for call event, and answer
       peer.current.on("call", call => {
