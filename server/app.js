@@ -45,9 +45,13 @@ io.on('connection', (socket) => {
   
   socket.on('disconnect', () => {});
   socket.on('send-msg', ({msg})=> {});
-  socket.on('send-contact-info', ({userId}) => {});
+  socket.on("send-contact-info", ({ userId }) => { });
   
-  matchUsers(activeUsers, lobby, Call);
+  socket.on("end-call", ({ remoteSocketId }) => {
+    io.to(remoteSocketId).emit("endCall");
+  });
+  
+  matchUsers(activeUsers, lobby, Call, io);
 });
 
 app.use(cors());
