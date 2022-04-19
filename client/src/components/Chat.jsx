@@ -1,5 +1,4 @@
 /** @jsxImportSource @emotion/react */
-
 import {css} from '@emotion/react';
 import React, {useState} from 'react'
 
@@ -18,23 +17,164 @@ const testMessages = [
   {
     text: 'ok',
     fromPeer: true
+  },
+  {
+    text: 'Hello',
+    fromPeer: true
+  },
+  {
+    text: 'Hi',
+    fromPeer: false
+  },
+  {
+    text: 'ok',
+    fromPeer: true
+  },
+  {
+    text: 'Hello',
+    fromPeer: true
+  },
+  {
+    text: 'Hi',
+    fromPeer: false
+  },
+  {
+    text: 'ok',
+    fromPeer: true
+  },
+  {
+    text: 'Hello',
+    fromPeer: true
+  },
+  {
+    text: 'Hi',
+    fromPeer: false
+  },
+  {
+    text: 'ok',
+    fromPeer: true
+  },
+  {
+    text: 'Hello',
+    fromPeer: true
+  },
+  {
+    text: 'Hi',
+    fromPeer: false
+  },
+  {
+    text: 'ok',
+    fromPeer: true
+  },
+  {
+    text: 'Hello',
+    fromPeer: true
+  },
+  {
+    text: 'Hi',
+    fromPeer: false
+  },
+  {
+    text: 'ok',
+    fromPeer: true
+  },
+  {
+    text: 'Hello',
+    fromPeer: true
+  },
+  {
+    text: 'Hi',
+    fromPeer: false
+  },
+  {
+    text: 'ok',
+    fromPeer: true
+  },
+  {
+    text: 'Hello',
+    fromPeer: true
+  },
+  {
+    text: 'Hi',
+    fromPeer: false
+  },
+  {
+    text: 'ok',
+    fromPeer: true
+  },
+  {
+    text: 'Hello',
+    fromPeer: true
+  },
+  {
+    text: 'Hi',
+    fromPeer: false
+  },
+  {
+    text: 'ok',
+    fromPeer: true
+  },
+  {
+    text: 'Hello',
+    fromPeer: true
+  },
+  {
+    text: 'Hi',
+    fromPeer: false
+  },
+  {
+    text: 'ok',
+    fromPeer: true
+  },
+  {
+    text: 'Hello',
+    fromPeer: true
+  },
+  {
+    text: 'Hi',
+    fromPeer: false
+  },
+  {
+    text: 'ok',
+    fromPeer: true
+  },
+  {
+    text: 'Hello',
+    fromPeer: true
+  },
+  {
+    text: 'Hi',
+    fromPeer: false
+  },
+  {
+    text: 'ok',
+    fromPeer: true
   }
 ];
 
-const styles = () => css`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  border-style: solid;
-`;
+const styles = {
+  wrapper: css`
+    width: 300px;
+    height: 80%;
+  `,
+  msgBox: css`
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border-style: solid;
+    overflow: scroll;
+  `
+};
 
 export default function Chat() {
   const [messages, setMessages] = useState(testMessages);
+
   return (
-    <Box
-     css={styles()}
-    >
-      {messages.map(message => <ChatListItem text = {message.text} fromPeer = {message.fromPeer}/>)}
+    <Box css={styles.wrapper}>
+      <Box css={styles.msgBox}>
+        {messages.map(message => <ChatListItem text = {message.text} fromPeer = {message.fromPeer}/>)}
+      </Box>
     </Box>
-  )
+  );
 };
