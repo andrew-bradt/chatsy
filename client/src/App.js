@@ -20,13 +20,14 @@ function App() {
       <LoginForm onSubmit={handleLogin} />
       <button
         onClick={() => {
+          toggleLobbyState(prev => !prev)
           socket.current.emit("enter-lobby", { userId });
         }}
       >
         enter lobby
       </button>
-      <video width="500" height="500" ref={videoRef} autoPlay></video>
-      <video width="500" height="500" ref={remoteVideoRef} autoPlay></video>
+      {/* <video width="500" height="500" ref={videoRef} autoPlay></video> */}
+      {/* <video width="500" height="500" ref={remoteVideoRef} autoPlay></video> */}
       <InterestsList interests={interests} socket={socket} userId={userId} inLobby={inLobby}/>
       {/* <button
         onClick = {() => {
