@@ -1,12 +1,9 @@
 import './App.css';
-import axios from 'axios';
-import Peer from 'peerjs';
-import {useState, useRef} from 'react';
+import {useState} from 'react';
 
-import useVideoCall from './hooks/useVideoCall';
+import useConnections from './hooks/useConnections';
 
 import LoginForm from './components/LoginForm';
-
 
 
 function App() {
@@ -14,19 +11,7 @@ function App() {
   const [interests, setInterests] = useState([]);
   const [remoteSocketId, setRemoteSocketId] = useState(null);
 
-  const socket = useRef(null);
-  const peer = useRef(null);
-  
-  const { videoRef, remoteVideoRef, endCall } = useVideoCall(socket, peer, userId, setRemoteSocketId);
-
-  const handleLogin = (email) => {
-    axios.post("/login", { email }).then(res => {
-      const { userId, interestsArray, peerId } = res.data;
-      setUserId(userId);
-      setInterests(interestsArray);
-      peer.current = new Peer(peerId);
-    });
-  };
+  const { videoRef, remoteVideoRef, endCall, handleLogin, socket } = useConnections(userId, setRemoteSocketId, setUserId, setInterests);
 
   return (
     <>

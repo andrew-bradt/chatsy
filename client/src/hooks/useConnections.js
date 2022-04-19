@@ -1,18 +1,29 @@
 import { useEffect, useRef } from "react";
 import socketIOClient from "socket.io-client"
 import Peer from "peerjs"
+import axios from "axios";
 
-export default function useVideoCall(socket, peer, userId, setRemoteSocketId) {
+export default function useConnections(userId, setRemoteSocketId, setUserId, setInterests) {
   
   const videoRef = useRef();
   const remoteVideoRef = useRef();
 
+  const socket = useRef(null);
+  const peer = useRef(null);
   const currentCall = useRef();
-  // const peer = useRef(null);
 
   const endCall = () => {
     currentCall.current.close();
     remoteVideoRef.current.srcObject = null;
+  };
+
+  const handleLogin = (email) => {
+    axios.post("/login", { email }).then(res => {
+      const { userId, interestsArray, peerId } = res.data;
+      setUserId(userId);
+      setInterests(interestsArray);
+      peer.current = new Peer(peerId);
+    });
   };
   
   // get local user video stream on page
@@ -79,5 +90,5 @@ export default function useVideoCall(socket, peer, userId, setRemoteSocketId) {
   }, [userId, peer, socket, setRemoteSocketId]);
 
   
-  return { videoRef, remoteVideoRef, endCall }
+  return { videoRef, remoteVideoRef, endCall, handleLogin, socket }
 }
