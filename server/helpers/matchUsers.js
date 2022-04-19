@@ -1,10 +1,8 @@
-const matchUsers = (activeUsers, lobby, Call) => {
-
+const matchUsers = (activeUsers, lobby, Call, io) => {
   // get all the interests current lobby has
   const interestUsing = Object.keys(lobby.usersByInterest);
 
   const startMatching = () => {
-
     // check users under each interests
     interestUsing.forEach(interest => {
       const usersHasInterest = lobby.usersByInterest[interest];
@@ -19,16 +17,18 @@ const matchUsers = (activeUsers, lobby, Call) => {
           const user = activeUsers.users[userArr.next().value];
           usersInCall.push(user);
         }
-        // TODO use socket.io to send one user the other user's peerId to start call
+        // use socket.io to send one user the other user's peerId to start call
         const call = new Call(...usersInCall);
-        console.log(call.sharedInterests);
 
-        console.log(lobby);
+        io.to(usersInCall[0].socketId).emit("callThisPeer", {
+          peerId: usersInCall[1].peerId,
+          shardInterests: call.sharedInterests
+        });
+
         // remove the two users from lobby
         usersInCall.forEach(user => {
           lobby.removeUser(user);
         });
-        console.log(lobby);
       }
     });
   };
