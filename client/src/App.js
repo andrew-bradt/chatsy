@@ -5,15 +5,19 @@ import useConnections from './hooks/useConnections';
 
 import LoginForm from './components/LoginForm';
 import InterestsList from './components/InterestsList';
+import ContactModal from './components/ContactModal';
 
 
 function App() {
   const [userId, setUserId] = useState(null);
   const [interests, setInterests] = useState([]);
   const [remoteSocketId, setRemoteSocketId] = useState(null);
+  
   const [inLobby, toggleLobbyState] = useState(false);
+  const [modalAnchor, setAnchor] = useState(null);
+  const [contactSaved, addContact] = useState([]);
 
-  const { videoRef, remoteVideoRef, endCall, handleLogin, socket } = useConnections(userId, setRemoteSocketId, setUserId, setInterests);
+  const { videoRef, remoteVideoRef, endCall, handleLogin, socket } = useConnections(userId, setRemoteSocketId, setUserId, setInterests, addContact);
 
   return (
     <>
@@ -26,8 +30,17 @@ function App() {
       >
         enter lobby
       </button>
-      {/* <video width="500" height="500" ref={videoRef} autoPlay></video> */}
-      {/* <video width="500" height="500" ref={remoteVideoRef} autoPlay></video> */}
+      <button
+        onClick = {() => {
+          socket.current.emit('send-contact-info', {remoteSocketId, userId})
+        }}
+        >
+          send contact info
+      </button>
+      <button onClick={e => setAnchor(e.currentTarget)}>Contacts</button>
+      <ContactModal contacts={contactSaved} anchorEl={modalAnchor} setAnchor={ setAnchor }/>
+      <video width="500" height="500" ref={videoRef} autoPlay></video>
+      <video width="500" height="500" ref={remoteVideoRef} autoPlay></video>
       <InterestsList interests={interests} socket={socket} userId={userId} inLobby={inLobby}/>
       {/* <button
         onClick = {() => {
@@ -60,15 +73,6 @@ function App() {
         >
           send a message
         </button>
-
-        <button
-        onClick = {() => {
-          socket.current.emit('send-contact-info', {remoteSocketId, userId})
-        }}
-        >
-          send contact info
-        </button>
-      
 
       <button
         onClick={() => {
