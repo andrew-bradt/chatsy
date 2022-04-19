@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import socketIOClient from "socket.io-client"
 import Peer from "peerjs"
 
-export default function useVideoCall(socket,  userId, peerId) {
+export default function useVideoCall(socket,  userId, peerId, setRemoteSocketId) {
   
   const videoRef = useRef();
   const remoteVideoRef = useRef();
@@ -45,6 +45,8 @@ export default function useVideoCall(socket,  userId, peerId) {
 
         console.log(call.metadata);
 
+        setRemoteSocketId(call.metadata.remoteSocketId);
+        
         currentCall.current = call;
         call.answer(videoRef.current.srcObject);
         call.on("stream", remoteVidoStream => {
@@ -54,8 +56,11 @@ export default function useVideoCall(socket,  userId, peerId) {
     
       // receive other user's peer id and call immediately
       socket.current.on("callThisPeer", msg => {
-        const { peerId, sharedInterests } = msg;
-        const data = {metadata: {"sharedInterests":sharedInterests[0]}}
+        const { peerId, socketId, sharedInterests } = msg;
+
+        setRemoteSocketId(socketId);        
+
+        const data = {metadata: {"sharedInterests":sharedInterests[0],"remoteSocketId":socketId}}
 
         // start calling the other peer and send shared interests to that peer
         const call = peer.current.call(peerId, videoRef.current.srcObject, data);
@@ -68,7 +73,7 @@ export default function useVideoCall(socket,  userId, peerId) {
       // end the peer call after getting endCall event from server
       socket.current.on("endCall", endCall);
     }
-  }, [userId, peerId, socket]);
+  }, [userId, peerId, socket, setRemoteSocketId]);
 
   
   return { videoRef, remoteVideoRef, endCall }
