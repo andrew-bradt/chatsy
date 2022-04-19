@@ -1,8 +1,6 @@
 import './App.css';
 import axios from 'axios';
-import Peer from "peerjs";
-import {useState, useEffect, useRef} from 'react';
-import socketIOClient from "socket.io-client"
+import {useState, useRef} from 'react';
 
 import useVideoCall from './hooks/useVideoCall';
 
@@ -15,20 +13,8 @@ function App() {
   const [peerId, setPeerId] = useState(null);
 
   const socket = useRef(null);
-  const peer = useRef(null);
   
-  const { videoRef, remoteVideoRef, endCall } = useVideoCall(socket.current, peer.current);
-
-  useEffect(() => {
-    if (userId) {
-      socket.current = socketIOClient("/");
-
-      peer.current = new Peer(peerId);
-      socket.current.on('connect', ()=>{
-        socket.current.emit('add-socket-id', ({userId}));
-      });
-    }
-  }, [userId, peerId]);
+  const { videoRef, remoteVideoRef, endCall } = useVideoCall(socket, userId, peerId);
 
   const handleLogin = (email) => {
     axios.post("/login", { email }).then(res => {
