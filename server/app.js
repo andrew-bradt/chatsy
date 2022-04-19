@@ -7,15 +7,11 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
 
+// Configs
 const db = require('./configs/db.config');
+const {lobby, activeUsers} = require('./configs/active-users-and-lobby');
 
 // Users Code
-const ActiveUsers = require('./entities/ActiveUsers');
-const Lobby = require('./entities/Lobby');
-
-const activeUsers = new ActiveUsers();
-const lobby = new Lobby();
-
 const app = express();
 const server = http.createServer(app);
 
