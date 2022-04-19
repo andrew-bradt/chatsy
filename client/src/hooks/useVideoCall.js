@@ -40,6 +40,8 @@ export default function useVideoCall(socket,  userId, peerId, setRemoteSocketId)
         socket.current.emit('add-socket-id', ({userId}));
       });
 
+      socket.current.on('msg', ({msg}) => console.log(msg));
+
       // listen for call event, and answer
       peer.current.on("call", call => {
 

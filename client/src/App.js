@@ -14,7 +14,7 @@ function App() {
   const [remoteSocketId, setRemoteSocketId] = useState(null);
 
   const socket = useRef(null);
-  
+
   const { videoRef, remoteVideoRef, endCall } = useVideoCall(socket, userId, peerId, setRemoteSocketId);
 
   const handleLogin = (email) => {
