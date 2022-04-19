@@ -22,7 +22,7 @@ class Lobby {
   }
 
   addUser(user) {
-    user.interests.forEach((interest) => this.addInterest(interest, user.userId));;
+    user.interests.forEach((interest) => this.addInterest(interest, user.userId));
   }
 
   removeUser(user) {
