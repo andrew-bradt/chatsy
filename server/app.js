@@ -7,16 +7,11 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
 
+// Configs
 const db = require('./configs/db.config');
+const {lobby, activeUsers} = require('./configs/active-users-and-lobby');
 
 // Users Code
-const ActiveUsers = require('./entities/ActiveUsers');
-const Lobby = require('./entities/Lobby');
-const Call = require('./entities/Call');
-
-const activeUsers = new ActiveUsers();
-const lobby = new Lobby();
-
 const app = express();
 const server = http.createServer(app);
 
@@ -35,6 +30,10 @@ const leaveLobby = require('./socket-listeners/leave-lobby')(activeUsers, lobby)
 const addCriteria = require('./socket-listeners/add-criteria')(lobby);
 const removeCriteria = require('./socket-listeners/remove-criteria')(lobby);
 const addSocketId = require('./socket-listeners/add-socket-id')(activeUsers);
+const sendMsg = require('./socket-listeners/send-msg')(io);
+const sendContactInfo = require('./socket-listeners/send-contact-info')(io, activeUsers);
+const endCall = require('./socket-listeners/end-call')(io);
+const disconnect = require('./socket-listeners/disconnect')(activeUsers, lobby);
 
 io.on('connection', (socket) => {
   socket.on('add-socket-id', ({userId}) => addSocketId(userId, socket.id));
@@ -42,16 +41,12 @@ io.on('connection', (socket) => {
   socket.on('leave-lobby', ({userId}) => leaveLobby(userId));
   socket.on('add-criteria', ({userId, interest}) => addCriteria(interest, userId));
   socket.on('remove-criteria', ({userId, interest}) => removeCriteria(interest, userId));
+  socket.on('send-msg', ({msg, remoteSocketId}) => sendMsg(remoteSocketId, msg));
+  socket.on("send-contact-info", ({ userId, remoteSocketId }) => sendContactInfo(remoteSocketId, userId));
+  socket.on("end-call", ({ remoteSocketId }) => endCall(remoteSocketId));
+  socket.on('disconnect', () => disconnect(socket.id));
   
-  socket.on('disconnect', () => {});
-  socket.on('send-msg', ({msg})=> {});
-  socket.on("send-contact-info", ({ userId }) => { });
-  
-  socket.on("end-call", ({ remoteSocketId }) => {
-    io.to(remoteSocketId).emit("endCall");
-  });
-  
-  matchUsers(activeUsers, lobby, Call, io);
+  matchUsers(activeUsers, lobby, io);
 });
 
 app.use(cors());

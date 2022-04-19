@@ -48,7 +48,21 @@ function App() {
         remove interest
       </button>
 
-      
+      <button
+        onClick = {() => {
+          socket.current.emit('send-msg', {remoteSocketId, msg: 'send a message'})
+        }}
+        >
+          send a message
+        </button>
+
+        <button
+        onClick = {() => {
+          socket.current.emit('send-contact-info', {remoteSocketId, userId})
+        }}
+        >
+          send contact info
+        </button>
       
       <video width="500" height="500" ref={videoRef} autoPlay></video>
       <video width="500" height="500" ref={remoteVideoRef} autoPlay></video>
