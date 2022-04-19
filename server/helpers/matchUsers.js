@@ -23,10 +23,12 @@ const matchUsers = (activeUsers, lobby, Call) => {
         const call = new Call(...usersInCall);
         console.log(call.sharedInterests);
 
+        console.log(lobby);
         // remove the two users from lobby
         usersInCall.forEach(user => {
           lobby.removeUser(user);
         });
+        console.log(lobby);
       }
     });
   };

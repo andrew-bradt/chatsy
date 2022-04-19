@@ -1,7 +1,7 @@
 class Lobby {
   constructor() {
     this.usersByInterest = {};
-  };
+  }
 
   addInterest(interest, userId) {
     if (this.usersByInterest[interest]) {
@@ -14,7 +14,7 @@ class Lobby {
   removeUserInterest(interest, userId) {
     const usersWithInterest = this.usersByInterest[interest];
 
-    if (usersWithInterest.length) {
+    if (usersWithInterest && usersWithInterest.length) {
       usersWithInterest.delete(userId);
     } else {
       delete this.usersByInterest[interest];
