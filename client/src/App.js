@@ -11,6 +11,7 @@ function App() {
   const [userId, setUserId] = useState(null);
   const [interests, setInterests] = useState([]);
   const [remoteSocketId, setRemoteSocketId] = useState(null);
+  const [inLobby, toggleLobbyState] = useState(false);
 
   const { videoRef, remoteVideoRef, endCall, handleLogin, socket } = useConnections(userId, setRemoteSocketId, setUserId, setInterests);
 
@@ -26,7 +27,7 @@ function App() {
       </button>
       <video width="500" height="500" ref={videoRef} autoPlay></video>
       <video width="500" height="500" ref={remoteVideoRef} autoPlay></video>
-      <InterestsList interests={interests} socket={socket} userId={userId} />
+      <InterestsList interests={interests} socket={socket} userId={userId} inLobby={inLobby}/>
       {/* <button
         onClick = {() => {
           socket.current.emit('leave-lobby', {userId});

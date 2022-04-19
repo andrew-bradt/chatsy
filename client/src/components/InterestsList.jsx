@@ -4,15 +4,16 @@ import InterestsListItem from "./InterestsListItem";
 
 export default function InterestsList(props) {
 
-  const { interests, socket, userId } = props;
+  const { interests, socket, userId, inLobby } = props;
 
   const parsedInterests = interests.map(
     interest =>
       <InterestsListItem
-      key={interest}
-      interest={interest}
-      socket={socket}
-      userId={userId} /> 
+        key={interest}
+        interest={interest}
+        socket={socket}
+        userId={userId}
+        inLobby={inLobby} /> 
   )
 
   return (
