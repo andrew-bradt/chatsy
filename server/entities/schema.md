@@ -6,13 +6,7 @@ class User {
     email = String,
     interests = Set {
       String
-    },
-    isLookingForPeer = false,
-    isInCall = false
-  }
-
-  toggleIsLooking(),
-  toggleIsInCall()
+    }
 };
 
 class ActiveUsers {
@@ -23,14 +17,18 @@ class ActiveUsers {
   }
   
   removeUser(userId),
-  addUser(userData, peerId)
+  addUser(userData, peerId),
+  getUserById(userId),
+  getUserBySocketId (socketId)
 };
 
 class Call {
   constructor(...User) {
+    users = [user]
     userIds = [userId],
     sharedInterests = [String]
   }
+  start(io)
 }
 
 class Lobby {
@@ -44,5 +42,7 @@ class Lobby {
 
   addUser(user)
   removeUser(user)
+  addInterest(interest, userId)
+  removeUserInterest(interest, userId)
 }
 ```
