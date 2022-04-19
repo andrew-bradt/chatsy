@@ -23,7 +23,7 @@ function App() {
     if (userId) {
       socket.current = socketIOClient("/");
       socket.current.on('connect', ()=>{
-        socket.current.emit('add-user-id', ({userId}));
+        socket.current.emit('add-socket-id', ({userId}));
       });
       peer.current = new Peer();
       peer.current.on("open", id => {
