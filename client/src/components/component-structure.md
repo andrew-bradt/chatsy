@@ -45,6 +45,12 @@
     - In Lobby Waiting
     - Logged In Not In Lobby
   
+# SharedInterests
+- Rendered During
+  - In Call
+
+- Props
+  - Shared Interests
 
 # InterestsListItem
   - Props
