@@ -45,10 +45,9 @@ io.on('connection', (socket) => {
   socket.on('add-criteria', ({userId, interest}) => addCriteria(interest, userId));
   socket.on('remove-criteria', ({userId, interest}) => removeCriteria(interest, userId));
   socket.on('send-msg', ({msg, remoteSocketId}) => sendMsg(remoteSocketId, msg));
+  socket.on("send-contact-info", ({ userId, remoteSocketId }) => sendContactInfo(remoteSocketId, userId));
 
   socket.on('disconnect', () => {});
-  socket.on("send-contact-info", ({ userId, remoteSocketId }) => sendContactInfo(remoteSocketId, userId));
-  
   socket.on("end-call", ({ remoteSocketId }) => {
     io.to(remoteSocketId).emit("endCall");
   });
