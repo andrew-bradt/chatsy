@@ -1,4 +1,6 @@
-const matchUsers = (activeUsers, lobby, Call, io) => {
+const Call = require('../entities/Call');
+
+const matchUsers = (activeUsers, lobby, io) => {
   // get all the interests current lobby has
   const interestUsing = Object.keys(lobby.usersByInterest);
 

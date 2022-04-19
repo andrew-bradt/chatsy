@@ -51,7 +51,7 @@ io.on('connection', (socket) => {
   socket.on("end-call", ({ remoteSocketId }) => endCall(remoteSocketId));
   socket.on('disconnect', () => disconnect(socket.id));
   
-  matchUsers(activeUsers, lobby, Call, io);
+  matchUsers(activeUsers, lobby, io);
 });
 
 app.use(cors());
