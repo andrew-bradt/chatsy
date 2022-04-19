@@ -22,21 +22,20 @@ function App() {
   useEffect(() => {
     if (userId) {
       socket.current = socketIOClient("/");
+
+      peer.current = new Peer(peerId);
       socket.current.on('connect', ()=>{
         socket.current.emit('add-socket-id', ({userId}));
       });
-      peer.current = new Peer();
-      peer.current.on("open", id => {
-        setPeerId(id);
-      });
     }
-  }, [userId]);
+  }, [userId, peerId]);
 
   const handleLogin = (email) => {
-    axios.post("/login", { email, peerId }).then(res => {
-      const { userId, interestsArray } = res.data;
+    axios.post("/login", { email }).then(res => {
+      const { userId, interestsArray, peerId } = res.data;
       setUserId(userId);
       setInterests(interestsArray);
+      setPeerId(peerId);
     });
   };
 
