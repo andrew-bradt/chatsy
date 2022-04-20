@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { AppBar, Box, Button, Toolbar, Typography } from '@mui/material';
 
 import ContactModal from "./ContactModal";
@@ -6,8 +6,18 @@ import ContactModal from "./ContactModal";
 export default function TopBar(props) {
   
   const [modalAnchor, setAnchor] = useState(null);
+  const [contactSaved, addContact] = useState([]);
 
-  const { userId, contacts } = props;
+  const { userId, socket } = props;
+
+
+  useEffect(() => {
+    if (socket) {
+      socket.on('contact-info', ({ email }) => {
+        addContact(prev => [...prev, email])
+      })
+    }
+  }, [socket])
 
   return (
     <>
@@ -23,7 +33,7 @@ export default function TopBar(props) {
         </AppBar>
       </Box>
       <ContactModal
-        contacts={contacts}
+        contacts={contactSaved}
         anchorEl={modalAnchor}
         setAnchor={setAnchor}
       />

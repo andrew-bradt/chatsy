@@ -92,9 +92,7 @@ export default function useConnections(userId, setRemoteSocketId, setUserId, set
 
       // Other socket event listeners
       // register receiving contact info event
-      socket.current.on('contact-info', ({ email }) => {
-        addContact(prev => [...prev, email])
-      })
+
     }
   }, [userId, peer, socket, setRemoteSocketId, addContact]);
 

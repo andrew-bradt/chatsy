@@ -15,14 +15,13 @@ function App() {
   const [remoteSocketId, setRemoteSocketId] = useState(null);
   
   const [inLobby, toggleLobbyState] = useState(false);
-  const [contactSaved, addContact] = useState([]);
 
-  const { videoRef, remoteVideoRef, endCall, handleLogin, socket } = useConnections(userId, setRemoteSocketId, setUserId, setInterests, addContact);
+  const { videoRef, remoteVideoRef, endCall, handleLogin, socket } = useConnections(userId, setRemoteSocketId, setUserId, setInterests);
 
   return (
     <>
       <CssBaseline />
-      <TopBar contacts={contactSaved} userId={userId} />
+      <TopBar userId={userId} socket={socket.current}/>
 
       <Grid container component="main" sx={{ height: "100vh", marginTop: '3rem' }}>
         <Grid
