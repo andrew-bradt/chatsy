@@ -76,7 +76,7 @@ function App() {
               End Call
             </button> */}
 
-            {userId && (
+            {userId && !remoteSocketId && (
               <InterestsList
                 interests={interests}
                 socket={socket}
