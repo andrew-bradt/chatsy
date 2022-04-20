@@ -2,7 +2,7 @@
 import {css} from '@emotion/react';
 
 import './App.css';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 
 import useConnections from './hooks/useConnections';
 import useMode from './hooks/useMode';
@@ -20,8 +20,8 @@ function App() {
   const [inLobby, toggleLobbyState] = useState(false);
   const { videoRef, remoteVideoRef, endCall, handleLogin, socket } = useConnections(userId, setRemoteSocketId, setUserId, setInterests);
 
-  // const mode = useMode({userId, remoteSocketId, inLobby});
-  // console.log(mode);
+  const {mode} = useMode({userId, remoteSocketId, inLobby});
+
   return (
     <>
       <CssBaseline />
