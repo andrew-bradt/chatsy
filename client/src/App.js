@@ -31,7 +31,7 @@ function App() {
         setAnchor={setAnchor}
       />
 
-      <Grid container component="main" sx={{ height: "100vh" }}>
+      <Grid container component="main" sx={{ height: "100vh", marginTop: '3rem' }}>
         <Grid
           item
           xs={3.5}

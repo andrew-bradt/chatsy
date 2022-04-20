@@ -8,7 +8,7 @@ export default function TopBar (props) {
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
-        <AppBar position='static'>
+        <AppBar position='fixed'>
           <Toolbar variant='dense'>
             <Typography variant='h5' component='div' sx={{ flexGrow: 1 }}>
               CHATSY
