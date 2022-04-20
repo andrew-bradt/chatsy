@@ -1,3 +1,6 @@
+/** @jsxImportSource @emotion/react */
+import {css} from '@emotion/react';
+
 import './App.css';
 import {useState} from 'react';
 
@@ -6,8 +9,8 @@ import useConnections from './hooks/useConnections';
 import { CssBaseline, Grid, Stack, Paper } from "@mui/material";
 import TopBar from "./components/TopBar";
 import LoginForm from './components/LoginForm';
+import Chat from './components/Chat';
 import InterestsList from './components/InterestsList';
-
 
 function App() {
   const [userId, setUserId] = useState(null);
@@ -22,20 +25,21 @@ function App() {
     <>
       <CssBaseline />
       <TopBar userId={userId} socket={socket.current}/>
-
+    
       <Grid container component="main" sx={{ height: "100vh", marginTop: '3rem' }}>
         <Grid
           item
           xs={3.5}
           sx={{
-            backgroundColor: "rgb(246, 245, 241)"
+            backgroundColor: "rgb(246, 245, 241)",
+            height: '100%'
           }}
           component={Paper}
           elevation={3}
           square
         >
-          <Stack justifyContent="center" alignItems="center">
-            <LoginForm onSubmit={handleLogin} />
+          <Stack justifyContent="center" alignItems="center" sx = {{height: '100%'}}>
+            {/* <LoginForm onSubmit={handleLogin} />
             <button
               onClick={() => {
                 toggleLobbyState(prev => !prev);
@@ -60,7 +64,8 @@ function App() {
               socket={socket}
               userId={userId}
               inLobby={inLobby}
-            />
+            /> */}
+            <Chat/>
           </Stack>
         </Grid>
 
