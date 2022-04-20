@@ -154,16 +154,17 @@ const testMessages = [
 
 const styles = {
   wrapper: css`
-    width: 300px;
+    width: 100%;
     height: 80%;
   `,
+
   msgBox: css`
-    width: 100%;
+    padding: 10px;
     height: 100%;
     display: flex;
     flex-direction: column;
     border-style: solid;
-    overflow: scroll;
+    overflow-y: scroll;
   `
 };
 
@@ -173,7 +174,7 @@ export default function Chat() {
   return (
     <Box css={styles.wrapper}>
       <Box css={styles.msgBox}>
-        {messages.map(message => <ChatListItem text = {message.text} fromPeer = {message.fromPeer}/>)}
+        {messages.map((message, i) => <ChatListItem text = {message.text} fromPeer = {message.fromPeer}/>)}
       </Box>
     </Box>
   );

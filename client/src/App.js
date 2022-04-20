@@ -1,3 +1,6 @@
+/** @jsxImportSource @emotion/react */
+import {css} from '@emotion/react';
+
 import './App.css';
 import {useState} from 'react';
 
@@ -5,6 +8,19 @@ import useConnections from './hooks/useConnections';
 
 import LoginForm from './components/LoginForm';
 import Chat from './components/Chat';
+
+import Container from '@mui/material/Container';
+import Box from '@mui/material/Box';
+
+const styles = {
+  wrapper: css`
+
+  `,
+  leftColumn: css`
+    width: 36%;
+    height: 100vh;
+  `
+};
 
 function App() {
   // const [userId, setUserId] = useState(null);
@@ -14,9 +30,12 @@ function App() {
   // const { videoRef, remoteVideoRef, endCall, handleLogin, socket } = useConnections(userId, setRemoteSocketId, setUserId, setInterests);
 
   return (
-    <>
-      <Chat />
-      {/* <LoginForm onSubmit={handleLogin} />
+      <Box css={styles.leftColumn}>
+        <Chat/>
+      </Box>
+    
+      
+      /* <LoginForm onSubmit={handleLogin} />
       <button
         onClick = {() => {
           socket.current.emit('enter-lobby', {userId});
@@ -74,8 +93,7 @@ function App() {
         }}
       >
         End Call
-      </button> */}
-    </>
+      </button> */
   );
 }
 
