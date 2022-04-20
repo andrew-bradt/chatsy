@@ -6,6 +6,14 @@ export default function ContactModalItem(props) {
   const { contact } = props;
 
   return (
-    <Typography>{contact}</Typography>
+    <>
+      <Typography
+        align="center"
+        sx={{
+          padding: 1,
+          borderTop: '1px solid rgb(246, 245, 241)'  
+        }}
+        >{contact}</Typography>
+    </>
   )
 }
