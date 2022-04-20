@@ -87,6 +87,7 @@ export default function useConnections(userId, setRemoteSocketId, setUserId, set
       // end the peer call after getting endCall event from server
       socket.current.on("endCall", () => {
         console.log('the other user ended the call')
+        socket.current.emit('enter-lobby', {userId})
         endCall();
       });
 
@@ -94,7 +95,7 @@ export default function useConnections(userId, setRemoteSocketId, setUserId, set
       // register receiving contact info event
 
     }
-  }, [userId, peer, socket, setRemoteSocketId, addContact]);
+  }, [userId, peer, socket, setRemoteSocketId, addContact, endCall]);
 
   
   return { videoRef, remoteVideoRef, endCall, handleLogin, socket }
