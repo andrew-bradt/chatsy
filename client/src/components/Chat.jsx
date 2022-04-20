@@ -318,8 +318,14 @@ export default function Chat({socket}) {
   const [messages, setMessages] = useState(testMessages);
   const [value, setValue] = useState('');
   
+  const appendLocalMsg = (text) => {
+    const newMsg = {text, fromPeer: false};
+    setMessages([...messages, newMsg]);
+  };
+    
   const send = (e) => {
     e.preventDefault();
+    appendLocalMsg(value);
     setValue('');
   };
 
