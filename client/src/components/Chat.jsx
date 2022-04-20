@@ -7,306 +7,320 @@ import Box from '@mui/material/Box';
 
 import { InputAdornment, TextField } from '@mui/material';
 
+// const testMessages = [
+//   {
+//     text: 'Hello',
+//     fromPeer: true
+//   },
+//   {
+//     text: 'Hi',
+//     fromPeer: false
+//   },
+//   {
+//     text: 'ok',
+//     fromPeer: true
+//   },
+//   {
+//     text: 'Hello',
+//     fromPeer: true
+//   },
+//   {
+//     text: 'Hi',
+//     fromPeer: false
+//   },
+//   {
+//     text: 'ok',
+//     fromPeer: true
+//   },
+//   {
+//     text: 'Hello',
+//     fromPeer: true
+//   },
+//   {
+//     text: 'Hi',
+//     fromPeer: false
+//   },
+//   {
+//     text: 'ok',
+//     fromPeer: true
+//   },
+//   {
+//     text: 'Hello',
+//     fromPeer: true
+//   },
+//   {
+//     text: 'Hi',
+//     fromPeer: false
+//   },
+//   {
+//     text: 'ok',
+//     fromPeer: true
+//   },
+//   {
+//     text: 'Hello',
+//     fromPeer: true
+//   },
+//   {
+//     text: 'Hi',
+//     fromPeer: false
+//   },
+//   {
+//     text: 'ok',
+//     fromPeer: true
+//   },
+//   {
+//     text: 'Hello',
+//     fromPeer: true
+//   },
+//   {
+//     text: 'Hi',
+//     fromPeer: false
+//   },
+//   {
+//     text: 'ok',
+//     fromPeer: true
+//   },
+//   {
+//     text: 'Hello',
+//     fromPeer: true
+//   },
+//   {
+//     text: 'Hi',
+//     fromPeer: false
+//   },
+//   {
+//     text: 'ok',
+//     fromPeer: true
+//   },
+//   {
+//     text: 'Hello',
+//     fromPeer: true
+//   },
+//   {
+//     text: 'Hi',
+//     fromPeer: false
+//   },
+//   {
+//     text: 'ok',
+//     fromPeer: true
+//   },
+//   {
+//     text: 'Hello',
+//     fromPeer: true
+//   },
+//   {
+//     text: 'Hi',
+//     fromPeer: false
+//   },
+//   {
+//     text: 'ok',
+//     fromPeer: true
+//   },
+//   {
+//     text: 'Hello',
+//     fromPeer: true
+//   },
+//   {
+//     text: 'Hi',
+//     fromPeer: false
+//   },
+//   {
+//     text: 'ok',
+//     fromPeer: true
+//   },
+//   {
+//     text: 'Hello',
+//     fromPeer: true
+//   },
+//   {
+//     text: 'Hi',
+//     fromPeer: false
+//   },
+//   {
+//     text: 'ok',
+//     fromPeer: true
+//   },
+//   {
+//     text: 'Hello',
+//     fromPeer: true
+//   },
+//   {
+//     text: 'Hi',
+//     fromPeer: false
+//   },
+//   {
+//     text: 'ok',
+//     fromPeer: true
+//   },
+//   {
+//     text: 'Hello',
+//     fromPeer: true
+//   },
+//   {
+//     text: 'Hi',
+//     fromPeer: false
+//   },
+//   {
+//     text: 'ok',
+//     fromPeer: true
+//   },
+//   {
+//     text: 'Hello',
+//     fromPeer: true
+//   },
+//   {
+//     text: 'Hi',
+//     fromPeer: false
+//   },
+//   {
+//     text: 'ok',
+//     fromPeer: true
+//   },
+//   {
+//     text: 'Hello',
+//     fromPeer: true
+//   },
+//   {
+//     text: 'Hi',
+//     fromPeer: false
+//   },
+//   {
+//     text: 'ok',
+//     fromPeer: true
+//   },
+//   {
+//     text: 'Hello',
+//     fromPeer: true
+//   },
+//   {
+//     text: 'Hi',
+//     fromPeer: false
+//   },
+//   {
+//     text: 'ok',
+//     fromPeer: true
+//   },
+//   {
+//     text: 'Hello',
+//     fromPeer: true
+//   },
+//   {
+//     text: 'Hi',
+//     fromPeer: false
+//   },
+//   {
+//     text: 'ok',
+//     fromPeer: true
+//   },
+//   {
+//     text: 'Hello',
+//     fromPeer: true
+//   },
+//   {
+//     text: 'Hi',
+//     fromPeer: false
+//   },
+//   {
+//     text: 'ok',
+//     fromPeer: true
+//   },
+//   {
+//     text: 'Hello',
+//     fromPeer: true
+//   },
+//   {
+//     text: 'Hi',
+//     fromPeer: false
+//   },
+//   {
+//     text: 'ok',
+//     fromPeer: true
+//   },
+//   {
+//     text: 'Hello',
+//     fromPeer: true
+//   },
+//   {
+//     text: 'Hi',
+//     fromPeer: false
+//   },
+//   {
+//     text: 'ok',
+//     fromPeer: true
+//   },
+//   {
+//     text: 'Hello',
+//     fromPeer: true
+//   },
+//   {
+//     text: 'Hi',
+//     fromPeer: false
+//   },
+//   {
+//     text: 'ok',
+//     fromPeer: true
+//   },
+//   {
+//     text: 'Hello',
+//     fromPeer: true
+//   },
+//   {
+//     text: 'Hi',
+//     fromPeer: false
+//   },
+//   {
+//     text: 'ok',
+//     fromPeer: true
+//   },
+//   {
+//     text: 'Hello',
+//     fromPeer: true
+//   },
+//   {
+//     text: 'Hi',
+//     fromPeer: false
+//   },
+//   {
+//     text: 'ok',
+//     fromPeer: true
+//   },
+//   {
+//     text: 'Hello',
+//     fromPeer: true
+//   },
+//   {
+//     text: 'Hi',
+//     fromPeer: false
+//   },
+//   {
+//     text: 'ok',
+//     fromPeer: true
+//   }
+// ];
+
 const testMessages = [
   {
     text: 'Hello',
     fromPeer: true
   },
   {
-    text: 'Hi',
+    text: 'Hello',
     fromPeer: false
-  },
-  {
-    text: 'ok',
-    fromPeer: true
   },
   {
     text: 'Hello',
-    fromPeer: true
-  },
-  {
-    text: 'Hi',
-    fromPeer: false
-  },
-  {
-    text: 'ok',
-    fromPeer: true
-  },
-  {
-    text: 'Hello',
-    fromPeer: true
-  },
-  {
-    text: 'Hi',
-    fromPeer: false
-  },
-  {
-    text: 'ok',
-    fromPeer: true
-  },
-  {
-    text: 'Hello',
-    fromPeer: true
-  },
-  {
-    text: 'Hi',
-    fromPeer: false
-  },
-  {
-    text: 'ok',
-    fromPeer: true
-  },
-  {
-    text: 'Hello',
-    fromPeer: true
-  },
-  {
-    text: 'Hi',
-    fromPeer: false
-  },
-  {
-    text: 'ok',
-    fromPeer: true
-  },
-  {
-    text: 'Hello',
-    fromPeer: true
-  },
-  {
-    text: 'Hi',
-    fromPeer: false
-  },
-  {
-    text: 'ok',
-    fromPeer: true
-  },
-  {
-    text: 'Hello',
-    fromPeer: true
-  },
-  {
-    text: 'Hi',
-    fromPeer: false
-  },
-  {
-    text: 'ok',
-    fromPeer: true
-  },
-  {
-    text: 'Hello',
-    fromPeer: true
-  },
-  {
-    text: 'Hi',
-    fromPeer: false
-  },
-  {
-    text: 'ok',
-    fromPeer: true
-  },
-  {
-    text: 'Hello',
-    fromPeer: true
-  },
-  {
-    text: 'Hi',
-    fromPeer: false
-  },
-  {
-    text: 'ok',
-    fromPeer: true
-  },
-  {
-    text: 'Hello',
-    fromPeer: true
-  },
-  {
-    text: 'Hi',
-    fromPeer: false
-  },
-  {
-    text: 'ok',
-    fromPeer: true
-  },
-  {
-    text: 'Hello',
-    fromPeer: true
-  },
-  {
-    text: 'Hi',
-    fromPeer: false
-  },
-  {
-    text: 'ok',
-    fromPeer: true
-  },
-  {
-    text: 'Hello',
-    fromPeer: true
-  },
-  {
-    text: 'Hi',
-    fromPeer: false
-  },
-  {
-    text: 'ok',
-    fromPeer: true
-  },
-  {
-    text: 'Hello',
-    fromPeer: true
-  },
-  {
-    text: 'Hi',
-    fromPeer: false
-  },
-  {
-    text: 'ok',
-    fromPeer: true
-  },
-  {
-    text: 'Hello',
-    fromPeer: true
-  },
-  {
-    text: 'Hi',
-    fromPeer: false
-  },
-  {
-    text: 'ok',
-    fromPeer: true
-  },
-  {
-    text: 'Hello',
-    fromPeer: true
-  },
-  {
-    text: 'Hi',
-    fromPeer: false
-  },
-  {
-    text: 'ok',
-    fromPeer: true
-  },
-  {
-    text: 'Hello',
-    fromPeer: true
-  },
-  {
-    text: 'Hi',
-    fromPeer: false
-  },
-  {
-    text: 'ok',
-    fromPeer: true
-  },
-  {
-    text: 'Hello',
-    fromPeer: true
-  },
-  {
-    text: 'Hi',
-    fromPeer: false
-  },
-  {
-    text: 'ok',
-    fromPeer: true
-  },
-  {
-    text: 'Hello',
-    fromPeer: true
-  },
-  {
-    text: 'Hi',
-    fromPeer: false
-  },
-  {
-    text: 'ok',
-    fromPeer: true
-  },
-  {
-    text: 'Hello',
-    fromPeer: true
-  },
-  {
-    text: 'Hi',
-    fromPeer: false
-  },
-  {
-    text: 'ok',
-    fromPeer: true
-  },
-  {
-    text: 'Hello',
-    fromPeer: true
-  },
-  {
-    text: 'Hi',
-    fromPeer: false
-  },
-  {
-    text: 'ok',
-    fromPeer: true
-  },
-  {
-    text: 'Hello',
-    fromPeer: true
-  },
-  {
-    text: 'Hi',
-    fromPeer: false
-  },
-  {
-    text: 'ok',
-    fromPeer: true
-  },
-  {
-    text: 'Hello',
-    fromPeer: true
-  },
-  {
-    text: 'Hi',
-    fromPeer: false
-  },
-  {
-    text: 'ok',
-    fromPeer: true
-  },
-  {
-    text: 'Hello',
-    fromPeer: true
-  },
-  {
-    text: 'Hi',
-    fromPeer: false
-  },
-  {
-    text: 'ok',
-    fromPeer: true
-  },
-  {
-    text: 'Hello',
-    fromPeer: true
-  },
-  {
-    text: 'Hi',
-    fromPeer: false
-  },
-  {
-    text: 'ok',
     fromPeer: true
   }
 ];
 
 
-
 export default function Chat({socket}) {
   const [messages, setMessages] = useState(testMessages);
-  const [inputVal, setInputVal] = useState();
+  const [value, setValue] = useState('');
   
   const send = (e) => {
     e.preventDefault();
-    console.log('send msg');
+    setValue('');
   };
 
   return (
@@ -317,7 +331,11 @@ export default function Chat({socket}) {
         {messages.map((message, i) => <ChatListItem key = {i} text = {message.text} fromPeer = {message.fromPeer}/>)}
       </Box>
       <Box component='form' onSubmit = {(e) => send(e)}>
-        <TextField css={textField} id='compose-msg'/>
+        <TextField 
+          css={textField} 
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+        />
       </Box>
     </Box>
   );
