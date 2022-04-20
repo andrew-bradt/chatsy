@@ -9,7 +9,7 @@ export default function TopBar (props) {
     <>
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position='static'>
-          <Toolbar variant='regular'>
+          <Toolbar variant='dense'>
             <Typography variant='h5' component='div' sx={{ flexGrow: 1 }}>
               CHATSY
             </Typography>
