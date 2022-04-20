@@ -24,22 +24,30 @@ function App() {
   return (
     <>
       <CssBaseline />
-      <TopBar userId={userId} socket={socket.current}/>
-    
-      <Grid container component="main" sx={{ height: "100vh", marginTop: '3rem' }}>
+      <TopBar userId={userId} socket={socket.current} />
+
+      <Grid
+        container
+        component="main"
+        sx={{ height: "100vh", marginTop: "3rem" }}
+      >
         <Grid
           item
           xs={3.5}
           sx={{
             backgroundColor: "rgb(246, 245, 241)",
-            height: '100%'
+            height: "100%"
           }}
           component={Paper}
           elevation={3}
           square
         >
-          <Stack justifyContent="center" alignItems="center" sx = {{height: '100%'}}>
-            {/* <LoginForm onSubmit={handleLogin} />
+          <Stack
+            justifyContent="center"
+            alignItems="center"
+            sx={{ height: "100%" }}
+          >
+            <LoginForm onSubmit={handleLogin} />
             <button
               onClick={() => {
                 toggleLobbyState(prev => !prev);
@@ -59,13 +67,22 @@ function App() {
               send contact info
             </button>
 
+            <button
+              onClick={() => {
+                endCall();
+                socket.current.emit("end-call", { remoteSocketId });
+              }}
+            >
+              End Call
+            </button>
+
             <InterestsList
               interests={interests}
               socket={socket}
               userId={userId}
               inLobby={inLobby}
-            /> */}
-            <Chat/>
+            />
+            {/* <Chat /> */}
           </Stack>
         </Grid>
 
