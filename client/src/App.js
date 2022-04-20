@@ -41,7 +41,6 @@ function App() {
           elevation={3}
           square
         >
-
           <Stack
             justifyContent="center"
             alignItems="center"
@@ -49,7 +48,6 @@ function App() {
           >
             {!userId && <LoginForm onSubmit={handleLogin} />}
 
-            
             {/* <button
               onClick={() => {
                 toggleLobbyState(prev => !prev);
@@ -78,22 +76,28 @@ function App() {
               End Call
             </button> */}
 
-            {userId && <InterestsList
-              interests={interests}
-              socket={socket}
-              userId={userId}
-              inLobby={inLobby}
-            />}
-            {remoteSocketId && <Chat socket={socket.current} remoteSocketId={remoteSocketId} />}
-            
-            {userId &&
+            {userId && (
+              <InterestsList
+                interests={interests}
+                socket={socket}
+                userId={userId}
+                inLobby={inLobby}
+              />
+            )}
+            {remoteSocketId && (
+              <Chat socket={socket.current} remoteSocketId={remoteSocketId} />
+            )}
+
+            {userId && (
               <CallControllers
                 inLobby={inLobby}
                 socket={socket}
                 userId={userId}
                 toggleLobbyState={toggleLobbyState}
-              />}
-
+                remoteSocketId={remoteSocketId}
+                endCall={endCall}
+              />
+            )}
           </Stack>
         </Grid>
 
