@@ -6,10 +6,11 @@ import ContactModal from "./ContactModal";
 export default function TopBar(props) {
   
   const [modalAnchor, setAnchor] = useState(null);
-  const [contactSaved, addContact] = useState([]);
+  const [contactSaved, addContact] = useState(['a@icloud.com', 'b@gmail.com', 'd@cool.com']);
 
-  const { userId, socket } = props;
-
+  // for test styling purpose
+  const { socket } = props;
+  const userId = 1;
 
   useEffect(() => {
     if (socket) {
