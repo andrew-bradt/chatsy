@@ -171,7 +171,7 @@ const styles = {
 
 export default function Chat() {
   const [messages, setMessages] = useState(testMessages);
-  const [inputVal, setInputVal] = useState()
+  const [inputVal, setInputVal] = useState();
   return (
     <Box css={styles.wrapper}>
       <Box css={styles.msgBox}>
