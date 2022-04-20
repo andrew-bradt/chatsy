@@ -51,7 +51,6 @@ export default function useConnections(userId, setRemoteSocketId, setUserId, set
         socket.current.emit('add-socket-id', ({userId}));
       });
 
-      socket.current.on('msg', ({msg}) => console.log(msg));
       socket.current.on('contact-info', ({email}) => console.log(email));
 
       // listen for call event, and answer

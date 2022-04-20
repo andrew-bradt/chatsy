@@ -1,326 +1,71 @@
 /** @jsxImportSource @emotion/react */
 import {css} from '@emotion/react';
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react';
 
 import ChatListItem from './ChatListItem';
 import Box from '@mui/material/Box';
 
-const testMessages = [
-  {
-    text: 'Hello',
-    fromPeer: true
-  },
-  {
-    text: 'Hi',
-    fromPeer: false
-  },
-  {
-    text: 'ok',
-    fromPeer: true
-  },
-  {
-    text: 'Hello',
-    fromPeer: true
-  },
-  {
-    text: 'Hi',
-    fromPeer: false
-  },
-  {
-    text: 'ok',
-    fromPeer: true
-  },
-  {
-    text: 'Hello',
-    fromPeer: true
-  },
-  {
-    text: 'Hi',
-    fromPeer: false
-  },
-  {
-    text: 'ok',
-    fromPeer: true
-  },
-  {
-    text: 'Hello',
-    fromPeer: true
-  },
-  {
-    text: 'Hi',
-    fromPeer: false
-  },
-  {
-    text: 'ok',
-    fromPeer: true
-  },
-  {
-    text: 'Hello',
-    fromPeer: true
-  },
-  {
-    text: 'Hi',
-    fromPeer: false
-  },
-  {
-    text: 'ok',
-    fromPeer: true
-  },
-  {
-    text: 'Hello',
-    fromPeer: true
-  },
-  {
-    text: 'Hi',
-    fromPeer: false
-  },
-  {
-    text: 'ok',
-    fromPeer: true
-  },
-  {
-    text: 'Hello',
-    fromPeer: true
-  },
-  {
-    text: 'Hi',
-    fromPeer: false
-  },
-  {
-    text: 'ok',
-    fromPeer: true
-  },
-  {
-    text: 'Hello',
-    fromPeer: true
-  },
-  {
-    text: 'Hi',
-    fromPeer: false
-  },
-  {
-    text: 'ok',
-    fromPeer: true
-  },
-  {
-    text: 'Hello',
-    fromPeer: true
-  },
-  {
-    text: 'Hi',
-    fromPeer: false
-  },
-  {
-    text: 'ok',
-    fromPeer: true
-  },
-  {
-    text: 'Hello',
-    fromPeer: true
-  },
-  {
-    text: 'Hi',
-    fromPeer: false
-  },
-  {
-    text: 'ok',
-    fromPeer: true
-  },
-  {
-    text: 'Hello',
-    fromPeer: true
-  },
-  {
-    text: 'Hi',
-    fromPeer: false
-  },
-  {
-    text: 'ok',
-    fromPeer: true
-  },
-  {
-    text: 'Hello',
-    fromPeer: true
-  },
-  {
-    text: 'Hi',
-    fromPeer: false
-  },
-  {
-    text: 'ok',
-    fromPeer: true
-  },
-  {
-    text: 'Hello',
-    fromPeer: true
-  },
-  {
-    text: 'Hi',
-    fromPeer: false
-  },
-  {
-    text: 'ok',
-    fromPeer: true
-  },
-  {
-    text: 'Hello',
-    fromPeer: true
-  },
-  {
-    text: 'Hi',
-    fromPeer: false
-  },
-  {
-    text: 'ok',
-    fromPeer: true
-  },
-  {
-    text: 'Hello',
-    fromPeer: true
-  },
-  {
-    text: 'Hi',
-    fromPeer: false
-  },
-  {
-    text: 'ok',
-    fromPeer: true
-  },
-  {
-    text: 'Hello',
-    fromPeer: true
-  },
-  {
-    text: 'Hi',
-    fromPeer: false
-  },
-  {
-    text: 'ok',
-    fromPeer: true
-  },
-  {
-    text: 'Hello',
-    fromPeer: true
-  },
-  {
-    text: 'Hi',
-    fromPeer: false
-  },
-  {
-    text: 'ok',
-    fromPeer: true
-  },
-  {
-    text: 'Hello',
-    fromPeer: true
-  },
-  {
-    text: 'Hi',
-    fromPeer: false
-  },
-  {
-    text: 'ok',
-    fromPeer: true
-  },
-  {
-    text: 'Hello',
-    fromPeer: true
-  },
-  {
-    text: 'Hi',
-    fromPeer: false
-  },
-  {
-    text: 'ok',
-    fromPeer: true
-  },
-  {
-    text: 'Hello',
-    fromPeer: true
-  },
-  {
-    text: 'Hi',
-    fromPeer: false
-  },
-  {
-    text: 'ok',
-    fromPeer: true
-  },
-  {
-    text: 'Hello',
-    fromPeer: true
-  },
-  {
-    text: 'Hi',
-    fromPeer: false
-  },
-  {
-    text: 'ok',
-    fromPeer: true
-  },
-  {
-    text: 'Hello',
-    fromPeer: true
-  },
-  {
-    text: 'Hi',
-    fromPeer: false
-  },
-  {
-    text: 'ok',
-    fromPeer: true
-  },
-  {
-    text: 'Hello',
-    fromPeer: true
-  },
-  {
-    text: 'Hi',
-    fromPeer: false
-  },
-  {
-    text: 'ok',
-    fromPeer: true
-  },
-  {
-    text: 'Hello',
-    fromPeer: true
-  },
-  {
-    text: 'Hi',
-    fromPeer: false
-  },
-  {
-    text: 'ok',
-    fromPeer: true
-  }
-];
+import {TextField } from '@mui/material';
 
-const styles = {
-  wrapper: css`
-    background-color:pink;
-    width: 100%;
-    height: 75%;
-  `,
+export default function Chat({socket, remoteSocketId}) {
+  const [messages, setMessages] = useState([]);
+  const [value, setValue] = useState('');
 
-  msgBox: css`
-    width: 100%;
-    height: 90%;
-    display: flex;
-    flex-direction: column;
-    border: 3px solid black;
-    overflow-y: scroll;
-  `
-};
+  useEffect(() => {
+    if(socket) {
+      socket.on('msg', ({msg}) => appendMsg({text: msg, fromPeer: true}));
+    }
+    
+    return () => {
+      socket.off('msg');
+    }
+  }, [socket]);
+  
+  const appendMsg = (msgObj) => setMessages(prev => [...prev, msgObj]);
 
-export default function Chat() {
-  const [messages, setMessages] = useState(testMessages);
-  const [inputVal, setInputVal] = useState();
+  const send = (e) => {
+    e.preventDefault();
+    appendMsg({text: value, fromPeer: false});
+    socket.emit('send-msg', ({msg: value, remoteSocketId}));
+    setValue('');
+  };
+
   return (
-    <Box css={styles.wrapper}>
-      <Box css={styles.msgBox}>
-        {messages.map((message, i) => <ChatListItem text = {message.text} fromPeer = {message.fromPeer}/>)}
+    <Box css={wrapper}>
+      <Box 
+        css={msgBox}
+      >
+        {messages.map((message, i) => <ChatListItem key = {i} text = {message.text} fromPeer = {message.fromPeer}/>)}
+      </Box>
+      <Box component='form' onSubmit = {(e) => send(e)}>
+        <TextField 
+          css={textField} 
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+        />
       </Box>
     </Box>
   );
 };
+
+const wrapper = css({
+  backgroundColor: 'pink',
+  width: '100%',
+  height: '75%'
+});
+
+const wrapperChildren = css({
+  overflowY: 'scroll',
+  width: '100%'
+});
+
+const msgBox = css(wrapperChildren, {
+  height: '90%',
+  display: 'flex',
+  flexDirection: 'column',
+  border: '3px solid black'
+});
+
+const textField = css(wrapperChildren, {
+
+});
