@@ -15,8 +15,9 @@ export default function Chat({socket, remoteSocketId}) {
     if(socket) {
       socket.on('msg', ({msg}) => appendMsg({text: msg, fromPeer: true}));
     }
+    
     return () => {
-      socket = null;
+      socket.off('msg');
     }
   }, [socket]);
   
