@@ -14,7 +14,7 @@ import Box from '@mui/material/Box';
 
 const styles = {
   wrapper: css`
-
+    background-color:yellow;
   `,
   leftColumn: css`
     width: 36%;
@@ -36,14 +36,12 @@ function App() {
   const { videoRef, remoteVideoRef, endCall, handleLogin, socket } = useConnections(userId, setRemoteSocketId, setUserId, setInterests);
 
   return (
-    <Container>
+  <Container css={styles.wrapper}>
       <Box css={styles.leftColumn}>
         <Chat/>
       </Box>
       
-      <Box css={styles.rightColumn}>
-        <Chat/>
-      </Box>
+      <Box css={styles.rightColumn}></Box>
     </Container>
       
       /* <LoginForm onSubmit={handleLogin} />
