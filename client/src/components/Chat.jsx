@@ -328,7 +328,7 @@ export default function Chat({socket, remoteSocketId}) {
   const send = (e) => {
     e.preventDefault();
     appendMsg({text: value, fromPeer: false});
-    socket.current.emit('send-msg', ({msg: value, remoteSocketId}));
+    socket.emit('send-msg', ({msg: value, remoteSocketId}));
     setValue('');
   };
 
