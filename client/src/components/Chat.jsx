@@ -5,7 +5,7 @@ import React, {useState, useEffect} from 'react';
 import ChatListItem from './ChatListItem';
 import Box from '@mui/material/Box';
 
-import { InputAdornment, TextField } from '@mui/material';
+import {TextField } from '@mui/material';
 
 export default function Chat({socket, remoteSocketId}) {
   const [messages, setMessages] = useState([]);
@@ -20,7 +20,6 @@ export default function Chat({socket, remoteSocketId}) {
     }
   }, [socket]);
   
-  // const appendMsg = (msgObj) => setMessages([...messages, msgObj]);
   const appendMsg = (msgObj) => setMessages(prev => [...prev, msgObj]);
 
   const send = (e) => {
