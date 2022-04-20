@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 
 const SIGNED_OUT = 'SIGNED_OUT';
 const OUTSIDE_LOBBY = 'OUTSIDE_LOBBY';
@@ -9,14 +9,24 @@ const IN_CALL = 'IN_CALL';
 export default function useMode({userId, remoteSocketId, inLobby}) {
   const [mode, setMode] = useState(SIGNED_OUT);
 
-  useEffect(() => {}, [userId, remoteSocketId, inLobby]);
-
-  const modesMap = new Map([
-    [!userId, SIGNED_OUT],
-    [userId && !inLobby, OUTSIDE_LOBBY],
-    [userId && inLobby, IN_LOBBY],
-    [remoteSocketId && !inLobby, IN_CALL]
-  ]);
+  useEffect(() => {
+    switch(true) {
+    case !userId:
+      setMode(SIGNED_OUT);
+      break;
+    case userId && !inLobby:
+      setMode(OUTSIDE_LOBBY);
+      break;
+    case userId && inLobby:
+      setMode(IN_LOBBY);
+      break;
+    case remoteSocketId && !inLobby:
+      setMode(IN_CALL);
+      break;
+    default:
+      break;
+    }
+  }, [userId, remoteSocketId, inLobby]);
 
   return mode;
 };
