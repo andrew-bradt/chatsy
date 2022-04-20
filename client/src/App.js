@@ -47,8 +47,10 @@ function App() {
             alignItems="center"
             sx={{ height: "100%" }}
           >
-            <LoginForm onSubmit={handleLogin} />
-            <button
+            {!userId && <LoginForm onSubmit={handleLogin} />}
+
+            
+            {/* <button
               onClick={() => {
                 toggleLobbyState(prev => !prev);
                 socket.current.emit("enter-lobby", { userId });
@@ -74,14 +76,14 @@ function App() {
               }}
             >
               End Call
-            </button>
+            </button> */}
 
-            <InterestsList
+            {userId && <InterestsList
               interests={interests}
               socket={socket}
               userId={userId}
               inLobby={inLobby}
-            />
+            />}
             {/* <Chat /> */}
           </Stack>
         </Grid>
