@@ -20,7 +20,8 @@ function App() {
   const [inLobby, toggleLobbyState] = useState(false);
   const { videoRef, remoteVideoRef, endCall, handleLogin, socket } = useConnections(userId, setRemoteSocketId, setUserId, setInterests);
 
-  const {mode} = useMode({userId, remoteSocketId, inLobby});
+  const mode = useMode({userId, remoteSocketId, inLobby});
+  console.log(mode);
 
   return (
     <>
