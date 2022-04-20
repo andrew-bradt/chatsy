@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import {css} from '@emotion/react';
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react';
 
 import ChatListItem from './ChatListItem';
 import Box from '@mui/material/Box';
@@ -314,15 +314,21 @@ const testMessages = [
 ];
 
 
-export default function Chat({socket}) {
+export default function Chat({socket, remoteSocketId}) {
   const [messages, setMessages] = useState(testMessages);
   const [value, setValue] = useState('');
+
+  useEffect(() => {
+    if(socket) {
+    }
+  }, [socket]);
   
   const appendMsg = (msgObj) => setMessages([...messages, msgObj]);
 
   const send = (e) => {
     e.preventDefault();
     appendMsg({text: value, fromPeer: false});
+    socket.current.emit('send-msg', ({msg: value, remoteSocketId}));
     setValue('');
   };
 
