@@ -299,22 +299,24 @@ const testMessages = [
 ];
 
 const styles = {
-  wrapper: css`
-    background-color:pink;
-    width: 100%;
-    height: 75%;
-  `,
+  wrapper: css({
+    backgroundColor: 'pink',
+    width: '100%',
+    height: '75%'
+  }),
 
-  child: css``,
-
-  msgBox: css`
-    width: 100%;
-    height: 90%;
-    display: flex;
-    flex-direction: column;
-    border: 3px solid black;
-    overflow-y: scroll;
-  `
+  child: css({
+    width: '100%',
+    backgroundColor: 'green'
+  }),
+    
+  msgBox: css({
+    height: '90%',
+    display: 'flex',
+    flexDirection: 'column',
+    border: '3px solid black',
+    overflowY: 'scroll'
+  })
 };
 
 export default function Chat({socket}) {
