@@ -149,6 +149,150 @@ const testMessages = [
   {
     text: 'ok',
     fromPeer: true
+  },
+  {
+    text: 'Hello',
+    fromPeer: true
+  },
+  {
+    text: 'Hi',
+    fromPeer: false
+  },
+  {
+    text: 'ok',
+    fromPeer: true
+  },
+  {
+    text: 'Hello',
+    fromPeer: true
+  },
+  {
+    text: 'Hi',
+    fromPeer: false
+  },
+  {
+    text: 'ok',
+    fromPeer: true
+  },
+  {
+    text: 'Hello',
+    fromPeer: true
+  },
+  {
+    text: 'Hi',
+    fromPeer: false
+  },
+  {
+    text: 'ok',
+    fromPeer: true
+  },
+  {
+    text: 'Hello',
+    fromPeer: true
+  },
+  {
+    text: 'Hi',
+    fromPeer: false
+  },
+  {
+    text: 'ok',
+    fromPeer: true
+  },
+  {
+    text: 'Hello',
+    fromPeer: true
+  },
+  {
+    text: 'Hi',
+    fromPeer: false
+  },
+  {
+    text: 'ok',
+    fromPeer: true
+  },
+  {
+    text: 'Hello',
+    fromPeer: true
+  },
+  {
+    text: 'Hi',
+    fromPeer: false
+  },
+  {
+    text: 'ok',
+    fromPeer: true
+  },
+  {
+    text: 'Hello',
+    fromPeer: true
+  },
+  {
+    text: 'Hi',
+    fromPeer: false
+  },
+  {
+    text: 'ok',
+    fromPeer: true
+  },
+  {
+    text: 'Hello',
+    fromPeer: true
+  },
+  {
+    text: 'Hi',
+    fromPeer: false
+  },
+  {
+    text: 'ok',
+    fromPeer: true
+  },
+  {
+    text: 'Hello',
+    fromPeer: true
+  },
+  {
+    text: 'Hi',
+    fromPeer: false
+  },
+  {
+    text: 'ok',
+    fromPeer: true
+  },
+  {
+    text: 'Hello',
+    fromPeer: true
+  },
+  {
+    text: 'Hi',
+    fromPeer: false
+  },
+  {
+    text: 'ok',
+    fromPeer: true
+  },
+  {
+    text: 'Hello',
+    fromPeer: true
+  },
+  {
+    text: 'Hi',
+    fromPeer: false
+  },
+  {
+    text: 'ok',
+    fromPeer: true
+  },
+  {
+    text: 'Hello',
+    fromPeer: true
+  },
+  {
+    text: 'Hi',
+    fromPeer: false
+  },
+  {
+    text: 'ok',
+    fromPeer: true
   }
 ];
 
@@ -161,7 +305,7 @@ const styles = {
 
   msgBox: css`
     width: 100%;
-    height: 80%;
+    height: 90%;
     display: flex;
     flex-direction: column;
     border: 3px solid black;

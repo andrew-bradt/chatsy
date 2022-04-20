@@ -31,13 +31,14 @@ function App() {
           item
           xs={3.5}
           sx={{
-            backgroundColor: "rgb(246, 245, 241)"
+            backgroundColor: "rgb(246, 245, 241)",
+            height: '100%'
           }}
           component={Paper}
           elevation={3}
           square
         >
-          <Stack justifyContent="center" alignItems="center">
+          <Stack justifyContent="center" alignItems="center" sx = {{height: '100%'}}>
             <LoginForm onSubmit={handleLogin} />
             <button
               onClick={() => {
@@ -64,6 +65,7 @@ function App() {
               userId={userId}
               inLobby={inLobby}
             />
+            <Chat/>
           </Stack>
         </Grid>
 
