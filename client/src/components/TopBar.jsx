@@ -8,7 +8,6 @@ export default function TopBar(props) {
   const [modalAnchor, setAnchor] = useState(null);
   const [contactSaved, addContact] = useState([]);
 
-  // for test styling purpose
   const { userId, socket } = props;
 
   useEffect(() => {

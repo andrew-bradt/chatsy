@@ -29,7 +29,9 @@ export default function ContactModal(props) {
           backgroundColor: 'rgb(246, 245, 241)',
           width: 200
         }}
-      >Saved contacts</Typography>
+      >
+        Saved contacts
+      </Typography>
         {parsedListItem}
     </Popover>
   )
