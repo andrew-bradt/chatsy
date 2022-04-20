@@ -16,9 +16,7 @@ function App() {
   const [userId, setUserId] = useState(null);
   const [interests, setInterests] = useState([]);
   const [remoteSocketId, setRemoteSocketId] = useState(null);
-  
   const [inLobby, toggleLobbyState] = useState(false);
-
   const { videoRef, remoteVideoRef, endCall, handleLogin, socket } = useConnections(userId, setRemoteSocketId, setUserId, setInterests);
 
   return (
@@ -65,7 +63,8 @@ function App() {
               userId={userId}
               inLobby={inLobby}
             />
-            {remoteSocketId && <Chat socket = {socket.current} remoteSocketId/>}
+            {remoteSocketId && <Chat socket = {socket.current} remoteSocketId={remoteSocketId}/>}
+           
           </Stack>
         </Grid>
 
