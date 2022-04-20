@@ -3,7 +3,7 @@ import socketIOClient from "socket.io-client"
 import Peer from "peerjs"
 import axios from "axios";
 
-export default function useConnections(userId, setRemoteSocketId, setUserId, setInterests) {
+export default function useConnections(userId, setRemoteSocketId, setUserId, setInterests, addContact) {
   
   const videoRef = useRef();
   const remoteVideoRef = useRef();
@@ -89,8 +89,14 @@ export default function useConnections(userId, setRemoteSocketId, setUserId, set
         console.log('the other user ended the call')
         endCall();
       });
+
+      // Other socket event listeners
+      // register receiving contact info event
+      socket.current.on('contact-info', ({ email }) => {
+        addContact(prev => [...prev, email])
+      })
     }
-  }, [userId, peer, socket, setRemoteSocketId]);
+  }, [userId, peer, socket, setRemoteSocketId, addContact]);
 
   
   return { videoRef, remoteVideoRef, endCall, handleLogin, socket }
