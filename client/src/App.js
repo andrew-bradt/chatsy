@@ -49,7 +49,7 @@ function App() {
             {!userId && <LoginForm onSubmit={handleLogin} />}
 
             
-            {/* <button
+            <button
               onClick={() => {
                 toggleLobbyState(prev => !prev);
                 socket.current.emit("enter-lobby", { userId });
@@ -75,7 +75,7 @@ function App() {
               }}
             >
               End Call
-            </button> */}
+            </button>
 
             {userId && <InterestsList
               interests={interests}
