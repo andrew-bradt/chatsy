@@ -39,7 +39,7 @@ function App() {
           square
         >
           <Stack justifyContent="center" alignItems="center" sx = {{height: '100%'}}>
-            <LoginForm onSubmit={handleLogin} />
+            {/* <LoginForm onSubmit={handleLogin} />
             <button
               onClick={() => {
                 toggleLobbyState(prev => !prev);
@@ -64,7 +64,7 @@ function App() {
               socket={socket}
               userId={userId}
               inLobby={inLobby}
-            />
+            /> */}
             <Chat/>
           </Stack>
         </Grid>
