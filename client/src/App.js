@@ -7,7 +7,6 @@ import { CssBaseline, Grid, Stack, Paper } from "@mui/material";
 import TopBar from "./components/TopBar";
 import LoginForm from './components/LoginForm';
 import InterestsList from './components/InterestsList';
-import ContactModal from './components/ContactModal';
 
 
 function App() {
@@ -16,7 +15,6 @@ function App() {
   const [remoteSocketId, setRemoteSocketId] = useState(null);
   
   const [inLobby, toggleLobbyState] = useState(false);
-  const [modalAnchor, setAnchor] = useState(null);
   const [contactSaved, addContact] = useState([]);
 
   const { videoRef, remoteVideoRef, endCall, handleLogin, socket } = useConnections(userId, setRemoteSocketId, setUserId, setInterests, addContact);
@@ -24,12 +22,7 @@ function App() {
   return (
     <>
       <CssBaseline />
-      <TopBar setAnchor={setAnchor} userId={userId} />
-      <ContactModal
-        contacts={contactSaved}
-        anchorEl={modalAnchor}
-        setAnchor={setAnchor}
-      />
+      <TopBar contacts={contactSaved} userId={userId} />
 
       <Grid container component="main" sx={{ height: "100vh", marginTop: '3rem' }}>
         <Grid

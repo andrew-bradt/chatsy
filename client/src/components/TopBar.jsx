@@ -1,9 +1,13 @@
-import React from "react";
+import React, {useState} from "react";
 import { AppBar, Box, Button, Toolbar, Typography } from '@mui/material';
 
-export default function TopBar (props) {
+import ContactModal from "./ContactModal";
 
-  const { userId, setAnchor } = props;
+export default function TopBar(props) {
+  
+  const [modalAnchor, setAnchor] = useState(null);
+
+  const { userId, contacts } = props;
 
   return (
     <>
@@ -18,6 +22,11 @@ export default function TopBar (props) {
           </Toolbar>
         </AppBar>
       </Box>
+      <ContactModal
+        contacts={contacts}
+        anchorEl={modalAnchor}
+        setAnchor={setAnchor}
+      />
     </>
   )
 }
