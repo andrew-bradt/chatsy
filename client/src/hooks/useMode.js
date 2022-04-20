@@ -9,24 +9,22 @@ const IN_CALL = 'IN_CALL';
 export default function useMode({userId, remoteSocketId, inLobby}) {
   const [mode, setMode] = useState(SIGNED_OUT);
 
-  useEffect(() => {
+  const newMode = (() => {
     switch(true) {
-    case !userId:
-      setMode(SIGNED_OUT);
-      break;
-    case userId && !inLobby:
-      setMode(OUTSIDE_LOBBY);
-      break;
-    case userId && inLobby:
-      setMode(IN_LOBBY);
-      break;
-    case remoteSocketId && !inLobby:
-      setMode(IN_CALL);
-      break;
-    default:
-      break;
-    }
-  }, [userId, remoteSocketId, inLobby]);
+      case !userId:
+        return SIGNED_OUT;
+      case userId && !inLobby:
+        return OUTSIDE_LOBBY;
+      case userId && inLobby:
+        return IN_LOBBY;
+      case remoteSocketId && !inLobby:
+        return IN_CALL;
+      default:
+        break;
+      }
+  })();
+
+  (newMode !== mode) && setMode(newMode);
 
   return mode;
 };

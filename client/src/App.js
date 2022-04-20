@@ -5,6 +5,7 @@ import './App.css';
 import {useState} from 'react';
 
 import useConnections from './hooks/useConnections';
+import useMode from './hooks/useMode';
 
 import { CssBaseline, Grid, Stack, Paper } from "@mui/material";
 import TopBar from "./components/TopBar";
@@ -19,6 +20,8 @@ function App() {
   const [inLobby, toggleLobbyState] = useState(false);
   const { videoRef, remoteVideoRef, endCall, handleLogin, socket } = useConnections(userId, setRemoteSocketId, setUserId, setInterests);
 
+  // const mode = useMode({userId, remoteSocketId, inLobby});
+  // console.log(mode);
   return (
     <>
       <CssBaseline />
