@@ -32,6 +32,7 @@ function App() {
         component="main"
         sx={{ height: "100vh", marginTop: "3rem" }}
       >
+        {/* LEFT COLUMN */}
         <Grid
           item
           xs={3.5}
@@ -49,6 +50,23 @@ function App() {
             alignItems="center"
             sx={{ height: "100%" }}
           >
+            {mode === SIGNED_OUT && (
+              <>
+              </>
+            )}
+            {mode === OUTSIDE_LOBBY && (
+              <>
+              </>
+            )}
+            {mode === IN_CALL && (
+              <>
+              </>
+            )}
+            {mode === IN_LOBBY && (
+              <>
+              </>
+            )}
+            
             {!userId && <LoginForm onSubmit={handleLogin} />}
 
             
@@ -90,11 +108,27 @@ function App() {
             
           </Stack>
         </Grid>
-
+        {/* RIGHT COLUMN */}
         <Grid item xs={8.5}>
           <Stack justifyContent="center" alignItems="center">
             <video ref={videoRef} autoPlay></video>
             <video ref={remoteVideoRef} autoPlay></video>
+            {mode === SIGNED_OUT && (
+              <>
+              </>
+            )}
+            {mode === OUTSIDE_LOBBY && (
+              <>
+              </>
+            )}
+            {mode === IN_CALL && (
+              <>
+              </>
+            )}
+            {mode === IN_LOBBY && (
+              <>
+              </>
+            )}
           </Stack>
         </Grid>
       </Grid>
