@@ -156,15 +156,15 @@ const styles = {
   wrapper: css`
     background-color:pink;
     width: 100%;
-    height: 65%;
+    height: 75%;
   `,
 
   msgBox: css`
     width: 100%;
-    height: 100%;
+    height: 80%;
     display: flex;
     flex-direction: column;
-    border-style: solid;
+    border: 3px solid black;
     overflow-y: scroll;
   `
 };
