@@ -11,6 +11,7 @@ import TopBar from "./components/TopBar";
 import LoginForm from './components/LoginForm';
 import Chat from './components/Chat';
 import InterestsList from './components/InterestsList';
+import CallControllers from './components/CallControllers';
 
 function App() {
   const [userId, setUserId] = useState(null);
@@ -83,8 +84,16 @@ function App() {
               userId={userId}
               inLobby={inLobby}
             />}
-            {remoteSocketId && <Chat socket = {socket.current} remoteSocketId={remoteSocketId}/>}
+            {remoteSocketId && <Chat socket={socket.current} remoteSocketId={remoteSocketId} />}
             
+            {userId &&
+              <CallControllers
+                inLobby={inLobby}
+                socket={socket}
+                userId={userId}
+                toggleLobbyState={toggleLobbyState}
+              />}
+
           </Stack>
         </Grid>
 
