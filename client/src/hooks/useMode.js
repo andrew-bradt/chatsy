@@ -4,7 +4,7 @@ const IN_LOBBY = 'IN_LOBBY';
 const IN_CALL = 'IN_CALL';
 
 export default function useMode({userId, remoteSocketId, inLobby}) {
-  return (() => {
+  const mode = (() => {
     switch(true) {
       case !userId:
         return SIGNED_OUT;
@@ -18,4 +18,6 @@ export default function useMode({userId, remoteSocketId, inLobby}) {
         break;
       }
   })();
+
+  return {mode, SIGNED_OUT, OUTSIDE_LOBBY, IN_CALL, IN_LOBBY};
 };
