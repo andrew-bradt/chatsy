@@ -155,7 +155,7 @@ const testMessages = [
 const styles = {
   wrapper: css`
     width: 100%;
-    height: 80%;
+    height: 65%;
   `,
 
   msgBox: css`
@@ -170,7 +170,7 @@ const styles = {
 
 export default function Chat() {
   const [messages, setMessages] = useState(testMessages);
-
+  const [inputVal, setInputVal] = useState()
   return (
     <Box css={styles.wrapper}>
       <Box css={styles.msgBox}>

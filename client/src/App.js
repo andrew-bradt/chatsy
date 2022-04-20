@@ -18,22 +18,33 @@ const styles = {
   `,
   leftColumn: css`
     width: 36%;
-    height: 100vh;
+    height: 80vh;
+    background-color: lightblue;
+  `,
+  rightColumn: css`
+    width: 64%;
+    height: 80vh;
+    background-color: lightgrey;
   `
 };
 
 function App() {
-  // const [userId, setUserId] = useState(null);
-  // const [interests, setInterests] = useState([]);
-  // const [remoteSocketId, setRemoteSocketId] = useState(null);
+  const [userId, setUserId] = useState(null);
+  const [interests, setInterests] = useState([]);
+  const [remoteSocketId, setRemoteSocketId] = useState(null);
 
-  // const { videoRef, remoteVideoRef, endCall, handleLogin, socket } = useConnections(userId, setRemoteSocketId, setUserId, setInterests);
+  const { videoRef, remoteVideoRef, endCall, handleLogin, socket } = useConnections(userId, setRemoteSocketId, setUserId, setInterests);
 
   return (
+    <Container>
       <Box css={styles.leftColumn}>
         <Chat/>
       </Box>
-    
+      
+      <Box css={styles.rightColumn}>
+        <Chat/>
+      </Box>
+    </Container>
       
       /* <LoginForm onSubmit={handleLogin} />
       <button
