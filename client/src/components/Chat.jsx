@@ -154,12 +154,13 @@ const testMessages = [
 
 const styles = {
   wrapper: css`
+    background-color:pink;
     width: 100%;
     height: 65%;
   `,
 
   msgBox: css`
-    padding: 10px;
+    width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;

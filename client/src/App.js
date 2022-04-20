@@ -15,15 +15,18 @@ import Box from '@mui/material/Box';
 const styles = {
   wrapper: css`
     background-color:yellow;
+    height: 100vh;
+    overflow: clip;
+    display: flex;
   `,
   leftColumn: css`
     width: 36%;
-    height: 80vh;
+    height: 100%;
     background-color: lightblue;
   `,
   rightColumn: css`
     width: 64%;
-    height: 80vh;
+    height: 100%;
     background-color: lightgrey;
   `
 };
@@ -36,12 +39,14 @@ function App() {
   const { videoRef, remoteVideoRef, endCall, handleLogin, socket } = useConnections(userId, setRemoteSocketId, setUserId, setInterests);
 
   return (
-  <Container css={styles.wrapper}>
+    <Container css={styles.wrapper}>
       <Box css={styles.leftColumn}>
         <Chat/>
       </Box>
       
-      <Box css={styles.rightColumn}></Box>
+      <Box css={styles.rightColumn}>
+        
+      </Box>
     </Container>
       
       /* <LoginForm onSubmit={handleLogin} />
