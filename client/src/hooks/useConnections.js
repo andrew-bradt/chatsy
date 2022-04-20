@@ -15,6 +15,7 @@ export default function useConnections(userId, setRemoteSocketId, setUserId, set
   const endCall = () => {
     currentCall.current.close();
     remoteVideoRef.current.srcObject = null;
+    setRemoteSocketId(null);
   };
 
   const handleLogin = (email) => {

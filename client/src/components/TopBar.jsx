@@ -10,7 +10,6 @@ export default function TopBar(props) {
 
   const { userId, socket } = props;
 
-
   useEffect(() => {
     if (socket) {
       socket.on('contact-info', ({ email }) => {
