@@ -1,12 +1,10 @@
 const Call = require('../entities/Call');
 
 const matchUsers = (activeUsers, lobby, io) => {
-  // get all the interests current lobby has
-  const interestUsing = Object.keys(lobby.usersByInterest);
-
+  
   const startMatching = () => {
     // check users under each interests
-    interestUsing.forEach(interest => {
+    Object.keys(lobby.usersByInterest).forEach(interest => {
       const usersHasInterest = lobby.usersByInterest[interest];
 
       // If that interest has more than 2 users
@@ -33,7 +31,7 @@ const matchUsers = (activeUsers, lobby, io) => {
 
   // every 5 sec, check whether lobby is empty
   setInterval(() => {
-    if (interestUsing.length) {
+    if (Object.keys(lobby.usersByInterest).length) {
       startMatching();
     }
   }, 5000);
