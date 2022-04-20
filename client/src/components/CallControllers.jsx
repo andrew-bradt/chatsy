@@ -15,19 +15,32 @@ export default function CallControllers(props) {
     socket.current.emit("leave-lobby", {userId})
   }
 
-  const end_call = function () {
+  const stopCall = function () {
     endCall();
     socket.current.emit("end-call", { remoteSocketId });
-    socket.current.emit("enter-lobby", { userId });
+    toggleLobbyState(false)
+  }
+
+  const nextCall = function () {
+    endCall();
+    socket.current.emit("end-call", { remoteSocketId });
+    socket.current.emit("enter-lobby", { userId }); 
+  }
+
+  const sendInfo = function () {
+    socket.current.emit("send-contact-info", {
+      remoteSocketId,
+      userId
+    });
   }
 
   const inCallButtons = function (remoteSocketId) {
     if (remoteSocketId) {
       return (
         <>
-          <Button variant="contained" onClick={end_call}>End Call</Button>
-          <Button variant="contained">Next</Button>
-          <Button variant="contained">Send Info</Button>
+          <Button variant="contained" onClick={stopCall}>End Call</Button>
+          <Button variant="contained" onClick={nextCall}>Next</Button>
+          <Button variant="contained" onClick={sendInfo}>Send Info</Button>
         </>
       )
     }
