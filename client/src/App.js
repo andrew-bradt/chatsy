@@ -3,7 +3,7 @@ import {useState} from 'react';
 
 import useConnections from './hooks/useConnections';
 
-import { CssBaseline, Grid, Paper } from "@mui/material";
+import { CssBaseline, Grid, Stack, Paper } from "@mui/material";
 import TopBar from "./components/TopBar";
 import LoginForm from './components/LoginForm';
 import InterestsList from './components/InterestsList';
@@ -34,7 +34,7 @@ function App() {
       <Grid container component="main" sx={{ height: "100vh" }}>
         <Grid
           item
-          md={3.5}
+          xs={3.5}
           sx={{
             backgroundColor: "#e7e9eb"
           }}
@@ -42,37 +42,41 @@ function App() {
           elevation={3}
           square
         >
-          <LoginForm onSubmit={handleLogin} />
-          <button
-            onClick={() => {
-              toggleLobbyState(prev => !prev);
-              socket.current.emit("enter-lobby", { userId });
-            }}
-          >
-            enter lobby
-          </button>
-          <button
-            onClick={() => {
-              socket.current.emit("send-contact-info", {
-                remoteSocketId,
-                userId
-              });
-            }}
-          >
-            send contact info
-          </button>
+          <Stack justifyContent="center" alignItems="center">
+            <LoginForm onSubmit={handleLogin} />
+            <button
+              onClick={() => {
+                toggleLobbyState(prev => !prev);
+                socket.current.emit("enter-lobby", { userId });
+              }}
+            >
+              enter lobby
+            </button>
+            <button
+              onClick={() => {
+                socket.current.emit("send-contact-info", {
+                  remoteSocketId,
+                  userId
+                });
+              }}
+            >
+              send contact info
+            </button>
 
-          <InterestsList
-            interests={interests}
-            socket={socket}
-            userId={userId}
-            inLobby={inLobby}
-          />
+            <InterestsList
+              interests={interests}
+              socket={socket}
+              userId={userId}
+              inLobby={inLobby}
+            />
+          </Stack>
         </Grid>
 
-        <Grid item md={8.5}>
-          <video width="500" height="500" ref={videoRef} autoPlay></video>
-          <video width="500" height="500" ref={remoteVideoRef} autoPlay></video>
+        <Grid item xs={8.5}>
+          <Stack justifyContent="center" alignItems="center">
+            <video ref={videoRef} autoPlay></video>
+            <video ref={remoteVideoRef} autoPlay></video>
+          </Stack>
         </Grid>
       </Grid>
 
