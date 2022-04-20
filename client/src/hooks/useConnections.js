@@ -95,7 +95,7 @@ export default function useConnections(userId, setRemoteSocketId, setUserId, set
       // register receiving contact info event
 
     }
-  }, [userId, peer, socket, setRemoteSocketId, addContact, endCall]);
+  }, [userId, peer, socket, setRemoteSocketId, addContact]);
 
   
   return { videoRef, remoteVideoRef, endCall, handleLogin, socket }
