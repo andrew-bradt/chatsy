@@ -36,7 +36,7 @@ function App() {
           item
           xs={3.5}
           sx={{
-            backgroundColor: "#e7e9eb"
+            backgroundColor: "rgb(246, 245, 241)"
           }}
           component={Paper}
           elevation={3}
