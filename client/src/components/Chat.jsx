@@ -5,6 +5,8 @@ import React, {useState} from 'react'
 import ChatListItem from './ChatListItem';
 import Box from '@mui/material/Box';
 
+import { InputAdornment, TextField } from '@mui/material';
+
 const testMessages = [
   {
     text: 'Hello',
@@ -303,6 +305,8 @@ const styles = {
     height: 75%;
   `,
 
+  child: css``,
+
   msgBox: css`
     width: 100%;
     height: 90%;
@@ -313,13 +317,18 @@ const styles = {
   `
 };
 
-export default function Chat() {
+export default function Chat({socket}) {
   const [messages, setMessages] = useState(testMessages);
   const [inputVal, setInputVal] = useState();
+
+
   return (
     <Box css={styles.wrapper}>
       <Box css={styles.msgBox}>
-        {messages.map((message, i) => <ChatListItem text = {message.text} fromPeer = {message.fromPeer}/>)}
+        {messages.map((message, i) => <ChatListItem key = {i} text = {message.text} fromPeer = {message.fromPeer}/>)}
+      </Box>
+      <Box component='form'>
+        <TextField id='compose-msg'/>
       </Box>
     </Box>
   );
