@@ -13,6 +13,7 @@ export default function useMode({userId, remoteSocketId, inLobby}) {
       case inLobby && !remoteSocketId:
         return IN_LOBBY;
       case !(!remoteSocketId):
+        console.log(IN_CALL);
         return IN_CALL;
       default:
         break;
