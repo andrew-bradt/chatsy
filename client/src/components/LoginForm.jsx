@@ -12,7 +12,7 @@ export default function LoginForm({onSubmit}) {
   return (
     <Box
           sx={{
-            marginBottom: 80,
+            marginBottom: 40,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',

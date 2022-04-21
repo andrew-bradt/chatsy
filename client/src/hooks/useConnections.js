@@ -89,6 +89,7 @@ export default function useConnections(userId, setRemoteSocketId, setUserId, set
       // end the peer call after getting endCall event from server
       socket.current.on("endCall", () => {
         console.log('the other user ended the call')
+        socket.current.emit('enter-lobby', {userId})
         endCall();
       });
 
