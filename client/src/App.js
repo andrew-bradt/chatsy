@@ -93,8 +93,7 @@ function App() {
             alignItems="center"
             sx={{ height: "100%" }}
           >
-            <video ref={videoRef} autoPlay></video>
-            <video ref={remoteVideoRef} autoPlay></video>
+            <Video videoRef={videoRef} remoteVideoRef={remoteVideoRef} remoteSocketId={remoteSocketId }/>
           </Stack>
         </Grid>
       </Grid>
