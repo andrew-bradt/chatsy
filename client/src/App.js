@@ -68,7 +68,7 @@ function App() {
             )}
             {mode === IN_CALL && (
               <>
-                <SharedInterests sharedInterests = {['art', 'science', 'something something']}/>
+                <SharedInterests sharedInterests = {sharedInterests}/>
                 <Chat socket = {socket.current} remoteSocketId={remoteSocketId}/>
               </>
             )}

@@ -75,6 +75,7 @@ export default function useConnections(userId, setRemoteSocketId, setUserId, set
         const socketId = socket.current.id
         setRemoteSocketId(remoteSocketId);        
         setSharedInterests(sharedInterests);
+        
         const data = {metadata: {"sharedInterests":sharedInterests[0],"remoteSocketId":socketId}}
 
         // start calling the other peer and send shared interests to that peer
