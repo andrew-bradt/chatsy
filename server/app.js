@@ -69,10 +69,7 @@ const {authURL, oauth2Client} = require('./configs/oauth.config');
 app.get('/', async(req, res) => {
   const {code} = req.query;
   const {tokens} = await oauth2Client.getToken(code);
-  console.log(tokens);
-
   res.redirect('http://localhost:3000');
-
 });
 
 app.use('/login', loginRoute);
