@@ -12,15 +12,18 @@ import TopBar from "./components/TopBar";
 import LoginForm from './components/LoginForm';
 import Chat from './components/Chat';
 import InterestsList from './components/InterestsList';
+import SharedInterests from './components/SharedInterests';
 import CallControllers from './components/CallControllers';
 import Video from './components/Video';
+
 
 function App() {
   const [userId, setUserId] = useState(null);
   const [interests, setInterests] = useState([]);
   const [remoteSocketId, setRemoteSocketId] = useState(null);
+  const [sharedInterests, setSharedInterests] = useState([]);
   const [inLobby, toggleLobbyState] = useState(false);
-  const { videoRef, remoteVideoRef, endCall, handleLogin, socket } = useConnections(userId, setRemoteSocketId, setUserId, setInterests);
+  const { videoRef, remoteVideoRef, endCall, handleLogin, socket } = useConnections(userId, setRemoteSocketId, setUserId, setSharedInterests, setInterests);
 
   const {mode, SIGNED_OUT, OUTSIDE_LOBBY, IN_CALL, IN_LOBBY} = useMode({userId, remoteSocketId, inLobby});
   return (
@@ -63,7 +66,8 @@ function App() {
             )}
             {mode === IN_CALL && (
               <>
-                <Chat socket={socket.current} remoteSocketId={remoteSocketId} />
+                <SharedInterests sharedInterests = {sharedInterests}/>
+                <Chat socket = {socket.current} remoteSocketId={remoteSocketId}/>
               </>
             )}
             {mode === IN_LOBBY && (
