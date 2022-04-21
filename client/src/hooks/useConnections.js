@@ -3,7 +3,7 @@ import socketIOClient from "socket.io-client"
 import Peer from "peerjs"
 import axios from "axios";
 
-export default function useConnections(userId, setRemoteSocketId, setUserId, setInterests, setSharedInterests, addContact) {
+export default function useConnections({userId, setRemoteSocketId, setUserId, setInterests, setSharedInterests, addContact}) {
   
   const videoRef = useRef();
   const remoteVideoRef = useRef();
@@ -57,7 +57,7 @@ export default function useConnections(userId, setRemoteSocketId, setUserId, set
       peer.current.on("call", call => {
 
         console.log(call.metadata);
-
+        console.log('shared interests from peer on call: ', call.metadata.sharedInterests);
         setRemoteSocketId(call.metadata.remoteSocketId);
         setSharedInterests(call.metadata.sharedInterests);
 
@@ -73,10 +73,11 @@ export default function useConnections(userId, setRemoteSocketId, setUserId, set
         const { peerId, remoteSocketId, sharedInterests } = msg;
 
         const socketId = socket.current.id
-        setRemoteSocketId(remoteSocketId);        
+        setRemoteSocketId(remoteSocketId);
+        console.log('shared interests from socket callThisPeer: ', sharedInterests);        
         setSharedInterests(sharedInterests);
         
-        const data = {metadata: {"sharedInterests":sharedInterests[0],"remoteSocketId":socketId}}
+        const data = {metadata: {"sharedInterests": sharedInterests,"remoteSocketId":socketId}}
 
         // start calling the other peer and send shared interests to that peer
         const call = peer.current.call(peerId, videoRef.current.srcObject, data);
