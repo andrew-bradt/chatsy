@@ -4,14 +4,10 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-// TEMP OAUTH CODE
-import Oauth from './Oauth';
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    {/* <App /> */}
-    <Oauth/>
+    <App />
   </React.StrictMode>
 );
 

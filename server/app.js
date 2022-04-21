@@ -1,7 +1,6 @@
 const http = require('http');
 const express = require('express');
 const socketio = require('socket.io');
-const youtube = require('./configs/youtube.config');
 
 const path = require('path');
 const cookieParser = require('cookie-parser');
@@ -65,9 +64,16 @@ const loginRoute = require("./routes/login")({
   lobby
 });
 
-
+app.get('/', (req, res) => {
+  console.log(req.query);
+  // const {code} = req.params;
+  // console.log(code);
+  res.redirect('http://localhost:3000');
+});
 
 app.use('/login', loginRoute);
-console.log(youtube);
-module.exports = {app, server};
+app.use('/oauth', require('./routes/oauth'));
 
+
+
+module.exports = {app, server};
