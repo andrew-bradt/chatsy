@@ -1,8 +1,14 @@
 import React from 'react'
-import authEndpoint from './config/oauth.config';
+import axios from 'axios';
 
+const oauth = () => {
+  axios.get('/oauth')
+    .then(res => {
+      console.log(res.data);
+    });
+}
 export default function Oauth() {
   return (
-    <a href={authEndpoint}>oauth login</a>
+    <button onClick = {oauth}>oauth</button>
   )
 }
