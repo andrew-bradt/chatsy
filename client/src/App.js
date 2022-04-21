@@ -26,7 +26,7 @@ function App() {
   return (
     <>
       <CssBaseline />
-      <TopBar userId={userId} socket={socket.current} />
+      <TopBar userId={userId} socket={socket}/>
 
       <Grid container component="main" sx={{ height: "100vh" }}>
         {/* LEFT COLUMN */}
