@@ -50,7 +50,7 @@ export default function CallControllers(props) {
     <Container>
       <Box display="flex" justifyContent="space-around">
 
-        {!inLobby && <Button variant="contained" onClick={enterLobby}>Start Matching</Button>}
+        {!inLobby && userId && <Button variant="contained" onClick={enterLobby}>Start Matching</Button>}
         {inLobby && !remoteSocketId && <Button variant="contained" onClick={leaveLobby}>Stop Matching</Button>}
 
         {inCallButtons(remoteSocketId)}
