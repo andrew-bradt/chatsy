@@ -5,8 +5,8 @@ import React from 'react'
 
 export default function SharedInterests({sharedInterests}) {
   return (
-    <li>
+    <ul>
       {sharedInterests.map(interest => <li key = {interest}>{interest}</li>)}
-    </li>
+    </ul>
   )
 }

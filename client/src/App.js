@@ -12,6 +12,7 @@ import TopBar from "./components/TopBar";
 import LoginForm from './components/LoginForm';
 import Chat from './components/Chat';
 import InterestsList from './components/InterestsList';
+import SharedInterests from './components/SharedInterests';
 
 function App() {
   const [userId, setUserId] = useState(null);
@@ -66,6 +67,7 @@ function App() {
             )}
             {mode === IN_CALL && (
               <>
+                <SharedInterests sharedInterests = {['art', 'science', 'something something']}/>
                 <Chat socket = {socket.current} remoteSocketId={remoteSocketId}/>
               </>
             )}
