@@ -64,15 +64,19 @@ const loginRoute = require("./routes/login")({
   lobby
 });
 
-app.get('/', (req, res) => {
-  console.log(req.query);
-  // const {code} = req.params;
-  // console.log(code);
+const {authURL, oauth2Client} = require('./configs/oauth.config');
+
+app.get('/', async(req, res) => {
+  const {code} = req.query;
+  const {tokens} = await oauth2Client.getToken(code);
+  console.log(tokens);
+
   res.redirect('http://localhost:3000');
+
 });
 
 app.use('/login', loginRoute);
-app.use('/oauth', require('./routes/oauth'));
+app.use('/oauth', require('./routes/oauth')(authURL));
 
 
 
