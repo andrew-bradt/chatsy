@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Box, Button, Avatar, Typography, TextField, Grid, Link } from "@mui/material";
+import axios from 'axios';
 
 export default function LoginForm({onSubmit}) {
   const [email, setEmail] = useState('');
@@ -7,6 +8,13 @@ export default function LoginForm({onSubmit}) {
   const login = e => {
     e.preventDefault();
     onSubmit(email);
+  }
+
+  const oauth = () => {
+    axios.get('/oauth')
+      .then(res => {
+        window.location = res.data;
+      });
   }
   
   return (
@@ -43,7 +51,7 @@ export default function LoginForm({onSubmit}) {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
+                <Link href="#" variant="body2" onClick={oauth}>
                   Sign in with Google
                 </Link>
               </Grid>

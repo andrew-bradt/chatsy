@@ -16,7 +16,6 @@ import SharedInterests from './components/SharedInterests';
 import CallControllers from './components/CallControllers';
 import Video from './components/Video';
 
-
 function App() {
   const [userId, setUserId] = useState(null);
   const [interests, setInterests] = useState([]);
