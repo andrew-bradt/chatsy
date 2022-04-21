@@ -2,7 +2,7 @@
 import {css} from '@emotion/react';
 
 import './App.css';
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 
 import useConnections from './hooks/useConnections';
 import useMode from './hooks/useMode';
@@ -12,6 +12,8 @@ import TopBar from "./components/TopBar";
 import LoginForm from './components/LoginForm';
 import Chat from './components/Chat';
 import InterestsList from './components/InterestsList';
+import CallControllers from './components/CallControllers';
+import Video from './components/Video';
 
 function App() {
   const [userId, setUserId] = useState(null);
@@ -24,17 +26,13 @@ function App() {
   return (
     <>
       <CssBaseline />
-      <TopBar userId={userId} socket={socket.current} />
+      <TopBar userId={userId} socket={socket}/>
 
-      <Grid
-        container
-        component="main"
-        sx={{ height: "100vh", marginTop: "3rem" }}
-      >
+      <Grid container component="main" sx={{ height: "100vh" }}>
         {/* LEFT COLUMN */}
         <Grid
           item
-          xs={3.5}
+          xs={4}
           sx={{
             backgroundColor: "rgb(246, 245, 241)",
             height: "100%"
@@ -43,7 +41,6 @@ function App() {
           elevation={3}
           square
         >
-
           <Stack
             justifyContent="center"
             alignItems="center"
@@ -51,7 +48,7 @@ function App() {
           >
             {mode === SIGNED_OUT && (
               <>
-                <LoginForm onSubmit={handleLogin}/>
+                <LoginForm onSubmit={handleLogin} />
               </>
             )}
             {mode === OUTSIDE_LOBBY && (
@@ -66,7 +63,7 @@ function App() {
             )}
             {mode === IN_CALL && (
               <>
-                <Chat socket = {socket.current} remoteSocketId={remoteSocketId}/>
+                <Chat socket={socket.current} remoteSocketId={remoteSocketId} />
               </>
             )}
             {mode === IN_LOBBY && (
@@ -79,33 +76,27 @@ function App() {
                 />
               </>
             )}
+            <CallControllers
+              inLobby={inLobby}
+              socket={socket}
+              userId={userId}
+              toggleLobbyState={toggleLobbyState}
+              remoteSocketId={remoteSocketId}
+              endCall={endCall}
+            />
           </Stack>
         </Grid>
         {/* RIGHT COLUMN */}
-        <Grid item xs={8.5}>
-          <Stack justifyContent="center" alignItems="center">
-            <video ref={videoRef} autoPlay></video>
-            <video ref={remoteVideoRef} autoPlay></video>
-            {mode === SIGNED_OUT && (
-              <>
-              </>
-            )}
-            {mode === OUTSIDE_LOBBY && (
-              <>
-              </>
-            )}
-            {mode === IN_CALL && (
-              <>
-              </>
-            )}
-            {mode === IN_LOBBY && (
-              <>
-              </>
-            )}
+        <Grid item xs={8} sx={{ height: "100%" }}>
+          <Stack
+            justifyContent="center"
+            alignItems="center"
+            sx={{ height: "100%" }}
+          >
+            <Video videoRef={videoRef} remoteVideoRef={remoteVideoRef} remoteSocketId={remoteSocketId }/>
           </Stack>
         </Grid>
       </Grid>
-
     </>
   );
 }

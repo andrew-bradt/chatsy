@@ -11,12 +11,17 @@ export default function TopBar(props) {
   const { userId, socket } = props;
 
   useEffect(() => {
-    if (socket) {
-      socket.on('contact-info', ({ email }) => {
+    if (socket.current) {
+      socket.current.on('contact-info', ({ email }) => {
         addContact(prev => [...prev, email])
       })
     }
-  }, [socket])
+  }, [socket.current])
+
+  const logOut = function () {
+    socket.current.disconnect();
+    window.location.reload(false)
+  }
 
   return (
     <>
@@ -27,7 +32,7 @@ export default function TopBar(props) {
               CHATSY
             </Typography>
             {userId && <Button color='inherit' onClick={e => setAnchor(e.currentTarget)}>Contacts</Button>}
-            {userId && <Button color='inherit'>Logout</Button>}
+            {userId && <Button color='inherit' onClick={logOut}>Logout</Button>}
           </Toolbar>
         </AppBar>
       </Box>
