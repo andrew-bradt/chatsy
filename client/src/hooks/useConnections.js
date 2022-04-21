@@ -3,7 +3,7 @@ import socketIOClient from "socket.io-client"
 import Peer from "peerjs"
 import axios from "axios";
 
-export default function useConnections(userId, setRemoteSocketId, setUserId, setInterests, addContact) {
+export default function useConnections(userId, setRemoteSocketId, setUserId, setInterests, setSharedInterests, addContact) {
   
   const videoRef = useRef();
   const remoteVideoRef = useRef();

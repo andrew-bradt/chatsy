@@ -20,7 +20,7 @@ function App() {
   const [remoteSocketId, setRemoteSocketId] = useState(null);
   const [sharedInterests, setSharedInterests] = useState([]);
   const [inLobby, toggleLobbyState] = useState(false);
-  const { videoRef, remoteVideoRef, endCall, handleLogin, socket } = useConnections(userId, setRemoteSocketId, setUserId, setInterests);
+  const { videoRef, remoteVideoRef, endCall, handleLogin, socket } = useConnections(userId, setRemoteSocketId, setUserId, setSharedInterests, setInterests);
 
   const {mode, SIGNED_OUT, OUTSIDE_LOBBY, IN_CALL, IN_LOBBY} = useMode({userId, remoteSocketId, inLobby});
   return (
