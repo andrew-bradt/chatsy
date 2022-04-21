@@ -21,7 +21,6 @@ function App() {
   const { videoRef, remoteVideoRef, endCall, handleLogin, socket } = useConnections(userId, setRemoteSocketId, setUserId, setInterests);
 
   const {mode, SIGNED_OUT, OUTSIDE_LOBBY, IN_CALL, IN_LOBBY} = useMode({userId, remoteSocketId, inLobby});
-  console.log(IN_CALL);
   return (
     <>
       <CssBaseline />
@@ -52,57 +51,34 @@ function App() {
           >
             {mode === SIGNED_OUT && (
               <>
+                <LoginForm onSubmit={handleLogin}/>
               </>
             )}
             {mode === OUTSIDE_LOBBY && (
               <>
+                <InterestsList
+                  interests={interests}
+                  socket={socket}
+                  userId={userId}
+                  inLobby={inLobby}
+                />
               </>
             )}
-            {mode === IN_CALL && <><Chat socket = {socket.current} remoteSocketId={remoteSocketId}/></>}
+            {mode === IN_CALL && (
+              <>
+                <Chat socket = {socket.current} remoteSocketId={remoteSocketId}/>
+              </>
+            )}
             {mode === IN_LOBBY && (
               <>
+                <InterestsList
+                  interests={interests}
+                  socket={socket}
+                  userId={userId}
+                  inLobby={inLobby}
+                />
               </>
             )}
-            
-            {!userId && <LoginForm onSubmit={handleLogin} />}
-
-            
-            <button
-              onClick={() => {
-                toggleLobbyState(prev => !prev);
-                socket.current.emit("enter-lobby", { userId });
-              }}
-            >
-              enter lobby
-            </button>
-            <button
-              onClick={() => {
-                socket.current.emit("send-contact-info", {
-                  remoteSocketId,
-                  userId
-                });
-              }}
-            >
-              send contact info
-            </button>
-
-            <button
-              onClick={() => {
-                endCall();
-                socket.current.emit("end-call", { remoteSocketId });
-              }}
-            >
-              End Call
-            </button>
-
-            {userId && <InterestsList
-              interests={interests}
-              socket={socket}
-              userId={userId}
-              inLobby={inLobby}
-            />}
-            {/* {remoteSocketId && <Chat socket = {socket.current} remoteSocketId={remoteSocketId}/>} */}
-            
           </Stack>
         </Grid>
         {/* RIGHT COLUMN */}
@@ -130,46 +106,6 @@ function App() {
         </Grid>
       </Grid>
 
-      {/* <button
-        onClick = {() => {
-          socket.current.emit('leave-lobby', {userId});
-        }}
-      >
-        leave lobby
-      </button>
-
-      <button
-        onClick = {() => {
-          socket.current.emit('add-criteria', {userId, interest: 'cycling'});
-        }}
-      >
-        add interest
-      </button>
-
-      <button
-        onClick = {() => {
-          socket.current.emit('remove-criteria', {userId, interest: interests[3]});
-        }}
-      >
-        remove interest
-      </button>
-
-      <button
-        onClick = {() => {
-          socket.current.emit('send-msg', {remoteSocketId, msg: 'send a message'})
-        }}
-        >
-          send a message
-        </button>
-
-      <button
-        onClick={() => {
-          endCall();
-          socket.current.emit("end-call", {remoteSocketId});
-        }}
-      >
-        End Call
-      </button> */}
     </>
   );
 }
