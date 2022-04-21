@@ -59,7 +59,8 @@ export default function useConnections(userId, setRemoteSocketId, setUserId, set
         console.log(call.metadata);
 
         setRemoteSocketId(call.metadata.remoteSocketId);
-        
+        setSharedInterests(call.metadata.sharedInterests);
+
         currentCall.current = call;
         call.answer(videoRef.current.srcObject);
         call.on("stream", remoteVidoStream => {
@@ -73,7 +74,7 @@ export default function useConnections(userId, setRemoteSocketId, setUserId, set
 
         const socketId = socket.current.id
         setRemoteSocketId(remoteSocketId);        
-
+        setSharedInterests(sharedInterests);
         const data = {metadata: {"sharedInterests":sharedInterests[0],"remoteSocketId":socketId}}
 
         // start calling the other peer and send shared interests to that peer
