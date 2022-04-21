@@ -10,7 +10,7 @@ import {TextField } from '@mui/material';
 export default function Chat({socket, remoteSocketId}) {
   const [messages, setMessages] = useState([]);
   const [value, setValue] = useState('');
-
+  console.log('rerender');
   useEffect(() => {
     if(socket) {
       socket.on('msg', ({msg}) => appendMsg({text: msg, fromPeer: true}));
