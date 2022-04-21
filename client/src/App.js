@@ -18,6 +18,7 @@ function App() {
   const [userId, setUserId] = useState(null);
   const [interests, setInterests] = useState([]);
   const [remoteSocketId, setRemoteSocketId] = useState(null);
+  const [sharedInterests, setSharedInterests] = useState([]);
   const [inLobby, toggleLobbyState] = useState(false);
   const { videoRef, remoteVideoRef, endCall, handleLogin, socket } = useConnections(userId, setRemoteSocketId, setUserId, setInterests);
 
