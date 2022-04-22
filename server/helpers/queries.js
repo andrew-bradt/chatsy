@@ -14,7 +14,7 @@ module.exports = (db) => ({
     });
   }, 
 
-  insertUser(email) {
+  updateUser(email) {
     const queryString = `
       INSERT INTO users (email)
       VALUES ($1)
@@ -29,7 +29,7 @@ module.exports = (db) => ({
       });
   },
 
-  insertInterests(interests) {
+  updateInterests(interests) {
     let values = '';
     let i = 0;
     while (i < interests.length - 1) {
@@ -50,7 +50,7 @@ module.exports = (db) => ({
       });
   },
 
-  insertTags(tags) {
+  updateTags(tags) {
     let values = '';
     let i = 0;
     while (i < tags.length - 1) {
@@ -71,7 +71,7 @@ module.exports = (db) => ({
       });
   },
 
-  insertUsersTags(userId, tags) {
+  updateUsersTags(userId, tags) {
     const userIdWithTags = tags.map(tag => [userId, tag]);
     const queryString = format(`
       INSERT INTO users_tags
@@ -86,7 +86,7 @@ module.exports = (db) => ({
     });
   },
 
-  insertUsersInterests(userId, interests) {
+  updateUsersInterests(userId, interests) {
     const userIdWithInterests = interests.map(interest => [userId, interest]);
     const queryString = format(`
       INSERT INTO users_interests
