@@ -1,8 +1,9 @@
 const { google } = require('googleapis');
+const getInterestsFromApi = require('./get-interests');
 
 const checkGoogleUser = async(auth, db) => {
   // import db related queries methods
-  const {getUserId, addUser} = require('../helpers/queries')(db);
+  const {addUser} = require('../helpers/queries')(db);
 
   // call oauth2 api for user email
   const o2 = google.oauth2({
@@ -11,16 +12,13 @@ const checkGoogleUser = async(auth, db) => {
   });
   const response = await o2.userinfo.get({});
   const userEmail = response.data.email;
+  
+  getInterestsFromApi(auth);
 
-  // check if user exist in db (Can be deleted, addUser can check existing user too)
-  const userId = await getUserId(userEmail);
-  if (userId) {
-    return userEmail;
-  }
-
-  // if user is new, add to db
+  // return user email from db, if not in db, will create new user
   const dbRes = await addUser(userEmail);
-  return dbRes.rows[0].email;
+
+  return dbRes.email;
 
 };
 
