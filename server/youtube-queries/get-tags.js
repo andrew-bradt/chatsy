@@ -1,6 +1,6 @@
 const { google } = require("@googleapis/youtube");
 
-const getLikedVideoTags = function (auth) {
+const getLikedVideoTags = function(auth) {
   const service = google.youtube("v3");
   service.videos.list(
     {
