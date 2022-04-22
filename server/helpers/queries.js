@@ -25,5 +25,18 @@ module.exports = (db) => ({
       .then(res => {
         return res.rows;
     });
+  },
+
+  addUser(email) {
+    const queryString = `
+      INSERT INTO users (email)
+      VALUES ($1)
+      RETURNING *
+    `;
+    const queryParams = [email];
+    return db.query(queryString, queryParams)
+      .then(res => {
+        return res;
+      });
   }
 });
