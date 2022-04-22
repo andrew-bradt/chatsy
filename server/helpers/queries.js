@@ -40,5 +40,20 @@ module.exports = (db) => ({
       .then(res => {
         return res.rows;
     });
+  },
+  
+  addUserTags(email, tags) {
+    const queryString = `
+      SELECT users.id, email, label
+      FROM users
+      JOIN users_tags ON users.id = users_tags.user_id
+      JOIN tags ON tag_id = tags.id
+      WHERE email = $1
+    `;
+    const queryParams = [email];
+    return db.query(queryString, queryParams)
+      .then(res => {
+        return res.rows;
+    });
   }
 });
