@@ -1,0 +1,7 @@
+DROP TABLE IF EXISTS users_tags CASCADE;
+
+CREATE TABLE users_tags (
+  user_id INT NOT NULL REFERENCES users(id)  ON DELETE CASCADE,
+  tag_id INT NOT NULL REFERENCES tags(id) ON DELETE CASCADE,
+  PRIMARY KEY(user_id, tag_id)
+);
