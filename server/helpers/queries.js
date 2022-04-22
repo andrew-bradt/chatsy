@@ -26,6 +26,22 @@ module.exports = (db) => ({
       });
   },
 
+  insertTags(tags) {
+    let values = '';
+    let i = 0;
+    while (i < tags.length - 1) {
+      values += `(DEFAULT, '${tags[i]}'), `;
+      i++;
+    }
+    values += `(DEFAULT, '${tags[i]}')`;
+    const queryString = `
+      INSERT INTO tags
+      VALUES ${values}
+      ON CONFLICT DO NOTHING
+    `;
+    return db.query(queryString);
+  },
+
   insertUsersTags(userId, tags) {
     const userIdWithTags = tags.map(tag => [userId, tag]);
     const queryString = format(`
@@ -35,7 +51,7 @@ module.exports = (db) => ({
     `, userIdWithTags);
     return db.query(queryString)
       .then(res => {
-        return res.rows[0]
+        return res.rows[0];
     });
   },
 
