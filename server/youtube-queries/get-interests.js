@@ -3,19 +3,14 @@ const categoryRef = require("./youtube-catId-list");
 
 const getInterestsFromApi = function(auth) {
   const service = google.youtube("v3");
-  service.videos.list(
-    {
+  return service.videos
+    .list({
       auth: auth,
       part: "snippet,contentDetails,statistics",
       myRating: "like",
-      maxResults: 50,
-    },
-    (err, res) => {
-      if (err) {
-        console.log("API does not work");
-        return;
-      }
-      // console.log(res.data.items[7].snippet);
+      maxResults: 50
+    })
+    .then(res => {
       const videoData = res.data.items;
       let userInterest = [];
       videoData.forEach(data => {
@@ -25,8 +20,7 @@ const getInterestsFromApi = function(auth) {
         }
       });
       return userInterest;
-    }
-  );
+    });
 };
 
 module.exports = getInterestsFromApi;
