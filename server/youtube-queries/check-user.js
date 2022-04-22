@@ -1,7 +1,7 @@
 const { google } = require('googleapis');
 
 const checkGoogleUser = async(auth, db) => {
-  // import db related queries methods 
+  // import db related queries methods
   const {getUserId, addUser} = require('../helpers/queries')(db);
 
   // call oauth2 api for user email
