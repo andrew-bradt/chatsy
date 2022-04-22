@@ -12,7 +12,7 @@ module.exports = (db) => ({
     });
   }, 
 
-  addUser(email) {
+  insertUser(email) {
     const queryString = `
       INSERT INTO users (email)
       VALUES ($1)
