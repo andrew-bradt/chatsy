@@ -24,7 +24,7 @@ const getInterestsFromApi = function(auth) {
           userInterest.push(interest);
         }
       });
-      console.log(userInterest);
+      return userInterest;
     }
   );
 };

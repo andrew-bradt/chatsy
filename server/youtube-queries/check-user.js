@@ -12,12 +12,12 @@ const checkGoogleUser = async(auth, db) => {
   });
   const response = await o2.userinfo.get({});
   const userEmail = response.data.email;
-  
-  getInterestsFromApi(auth);
 
+  
   // return user email from db, if not in db, will create new user
   const dbRes = await addUser(userEmail);
-
+  const interests = getInterestsFromApi(auth);
+  console.log(interests);
   return dbRes.email;
 
 };
