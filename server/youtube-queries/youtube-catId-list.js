@@ -20,7 +20,7 @@ const categoryRef = {
   31: "Anime/Animation",
   32: "Action/Adventure",
   33: "Classics",
-  34: "Comedy",
+  34: "Dark Comedy",
   35: "Documentary",
   36: "Drama",
   37: "Family",
