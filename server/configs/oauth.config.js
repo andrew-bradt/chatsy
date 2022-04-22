@@ -4,7 +4,7 @@ const {OAUTH_CLIENT_ID, OAUTH_CLIENT_SECRET} = process.env;
 const oauth2Client = new google.auth.OAuth2(
   OAUTH_CLIENT_ID,
   OAUTH_CLIENT_SECRET,
-  'http://localhost:8080'
+  'http://localhost:3000'
 );
 
 const scope = [
