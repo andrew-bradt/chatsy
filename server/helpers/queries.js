@@ -14,7 +14,7 @@ module.exports = (db) => ({
     });
   }, 
 
-  updateUser(email) {
+  addUser(email) {
     const queryString = `
       INSERT INTO users (email)
       VALUES ($1)
