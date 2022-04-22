@@ -1,3 +1,5 @@
+const format = require('pg-format');
+
 module.exports = (db) => ({
   getUserId(email) {
     const queryString = `
@@ -22,6 +24,19 @@ module.exports = (db) => ({
       .then(res => {
         return res.rows[0];
       });
+  },
+
+  insertUsersTags(userId, tags) {
+    const userIdWithTags = tags.map(tag => [userId, tag]);
+    const queryString = format(`
+      INSERT INTO users_tags
+      VALUES %L
+      ON CONFLICT DO NOTHING
+    `, userIdWithTags);
+    return db.query(queryString)
+      .then(res => {
+        return res.rows[0]
+    });
   },
 
   getUserInterests(email) {
