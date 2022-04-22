@@ -1,13 +1,13 @@
-const { google } = require("@googleapis/youtube");
+const { google } = require("googleapis");
 
-const getLikedVideoTags = function(auth) {
+const getInterestsFromApi = function(auth) {
   const service = google.youtube("v3");
   service.videos.list(
     {
       auth: auth,
       part: "snippet,contentDetails,statistics",
       myRating: "like",
-      maxResults: 50
+      maxResults: 20,
     },
     (err, res) => {
       if (err) {
@@ -20,4 +20,4 @@ const getLikedVideoTags = function(auth) {
   );
 };
 
-module.exports = getLikedVideoTags;
+module.exports = getInterestsFromApi;

@@ -12,7 +12,7 @@ const checkGoogleUser = async(auth, db) => {
   const response = await o2.userinfo.get({});
   const userEmail = response.data.email;
 
-  // check if user exist in db
+  // check if user exist in db (Can be deleted, addUser can check existing user too)
   const userId = await getUserId(userEmail);
   if (userId) {
     return userEmail;
