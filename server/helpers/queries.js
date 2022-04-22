@@ -18,6 +18,9 @@ module.exports = (db) => ({
     const queryString = `
       INSERT INTO users (email)
       VALUES ($1)
+      ON CONFLICT (email) DO UPDATE
+        SET email=EXCLUDED.email
+      RETURNING *
     `;
     const queryParams = [email];
     return db.query(queryString, queryParams)
@@ -38,8 +41,12 @@ module.exports = (db) => ({
       INSERT INTO tags
       VALUES ${values}
       ON CONFLICT DO NOTHING
+      RETURNING *
     `;
-    return db.query(queryString);
+    return db.query(queryString)
+      .then(res => {
+        return res.rows;
+      });
   },
 
   insertUsersTags(userId, tags) {
@@ -48,10 +55,11 @@ module.exports = (db) => ({
       INSERT INTO users_tags
       VALUES %L
       ON CONFLICT DO NOTHING
+      RETURNING *
     `, userIdWithTags);
     return db.query(queryString)
       .then(res => {
-        return res.rows[0];
+        return res.rows;
     });
   },
 
