@@ -36,9 +36,10 @@ export default function useConnections({userId, setRemoteSocketId, setUserId, se
         setUserId(userId);
         setInterests(interestsArray);
         peer.current = new Peer(peerId);
+        window.history.replaceState(null, 'Welcome', '/loggedin')
       });
     }
-  }, []);
+  }, [setInterests, setUserId]);
 
   // get local user video stream on page
   useEffect(() => {
