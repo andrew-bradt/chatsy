@@ -66,20 +66,14 @@ const loginRoute = require("./routes/login")({
 
 const { authURL, oauth2Client } = require("./configs/oauth.config");
 const { google } = require("googleapis");
+const checkGoogleUser = require('./youtube-queries/check-user');
 
 app.get('/', async(req, res) => {
   const {code} = req.query;
   const {tokens} = await oauth2Client.getToken(code);
   oauth2Client.setCredentials(tokens);
 
-  // experimenting with getting user profile
-  const o2 = google.oauth2({
-    auth: oauth2Client,
-    version: "v2"
-  });
-
-  const response = await o2.userinfo.get({});
-  console.log(response.data);
+  checkGoogleUser(oauth2Client, db);
 
   res.redirect('http://localhost:3000');
 });
