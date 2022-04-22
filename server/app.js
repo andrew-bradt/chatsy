@@ -64,7 +64,11 @@ const loginRoute = require("./routes/login")({
   lobby
 });
 
+const { authURL } = require("./configs/oauth.config");
+
 app.use('/login', loginRoute);
+app.use('/oauth', require('./routes/oauth')(authURL));
+
+
 
 module.exports = {app, server};
-

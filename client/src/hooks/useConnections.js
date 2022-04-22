@@ -4,7 +4,6 @@ import Peer from "peerjs"
 import axios from "axios";
 
 export default function useConnections({userId, setRemoteSocketId, setUserId, setInterests, setSharedInterests, addContact}) {
-  
   const videoRef = useRef();
   const remoteVideoRef = useRef();
 
@@ -18,7 +17,7 @@ export default function useConnections({userId, setRemoteSocketId, setUserId, se
     setRemoteSocketId(null);
   };
 
-  const handleLogin = (email) => {
+  const handleLogin = email => {
     axios.post("/login", { email }).then(res => {
       const { userId, interestsArray, peerId } = res.data;
       setUserId(userId);
@@ -26,7 +25,22 @@ export default function useConnections({userId, setRemoteSocketId, setUserId, se
       peer.current = new Peer(peerId);
     });
   };
-  
+
+  // check oauth code from URL
+  useEffect(() => {
+    const url = window.location.search;
+    const oauthCode = url.slice(6);
+    if (oauthCode) {
+      axios.post("/login", { oauthCode }).then(res => {
+        const { userId, interestsArray, peerId } = res.data;
+        setUserId(userId);
+        setInterests(interestsArray);
+        peer.current = new Peer(peerId);
+        window.history.replaceState(null, 'Welcome', '/loggedin')
+      });
+    }
+  }, [setInterests, setUserId]);
+
   // get local user video stream on page
   useEffect(() => {
     const constraints = {
@@ -41,23 +55,25 @@ export default function useConnections({userId, setRemoteSocketId, setUserId, se
       .catch(error => {
         console.error("Error accessing media devices.", error);
       });
-  }, [])
-  
+  }, []);
+
   // Connection related logic
   useEffect(() => {
     if (userId) {
       socket.current = socketIOClient("/");
-      socket.current.on('connect', ()=>{
-        socket.current.emit('add-socket-id', ({userId}));
+      socket.current.on("connect", () => {
+        socket.current.emit("add-socket-id", { userId });
       });
 
-      socket.current.on('contact-info', ({email}) => console.log(email));
+      socket.current.on("contact-info", ({ email }) => console.log(email));
 
       // listen for call event, and answer
       peer.current.on("call", call => {
-
         console.log(call.metadata);
-        console.log('shared interests from peer on call: ', call.metadata.sharedInterests);
+        console.log(
+          "shared interests from peer on call: ",
+          call.metadata.sharedInterests
+        );
         setRemoteSocketId(call.metadata.remoteSocketId);
         setSharedInterests(call.metadata.sharedInterests);
 
@@ -67,39 +83,49 @@ export default function useConnections({userId, setRemoteSocketId, setUserId, se
           remoteVideoRef.current.srcObject = remoteVidoStream;
         });
       });
-    
+
       // receive other user's peer id and call immediately
       socket.current.on("callThisPeer", msg => {
         const { peerId, remoteSocketId, sharedInterests } = msg;
 
-        const socketId = socket.current.id
+        const socketId = socket.current.id;
         setRemoteSocketId(remoteSocketId);
-        console.log('shared interests from socket callThisPeer: ', sharedInterests);        
+        console.log(
+          "shared interests from socket callThisPeer: ",
+          sharedInterests
+        );
         setSharedInterests(sharedInterests);
-        
-        const data = {metadata: {"sharedInterests": sharedInterests,"remoteSocketId":socketId}}
+
+        const data = {
+          metadata: {
+            sharedInterests: sharedInterests,
+            remoteSocketId: socketId
+          }
+        };
 
         // start calling the other peer and send shared interests to that peer
-        const call = peer.current.call(peerId, videoRef.current.srcObject, data);
+        const call = peer.current.call(
+          peerId,
+          videoRef.current.srcObject,
+          data
+        );
         currentCall.current = call;
         call.on("stream", remoteVidoStream => {
           remoteVideoRef.current.srcObject = remoteVidoStream;
         });
       });
-    
+
       // end the peer call after getting endCall event from server
       socket.current.on("endCall", () => {
-        console.log('the other user ended the call')
-        socket.current.emit('enter-lobby', {userId})
+        console.log("the other user ended the call");
+        socket.current.emit("enter-lobby", { userId });
         endCall();
       });
 
       // Other socket event listeners
       // register receiving contact info event
-
     }
   }, [userId, peer, socket, setRemoteSocketId, addContact]);
 
-  
-  return { videoRef, remoteVideoRef, endCall, handleLogin, socket }
+  return { videoRef, remoteVideoRef, endCall, handleLogin, socket };
 }
