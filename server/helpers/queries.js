@@ -29,6 +29,27 @@ module.exports = (db) => ({
       });
   },
 
+  insertInterests(interests) {
+    let values = '';
+    let i = 0;
+    while (i < interests.length - 1) {
+      values += `(DEFAULT, '${interests[i]}'), `;
+      i++;
+    }
+    values += `(DEFAULT, '${interests[i]}')`;
+    const queryString = `
+      INSERT INTO interests
+      VALUES ${values}
+      ON CONFLICT (label) DO UPDATE
+        SET label=EXCLUDED.label
+      RETURNING *
+    `;
+    return db.query(queryString)
+      .then(res => {
+        return res.rows;
+      });
+  },
+
   insertTags(tags) {
     let values = '';
     let i = 0;
@@ -40,7 +61,8 @@ module.exports = (db) => ({
     const queryString = `
       INSERT INTO tags
       VALUES ${values}
-      ON CONFLICT DO NOTHING
+      ON CONFLICT (label) DO UPDATE
+        SET label=EXCLUDED.label
       RETURNING *
     `;
     return db.query(queryString)
@@ -54,9 +76,25 @@ module.exports = (db) => ({
     const queryString = format(`
       INSERT INTO users_tags
       VALUES %L
-      ON CONFLICT DO NOTHING
+      ON CONFLICT (user_id, tag_id) DO UPDATE
+        SET user_id=EXCLUDED.user_id, tag_id=EXCLUDED.tag_id
       RETURNING *
     `, userIdWithTags);
+    return db.query(queryString)
+      .then(res => {
+        return res.rows;
+    });
+  },
+
+  insertUsersInterests(userId, interests) {
+    const userIdWithInterests = interests.map(interest => [userId, interest]);
+    const queryString = format(`
+      INSERT INTO users_interests
+      VALUES %L
+      ON CONFLICT (user_id, interest_id) DO UPDATE
+        SET user_id=EXCLUDED.user_id, interest_id=EXCLUDED.interest_id
+      RETURNING *
+    `, userIdWithInterests);
     return db.query(queryString)
       .then(res => {
         return res.rows;
