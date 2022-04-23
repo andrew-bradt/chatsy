@@ -1,10 +1,10 @@
 const { google } = require('googleapis');
 // TODO: import ML helper function
 
-const getInterestsFromApi = require('./get-interests');
+const getTags = require('./get-tags');
 const checkGoogleUser = async(auth, db) => {
   // import db related queries methods
-  const { addUser, updateInterests, updateUsersInterests } =
+  const { addUser, updateInterests, updateUsersInterests, updateTags } =
     require("../helpers/queries")(db);
 
   // call oauth2 api for user email
@@ -16,11 +16,12 @@ const checkGoogleUser = async(auth, db) => {
   const userEmail = response.data.email;
 
   // TODO: getTagsFromApi
-  // add tags to tags table and update users_tags bridging table
   // pass tags into NLP API to get interests
   // add interests to interests table, update users_interests table
-
-  const interests = await getInterestsFromApi(auth);
+  
+  // add tags to tags table and update users_tags bridging table
+  const tags = await getTags(auth);
+  const dbresult = await updateTags(tags);
 
   let email;
 
