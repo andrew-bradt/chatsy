@@ -1,7 +1,7 @@
 const { google } = require('googleapis');
 // TODO: import ML helper function
 
-const getInterestsFromApi = require('./get-interests');
+const getTags = require('./get-tags');
 const checkGoogleUser = async(auth, db) => {
   // import db related queries methods
   const { addUser, updateInterests, updateUsersInterests } =
@@ -20,7 +20,7 @@ const checkGoogleUser = async(auth, db) => {
   // pass tags into NLP API to get interests
   // add interests to interests table, update users_interests table
 
-  const interests = await getInterestsFromApi(auth);
+  const interests = await getTags(auth);
 
   let email;
 
