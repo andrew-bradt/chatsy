@@ -1,9 +1,10 @@
 const { google } = require('googleapis');
-const getInterestsFromApi = require('./get-interests');
+const processTags = require('../ml/process-tags');
 
+const getTags = require('./get-tags');
 const checkGoogleUser = async(auth, db) => {
   // import db related queries methods
-  const { addUser, updateInterests, updateUsersInterests } =
+  const { addUser, updateInterests, updateUsersInterests, updateTags } =
     require("../helpers/queries")(db);
 
   // call oauth2 api for user email
@@ -14,8 +15,10 @@ const checkGoogleUser = async(auth, db) => {
   const response = await o2.userinfo.get({});
   const userEmail = response.data.email;
 
-  // return user email from db, if not in db, will create new user
-  const interests = await getInterestsFromApi(auth);
+  // add tags to tags table and update users_tags bridging table
+  const tags = await getTags(auth);
+  const interests = await processTags(tags);
+  updateTags(tags);
 
   let email;
 

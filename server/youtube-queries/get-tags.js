@@ -1,7 +1,6 @@
 const { google } = require("googleapis");
-const categoryRef = require("./youtube-catId-list");
 
-const getInterestsFromApi = function(auth) {
+const getTags = function(auth) {
   const service = google.youtube("v3");
   return service.videos
     .list({
@@ -12,15 +11,19 @@ const getInterestsFromApi = function(auth) {
     })
     .then(res => {
       const videoData = res.data.items;
-      let userInterest = [];
+      let userTags = [];
       videoData.forEach(data => {
-        const interest = categoryRef[data.snippet.categoryId];
-        if (!userInterest.includes(interest)) {
-          userInterest.push(interest);
+        const tags = data.snippet.tags;
+        if (tags && tags.length) {
+          tags.forEach(tag => {
+            if (!userTags.includes(tag) && !tag.includes("'")) {
+              userTags.push(tag);
+            }
+          });
         }
       });
-      return userInterest;
+      return userTags;
     });
 };
 
-module.exports = getInterestsFromApi;
+module.exports = getTags;
