@@ -1,5 +1,4 @@
 const { google } = require("googleapis");
-const categoryRef = require("./youtube-catId-list");
 
 const getTags = function(auth) {
   const service = google.youtube("v3");
@@ -17,7 +16,7 @@ const getTags = function(auth) {
         const tags = data.snippet.tags;
         if (tags && tags.length) {
           tags.forEach(tag => {
-            if (!userTags.includes(tag)) {
+            if (!userTags.includes(tag) && !tag.includes("'")) {
               userTags.push(tag);
             }
           });

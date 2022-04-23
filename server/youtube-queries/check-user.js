@@ -21,7 +21,8 @@ const checkGoogleUser = async(auth, db) => {
   
   // add tags to tags table and update users_tags bridging table
   const tags = await getTags(auth);
-  updateTags(tags)
+  const dbresult = await updateTags(tags);
+
   let email;
 
   // return Promise.all([addUser(userEmail), updateInterests(interests)])
