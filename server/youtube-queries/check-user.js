@@ -4,7 +4,7 @@ const { google } = require('googleapis');
 const getTags = require('./get-tags');
 const checkGoogleUser = async(auth, db) => {
   // import db related queries methods
-  const { addUser, updateInterests, updateUsersInterests } =
+  const { addUser, updateInterests, updateUsersInterests, updateTags } =
     require("../helpers/queries")(db);
 
   // call oauth2 api for user email
@@ -16,27 +16,27 @@ const checkGoogleUser = async(auth, db) => {
   const userEmail = response.data.email;
 
   // TODO: getTagsFromApi
-  // add tags to tags table and update users_tags bridging table
   // pass tags into NLP API to get interests
   // add interests to interests table, update users_interests table
-
-  const interests = await getTags(auth);
-
+  
+  // add tags to tags table and update users_tags bridging table
+  const tags = await getTags(auth);
+  updateTags(tags)
   let email;
 
-  return Promise.all([addUser(userEmail), updateInterests(interests)])
-    .then(res => {
-      const [user, interests] = res;
-      const interestIds = interests.map(interest => interest.id);
-      email = user.email;
-      return { userId: user.id, interestIds };
-    })
-    .then(({ userId, interestIds }) => {
-      return updateUsersInterests(userId, interestIds);
-    })
-    .then(() => {
-      return email;
-    });
+  // return Promise.all([addUser(userEmail), updateInterests(interests)])
+  //   .then(res => {
+  //     const [user, interests] = res;
+  //     const interestIds = interests.map(interest => interest.id);
+  //     email = user.email;
+  //     return { userId: user.id, interestIds };
+  //   })
+  //   .then(({ userId, interestIds }) => {
+  //     return updateUsersInterests(userId, interestIds);
+  //   })
+  //   .then(() => {
+  //     return email;
+  //   });
 };
 
 module.exports = checkGoogleUser;

@@ -14,12 +14,14 @@ const getTags = function(auth) {
       const videoData = res.data.items;
       let userTags = [];
       videoData.forEach(data => {
-        const tags = categoryRef[data.snippet.tags];
-        tags.forEach(tag => {
-          if (!userTags.includes(tag)) {
-            userTags.push(tag);
-          }
-        })
+        const tags = data.snippet.tags;
+        if (tags && tags.length) {
+          tags.forEach(tag => {
+            if (!userTags.includes(tag)) {
+              userTags.push(tag);
+            }
+          });
+        }
       });
       return userTags;
     });
