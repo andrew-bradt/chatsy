@@ -1,21 +1,16 @@
-// TODO:
-// ml function
-  // make api call
-  // extract labels 
-  // return parsed labels
-
 const axios = require('axios');
 const {URLSearchParams} = require('url');
-// const FormData = require('form-data');
+
 const API_KEY = process.env.MEANING_CLOUD_API;
 const API_MODEL = 'IAB_2.0-tier4';
 const API_URL = 'https://api.meaningcloud.com/deepcategorization-1.0';
 
-const tags = require('../../LOCAL/mock-data');
-
 const parseTags = (tags) => tags.join(', ');
 
-const parseLabel = (label) => label;
+const parseLabel = (label) => {
+  if (!label.includes('>')) return label;
+  return label.split('>').pop();
+};
 
 const makeAPICall = (tags) => {
   const params = new URLSearchParams({
@@ -30,13 +25,8 @@ const makeAPICall = (tags) => {
     });
 }
 
-const processTags = async(tags) => {
+module.exports = async(tags) => {
   const parsedTags = parseTags(tags);
   const interests = await makeAPICall(parsedTags);
-  const labels = interests.map(category => parseLabel(category.label));
-  return labels;
+  return interests.map(el => parseLabel(el.label));
 };
-
-processTags(tags).then(console.log);
-
-module.exports = processTags;
