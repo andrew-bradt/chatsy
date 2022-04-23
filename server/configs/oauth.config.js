@@ -1,10 +1,10 @@
 const {google} = require('googleapis');
-const {OAUTH_CLIENT_ID, OAUTH_CLIENT_SECRET} = process.env;
+const {OAUTH_CLIENT_ID, OAUTH_CLIENT_SECRET, CLIENT_URL} = process.env;
 
 const oauth2Client = new google.auth.OAuth2(
   OAUTH_CLIENT_ID,
   OAUTH_CLIENT_SECRET,
-  'http://localhost:3000'
+  CLIENT_URL
 );
 
 const scope = [
