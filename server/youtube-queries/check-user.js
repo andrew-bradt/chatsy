@@ -25,19 +25,19 @@ const checkGoogleUser = async(auth, db) => {
 
   let email;
 
-  // return Promise.all([addUser(userEmail), updateInterests(interests)])
-  //   .then(res => {
-  //     const [user, interests] = res;
-  //     const interestIds = interests.map(interest => interest.id);
-  //     email = user.email;
-  //     return { userId: user.id, interestIds };
-  //   })
-  //   .then(({ userId, interestIds }) => {
-  //     return updateUsersInterests(userId, interestIds);
-  //   })
-  //   .then(() => {
-  //     return email;
-  //   });
+  return Promise.all([addUser(userEmail), updateInterests(interests)])
+    .then(res => {
+      const [user, interests] = res;
+      const interestIds = interests.map(interest => interest.id);
+      email = user.email;
+      return { userId: user.id, interestIds };
+    })
+    .then(({ userId, interestIds }) => {
+      return updateUsersInterests(userId, interestIds);
+    })
+    .then(() => {
+      return email;
+    });
 };
 
 module.exports = checkGoogleUser;
