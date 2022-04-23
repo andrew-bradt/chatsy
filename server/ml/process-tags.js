@@ -15,10 +15,7 @@ const tags = require('../../LOCAL/mock-data');
 
 const parseTags = (tags) => tags.join(', ');
 
-const parseLabel = (label) => {
-  
-};
-
+const parseLabel = (label) => label;
 
 const makeAPICall = (tags) => {
   const params = new URLSearchParams({
@@ -35,10 +32,11 @@ const makeAPICall = (tags) => {
 
 const processTags = async(tags) => {
   const parsedTags = parseTags(tags);
-  const data = await makeAPICall(parsedTags);
-  console.log(data);
+  const interests = await makeAPICall(parsedTags);
+  const labels = interests.map(category => parseLabel(category.label));
+  return labels;
 };
 
-processTags(tags);
+processTags(tags).then(console.log);
 
 module.exports = processTags;
