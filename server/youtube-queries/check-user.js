@@ -1,6 +1,7 @@
 const { google } = require('googleapis');
-const getInterestsFromApi = require('./get-interests');
+// TODO: import ML helper function
 
+const getInterestsFromApi = require('./get-interests');
 const checkGoogleUser = async(auth, db) => {
   // import db related queries methods
   const { addUser, updateInterests, updateUsersInterests } =
@@ -14,7 +15,11 @@ const checkGoogleUser = async(auth, db) => {
   const response = await o2.userinfo.get({});
   const userEmail = response.data.email;
 
-  // return user email from db, if not in db, will create new user
+  // TODO: getTagsFromApi
+  // add tags to tags table and update users_tags bridging table
+  // pass tags into NLP API to get interests
+  // add interests to interests table, update users_interests table
+
   const interests = await getInterestsFromApi(auth);
 
   let email;
