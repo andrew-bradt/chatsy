@@ -1,5 +1,5 @@
 const { google } = require('googleapis');
-// TODO: import ML helper function
+const processTags = require('../ml/process-tags');
 
 const getTags = require('./get-tags');
 const checkGoogleUser = async(auth, db) => {
@@ -15,13 +15,10 @@ const checkGoogleUser = async(auth, db) => {
   const response = await o2.userinfo.get({});
   const userEmail = response.data.email;
 
-  // TODO: getTagsFromApi
-  // pass tags into NLP API to get interests
-  // add interests to interests table, update users_interests table
-  
   // add tags to tags table and update users_tags bridging table
   const tags = await getTags(auth);
-  const dbresult = await updateTags(tags);
+  const interests = await processTags(tags);
+  updateTags(tags);
 
   let email;
 
