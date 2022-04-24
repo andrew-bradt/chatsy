@@ -22,9 +22,9 @@ function App() {
   const [remoteSocketId, setRemoteSocketId] = useState(null);
   const [sharedInterests, setSharedInterests] = useState([]);
   const [inLobby, toggleLobbyState] = useState(false);
-  const { videoRef, remoteVideoRef, endCall, handleLogin, socket } = useConnections({userId, setRemoteSocketId, setUserId, setSharedInterests, setInterests});
+  const { videoRef, remoteVideoRef, endCall, handleLogin, socket, loginFormElements } = useConnections({userId, setRemoteSocketId, setUserId, setSharedInterests, setInterests});
 
-  const {mode, SIGNED_OUT, OUTSIDE_LOBBY, IN_CALL, IN_LOBBY} = useMode({userId, remoteSocketId, inLobby});
+  const { mode, SIGNED_OUT, OUTSIDE_LOBBY, IN_CALL, IN_LOBBY } = useMode({ userId, remoteSocketId, inLobby });
 
   console.log('sharedInterests in App component: ', sharedInterests);
   return (
@@ -52,7 +52,7 @@ function App() {
           >
             {mode === SIGNED_OUT && (
               <>
-                <LoginForm onSubmit={handleLogin} />
+                <LoginForm formRef={loginFormElements} onSubmit={handleLogin} />
               </>
             )}
             {mode === OUTSIDE_LOBBY && (

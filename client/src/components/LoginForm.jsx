@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Box, Button, Avatar, Typography, TextField, Grid, Link } from "@mui/material";
 import axios from 'axios';
 
-export default function LoginForm({onSubmit}) {
+export default function LoginForm({onSubmit, formRef}) {
   const [email, setEmail] = useState('');
 
   const login = e => {
@@ -31,7 +31,7 @@ export default function LoginForm({onSubmit}) {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Box component="form" onSubmit={login} sx={{ mt: 1 }}>
+      <Box ref={formRef} component="form" onSubmit={login} sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required

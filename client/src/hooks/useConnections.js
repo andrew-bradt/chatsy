@@ -3,7 +3,8 @@ import socketIOClient from "socket.io-client"
 import Peer from "peerjs"
 import axios from "axios";
 
-export default function useConnections({userId, setRemoteSocketId, setUserId, setInterests, setSharedInterests, addContact}) {
+export default function useConnections({ userId, setRemoteSocketId, setUserId, setInterests, setSharedInterests, addContact }) {
+  const loginFormElements = useRef();
   const videoRef = useRef();
   const remoteVideoRef = useRef();
 
@@ -32,6 +33,7 @@ export default function useConnections({userId, setRemoteSocketId, setUserId, se
     const oauthCode = url.slice(6);
     if (oauthCode) {
       window.history.replaceState(null, 'Welcome', '/loading-interests')
+      loginFormElements.current.setAttribute('hidden', true);
       axios.post("/login", { oauthCode }).then(res => {
         const { userId, interestsArray, peerId } = res.data;
         setUserId(userId);
@@ -128,5 +130,5 @@ export default function useConnections({userId, setRemoteSocketId, setUserId, se
     }
   }, [userId, peer, socket, setRemoteSocketId, addContact]);
 
-  return { videoRef, remoteVideoRef, endCall, handleLogin, socket };
+  return { videoRef, remoteVideoRef, endCall, handleLogin, socket, loginFormElements };
 }
