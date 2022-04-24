@@ -21,6 +21,14 @@ const grid = css({
   marginTop: '48px'
 });
 
+const rightColumn = css({
+  height: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-around',
+  padding: '20px'
+});
+
 function App() {
   const [userId, setUserId] = useState(null);
   const [interests, setInterests] = useState([]);
@@ -97,11 +105,11 @@ function App() {
           </Stack>
         </Grid>
         {/* RIGHT COLUMN */}
-        <Grid item xs={8} sx={{ height: "100%" }}>
+        <Grid item xs={8} sx={{height: '100%'}}>
           <Stack
             justifyContent="center"
             alignItems="center"
-            sx={{ height: "100%" }}
+            css={rightColumn}
           >
             <Video videoRef={videoRef} remoteVideoRef={remoteVideoRef} remoteSocketId={remoteSocketId }/>
           </Stack>
