@@ -20,7 +20,6 @@ export default function LoginForm({onSubmit, formRef}) {
   return (
     <Box
           sx={{
-            marginBottom: 40,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
