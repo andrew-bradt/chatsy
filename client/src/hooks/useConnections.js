@@ -5,6 +5,7 @@ import axios from "axios";
 
 export default function useConnections({ userId, setRemoteSocketId, setUserId, setInterests, setSharedInterests, addContact }) {
   const loginFormElements = useRef();
+  const waitingElement = useRef();
   const videoRef = useRef();
   const remoteVideoRef = useRef();
 
@@ -27,13 +28,16 @@ export default function useConnections({ userId, setRemoteSocketId, setUserId, s
     });
   };
 
-  // check oauth code from URL
+  // check oauth code from URL and do api calls
   useEffect(() => {
     const url = window.location.search;
     const oauthCode = url.slice(6);
     if (oauthCode) {
       window.history.replaceState(null, 'Welcome', '/loading-interests')
+      // toggle loginForm and waitingIndicator
       loginFormElements.current.setAttribute('hidden', true);
+      waitingElement.current.style.visibility = 'visible';
+
       axios.post("/login", { oauthCode }).then(res => {
         const { userId, interestsArray, peerId } = res.data;
         setUserId(userId);
@@ -130,5 +134,5 @@ export default function useConnections({ userId, setRemoteSocketId, setUserId, s
     }
   }, [userId, peer, socket, setRemoteSocketId, addContact]);
 
-  return { videoRef, remoteVideoRef, endCall, handleLogin, socket, loginFormElements };
+  return { videoRef, remoteVideoRef, endCall, handleLogin, socket, loginFormElements, waitingElement };
 }
