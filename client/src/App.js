@@ -16,6 +16,11 @@ import SharedInterests from './components/SharedInterests';
 import CallControllers from './components/CallControllers';
 import Video from './components/Video';
 
+const grid = css({
+  height: 'calc(100vh - 48px)',
+  marginTop: '48px'
+});
+
 function App() {
   const [userId, setUserId] = useState(null);
   const [interests, setInterests] = useState([]);
@@ -32,7 +37,7 @@ function App() {
       <CssBaseline />
       <TopBar userId={userId} socket={socket}/>
 
-      <Grid container component="main" sx={{ height: "100vh" }}>
+      <Grid container component="main" css={grid}>
         {/* LEFT COLUMN */}
         <Grid
           item
