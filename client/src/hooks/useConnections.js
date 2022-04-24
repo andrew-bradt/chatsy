@@ -62,7 +62,7 @@ export default function useConnections({userId, setRemoteSocketId, setUserId, se
   // Connection related logic
   useEffect(() => {
     if (userId) {
-      socket.current = socketIOClient(`${REACT_APP_BACKEND_API}/`);
+      socket.current = socketIOClient(`${REACT_APP_BACKEND_API}`);
       socket.current.on("connect", () => {
         socket.current.emit("add-socket-id", { userId });
       });
