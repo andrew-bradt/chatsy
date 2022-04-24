@@ -31,6 +31,7 @@ export default function useConnections({userId, setRemoteSocketId, setUserId, se
     const url = window.location.search;
     const oauthCode = url.slice(6);
     if (oauthCode) {
+      window.history.replaceState(null, 'Welcome', '/loading-interests')
       axios.post("/login", { oauthCode }).then(res => {
         const { userId, interestsArray, peerId } = res.data;
         setUserId(userId);
