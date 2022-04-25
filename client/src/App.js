@@ -18,9 +18,9 @@ import CallControllers from './components/CallControllers';
 import Video from './components/Video';
 
 const grid = css({
-  height: 'calc(100vh - 48px)',
-  marginTop: '48px',
-  padding: '0 1.5rem 1.5rem 1.5rem'
+  height: '100vh',
+  padding: '3rem 1.5rem 1.5rem 1.5rem',
+  backgroundColor: "white",
 });
 
 const gridItem = css({
