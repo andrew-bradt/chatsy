@@ -41,6 +41,8 @@ export default function Chat({socket, remoteSocketId}) {
         <TextField 
           css={textField} 
           value={value}
+          multiline
+          maxRows={3}
           onChange={(e) => setValue(e.target.value)}
         />
       </Box>
