@@ -3,6 +3,8 @@ import socketIOClient from "socket.io-client"
 import Peer from "peerjs"
 import axios from "axios";
 
+const {REACT_APP_BACKEND_API} = process.env;
+
 export default function useConnections({userId, setRemoteSocketId, setUserId, setInterests, setSharedInterests, addContact}) {
   const videoRef = useRef();
   const remoteVideoRef = useRef();
@@ -18,7 +20,7 @@ export default function useConnections({userId, setRemoteSocketId, setUserId, se
   };
 
   const handleLogin = email => {
-    axios.post("/login", { email }).then(res => {
+    axios.post(`${REACT_APP_BACKEND_API}/login`, { email }).then(res => {
       const { userId, interestsArray, peerId } = res.data;
       setUserId(userId);
       setInterests(interestsArray);
@@ -31,7 +33,7 @@ export default function useConnections({userId, setRemoteSocketId, setUserId, se
     const url = window.location.search;
     const oauthCode = url.slice(6);
     if (oauthCode) {
-      axios.post("/login", { oauthCode }).then(res => {
+      axios.post(`${REACT_APP_BACKEND_API}/login`, { oauthCode }).then(res => {
         const { userId, interestsArray, peerId } = res.data;
         setUserId(userId);
         setInterests(interestsArray);
@@ -60,7 +62,7 @@ export default function useConnections({userId, setRemoteSocketId, setUserId, se
   // Connection related logic
   useEffect(() => {
     if (userId) {
-      socket.current = socketIOClient("/");
+      socket.current = socketIOClient(`${REACT_APP_BACKEND_API}`);
       socket.current.on("connect", () => {
         socket.current.emit("add-socket-id", { userId });
       });
