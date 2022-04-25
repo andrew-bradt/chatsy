@@ -49,7 +49,6 @@ export default function Chat({socket, remoteSocketId}) {
 };
 
 const wrapper = css({
-  backgroundColor: 'pink',
   width: '100%',
   height: '75%'
 });
@@ -63,7 +62,8 @@ const msgBox = css(wrapperChildren, {
   height: '90%',
   display: 'flex',
   flexDirection: 'column',
-  border: '3px solid black'
+  border: '3px solid black',
+  padding: '15px'
 });
 
 const textField = css(wrapperChildren, {
