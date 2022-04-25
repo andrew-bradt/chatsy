@@ -15,6 +15,11 @@ export default function LoginForm({ onSubmit, formRef }) {
     width: '90%'
   })
 
+  const buttonStyle = css({
+    marginTop: '1rem',
+    borderRadius: '20px'
+  })
+
   const [email, setEmail] = useState('');
 
   const login = e => {
@@ -49,7 +54,7 @@ export default function LoginForm({ onSubmit, formRef }) {
               type="submit"
               fullWidth
               variant="outlined"
-              sx={{ mt: 3, mb: 2 }}
+              sx={buttonStyle}
             >
               Sign In
             </Button>
@@ -60,6 +65,7 @@ export default function LoginForm({ onSubmit, formRef }) {
               variant="outlined"
               startIcon={<Google />}
               onClick={oauth}
+              sx={buttonStyle}
             >
               Sign in with Google
             </Button>
