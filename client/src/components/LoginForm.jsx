@@ -1,9 +1,19 @@
 import React, { useState } from 'react'
-import { Box, Button, Avatar, Typography, TextField, Grid, Link } from "@mui/material";
 import axios from 'axios';
+import { Box, Button, Avatar, Typography, TextField, Grid, Link } from "@mui/material";
+import { Google } from "@mui/icons-material";
+import {css} from '@emotion/react';
+
 const {REACT_APP_BACKEND_API} = process.env;
 
-export default function LoginForm({onSubmit, formRef}) {
+export default function LoginForm({ onSubmit, formRef }) {
+  
+  const formStyle = css({
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    width: '90%'
+  })
 
   const [email, setEmail] = useState('');
 
@@ -20,17 +30,9 @@ export default function LoginForm({onSubmit, formRef}) {
   }
   
   return (
-    <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
-          </Avatar>
-          
-      <Box ref={formRef} component="form" onSubmit={login} sx={{ mt: 1 }}>
+    <Box sx={formStyle}>
+      <Avatar sx={{ m: 1, bgcolor: 'primary.main' }} />
+      <Box ref={formRef} component="form" onSubmit={login} sx={formStyle}>
             <Typography component="h1" variant="h5">
               Sign In
             </Typography>
@@ -46,16 +48,22 @@ export default function LoginForm({onSubmit, formRef}) {
             <Button
               type="submit"
               fullWidth
-              variant="contained"
+              variant="outlined"
               sx={{ mt: 3, mb: 2 }}
             >
               Sign In
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2" onClick={oauth}>
-                  Sign in with Google
-                </Link>
+            <Button
+              fullWidth
+              variant="outlined"
+              startIcon={<Google />}
+              onClick={oauth}
+            >
+              Sign in with Google
+            </Button>
+            
               </Grid>
             </Grid>
           </Box>
