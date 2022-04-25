@@ -26,9 +26,12 @@ export default function Chat({socket, remoteSocketId}) {
 
   const send = (e) => {
     e.preventDefault();
-    appendMsg({text: value, fromPeer: false});
-    socket.emit('send-msg', ({msg: value, remoteSocketId}));
-    setValue('');
+    
+    if (value.length) {
+      appendMsg({text: value, fromPeer: false});
+      socket.emit('send-msg', ({msg: value, remoteSocketId}));
+      setValue('');
+    }
   };
 
   return (
@@ -44,9 +47,7 @@ export default function Chat({socket, remoteSocketId}) {
         <TextField 
           css={textField} 
           value={value}
-          multiline
           variant='standard'
-          maxRows={2}
           onChange={(e) => setValue(e.target.value)}
           InputProps={{
             variant: 'filled',
