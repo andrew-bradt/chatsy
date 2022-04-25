@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, ButtonGroup, Container, Box, createTheme, ThemeProvider } from "@mui/material";
+import { Button, ButtonGroup, Container, Box } from "@mui/material";
 
 export default function CallControllers(props) {
 
@@ -34,21 +34,6 @@ export default function CallControllers(props) {
     });
   }
 
-  const theme = createTheme({
-    components: {
-      MuiButton: {
-        defaultProps: {
-          variant: 'contained',
-        },
-        styleOverrides: {
-          root: {
-            width: '47%'
-          }
-        }
-      },
-    },
-  });
-
   const inCallButtons = function (remoteSocketId) {
     if (remoteSocketId) {
       return (
@@ -63,13 +48,11 @@ export default function CallControllers(props) {
 
   return (
     <Container sx={{ marginTop: 'auto' }}>
-      <ThemeProvider theme={theme}>
         <Box fullWidth display="flex" justifyContent="space-around">
-          {!inLobby && userId && <Button onClick={enterLobby}>Start Matching</Button>}
-          {inLobby && !remoteSocketId && <Button onClick={leaveLobby}>Stop Matching</Button>}
+          {!inLobby && userId && <Button variant='contained' onClick={enterLobby}>Start Matching</Button>}
+          {inLobby && !remoteSocketId && <Button variant='contained' onClick={leaveLobby}>Stop Matching</Button>}
           {inCallButtons(remoteSocketId)}
         </Box>
-      </ThemeProvider>
     </Container>
   )
 }
