@@ -41,7 +41,7 @@ const columns = css({
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#ff4400'
+      main: '#3f51b5'
     }
   }
 })
