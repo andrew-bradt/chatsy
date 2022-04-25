@@ -43,6 +43,7 @@ export default function CallControllers(props) {
         styleOverrides: {
           root: {
             borderRadius: '20px',
+            width: '47%'
           }
         }
       },
@@ -64,7 +65,7 @@ export default function CallControllers(props) {
   return (
     <Container sx={{ marginTop: 'auto' }}>
       <ThemeProvider theme={theme}>
-        <Box fullWidth display="flex" justifyContent="space-between">
+        <Box fullWidth display="flex" justifyContent="space-around">
           {!inLobby && userId && <Button onClick={enterLobby}>Start Matching</Button>}
           {inLobby && !remoteSocketId && <Button onClick={leaveLobby}>Stop Matching</Button>}
           {inCallButtons(remoteSocketId)}
