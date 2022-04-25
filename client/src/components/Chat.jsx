@@ -5,13 +5,13 @@ import React, {useState, useEffect} from 'react';
 import ChatListItem from './ChatListItem';
 import Box from '@mui/material/Box';
 
-import {InputAdornment, TextField } from '@mui/material';
+import {InputAdornment, TextField, Divider } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 
 export default function Chat({socket, remoteSocketId}) {
   const [messages, setMessages] = useState([]);
   const [value, setValue] = useState('');
-  console.log('rerender');
+
   useEffect(() => {
     if(socket) {
       socket.on('msg', ({msg}) => appendMsg({text: msg, fromPeer: true}));
@@ -33,6 +33,7 @@ export default function Chat({socket, remoteSocketId}) {
 
   return (
     <Box css={wrapper}>
+      <Divider/>
       <Box 
         css={msgBox}
       >
