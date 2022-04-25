@@ -26,10 +26,10 @@ export default function TopBar(props) {
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
-        <AppBar position='fixed'>
+        <AppBar position='fixed' color="transparent" sx={{boxShadow: 'none'}}>
           <Toolbar variant='dense'>
             <Typography variant='h5' component='div' sx={{ flexGrow: 1 }}>
-              CHATSY
+              Chatsy
             </Typography>
             {userId && <Button color='inherit' onClick={e => setAnchor(e.currentTarget)}>Contacts</Button>}
             {userId && <Button color='inherit' onClick={logOut}>Logout</Button>}

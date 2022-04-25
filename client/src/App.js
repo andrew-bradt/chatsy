@@ -18,16 +18,24 @@ import CallControllers from './components/CallControllers';
 import Video from './components/Video';
 
 const grid = css({
-  height: 'calc(100vh - 48px)',
-  marginTop: '48px'
+  height: '100vh',
+  padding: '3rem 1.5rem 1.5rem 1.5rem',
+  backgroundColor: "white",
 });
 
-const rightColumn = css({
+const gridItem = css({
+  height: "100%",
+})
+
+const columns = css({
   height: '100%',
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-around',
-  padding: '20px'
+  alignItems: "center",
+  padding: '20px',
+  backgroundColor: "rgb(246, 245, 241)",
+  borderRadius: '10px'
 });
 
 function App() {
@@ -46,24 +54,10 @@ function App() {
       <CssBaseline />
       <TopBar userId={userId} socket={socket} />
 
-      <Grid container component="main" css={grid}>
+      <Grid container component="main" columnSpacing={3} css={grid}>
         {/* LEFT COLUMN */}
-        <Grid
-          item
-          xs={4}
-          sx={{
-            backgroundColor: "rgb(246, 245, 241)",
-            height: "100%"
-          }}
-          component={Paper}
-          elevation={3}
-          square
-        >
-          <Stack
-            justifyContent="center"
-            alignItems="center"
-            sx={{ height: "100%" }}
-          >
+        <Grid item xs={5} sx={gridItem}>
+          <Stack sx={columns}>
             {mode === SIGNED_OUT && (
               <>
                 <LoginForm formRef={loginFormElements} onSubmit={handleLogin} />
@@ -107,12 +101,8 @@ function App() {
           </Stack>
         </Grid>
         {/* RIGHT COLUMN */}
-        <Grid item xs={8} sx={{height: '100%'}}>
-          <Stack
-            justifyContent="center"
-            alignItems="center"
-            css={rightColumn}
-          >
+        <Grid item xs={7} sx={gridItem}>
+          <Stack css={columns}>
             <Video
               videoRef={videoRef}
               remoteVideoRef={remoteVideoRef}

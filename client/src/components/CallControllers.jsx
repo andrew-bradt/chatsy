@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Container, Box } from "@mui/material";
+import { Button, Container, Box, createTheme, ThemeProvider } from "@mui/material";
 
 export default function CallControllers(props) {
 
@@ -34,28 +34,42 @@ export default function CallControllers(props) {
     });
   }
 
+  const theme = createTheme({
+    components: {
+      MuiButton: {
+        defaultProps: {
+          variant: 'contained',
+        },
+        styleOverrides: {
+          root: {
+            borderRadius: '20px',
+          }
+        }
+      },
+    },
+  });
+
   const inCallButtons = function (remoteSocketId) {
     if (remoteSocketId) {
       return (
         <>
-          <Button variant="contained" onClick={stopCall}>End Call</Button>
-          <Button variant="contained" onClick={nextCall}>Next</Button>
-          <Button variant="contained" onClick={sendInfo}>Send Info</Button>
+          <Button onClick={stopCall}>End</Button>
+          <Button onClick={nextCall}>Next</Button>
+          <Button onClick={sendInfo}>Send Info</Button>
         </>
       )
     }
   }
 
   return (
-    <Container>
-      <Box display="flex" justifyContent="space-around">
-
-        {!inLobby && userId && <Button variant="contained" onClick={enterLobby}>Start Matching</Button>}
-        {inLobby && !remoteSocketId && <Button variant="contained" onClick={leaveLobby}>Stop Matching</Button>}
-
-        {inCallButtons(remoteSocketId)}
-
-      </Box>
+    <Container sx={{ marginTop: 'auto' }}>
+      <ThemeProvider theme={theme}>
+        <Box fullWidth display="flex" justifyContent="space-between">
+          {!inLobby && userId && <Button onClick={enterLobby}>Start Matching</Button>}
+          {inLobby && !remoteSocketId && <Button onClick={leaveLobby}>Stop Matching</Button>}
+          {inCallButtons(remoteSocketId)}
+        </Box>
+      </ThemeProvider>
     </Container>
   )
 }
