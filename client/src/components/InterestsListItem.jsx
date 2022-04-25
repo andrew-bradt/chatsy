@@ -10,6 +10,7 @@ export default function InterestsListItem(props) {
 
   return (
     <Button
+      sx={{margin: '0.2rem', textTransform: 'none'}}
       variant={variant}
       disabled={!inLobby}
       onClick={() => {

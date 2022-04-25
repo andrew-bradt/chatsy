@@ -1,5 +1,5 @@
 import React from "react";
-import { ButtonGroup } from "@mui/material"
+import { Typography, Box } from "@mui/material"
 import InterestsListItem from "./InterestsListItem";
 
 export default function InterestsList(props) {
@@ -17,8 +17,9 @@ export default function InterestsList(props) {
   )
 
   return (
-    <ButtonGroup orientation="vertical">
+    <Box>
+      <Typography component="h1" variant="h5">Interests For Matching</Typography>
       {parsedInterests}
-    </ButtonGroup>
+    </Box>
   )
 }
