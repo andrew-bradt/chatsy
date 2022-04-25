@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Container, Box, createTheme, ThemeProvider } from "@mui/material";
+import { Button, ButtonGroup, Container, Box, createTheme, ThemeProvider } from "@mui/material";
 
 export default function CallControllers(props) {
 
@@ -42,7 +42,6 @@ export default function CallControllers(props) {
         },
         styleOverrides: {
           root: {
-            borderRadius: '20px',
             width: '47%'
           }
         }
@@ -53,11 +52,11 @@ export default function CallControllers(props) {
   const inCallButtons = function (remoteSocketId) {
     if (remoteSocketId) {
       return (
-        <>
+        <ButtonGroup fullWidth variant="contained">
           <Button onClick={stopCall}>End</Button>
           <Button onClick={nextCall}>Next</Button>
           <Button onClick={sendInfo}>Send Info</Button>
-        </>
+        </ButtonGroup>
       )
     }
   }
