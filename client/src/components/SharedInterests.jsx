@@ -14,7 +14,7 @@ export default function SharedInterests({sharedInterests}) {
   return (
     <Box>
       <Typography component="h1" variant="h5">Shared Interests</Typography>
-      {sharedInterests.map(interest => <Button sx={buttonStyle} disabled variant='contained'>{interest}</Button>)}
+      {sharedInterests.map(interest => <Button sx={buttonStyle} disabled variant='contained' key={interest}>{interest}</Button>)}
     </Box>
   )
 }

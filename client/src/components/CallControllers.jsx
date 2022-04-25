@@ -53,8 +53,8 @@ export default function CallControllers(props) {
     if (remoteSocketId) {
       return (
         <ButtonGroup fullWidth variant="contained">
-          <Button onClick={stopCall}>End</Button>
-          <Button onClick={nextCall}>Next</Button>
+          <Button onClick={stopCall}>End Call</Button>
+          <Button onClick={nextCall}>Next Chat</Button>
           <Button onClick={sendInfo}>Send Info</Button>
         </ButtonGroup>
       )
