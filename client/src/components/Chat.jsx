@@ -39,6 +39,7 @@ export default function Chat({socket, remoteSocketId}) {
       >
         {messages.map((message, i) => <ChatListItem key = {i} text = {message.text} fromPeer = {message.fromPeer}/>)}
       </Box>
+      <Divider/>
       <Box component='form' onSubmit = {(e) => send(e)}>
         <TextField 
           css={textField} 
@@ -57,6 +58,7 @@ export default function Chat({socket, remoteSocketId}) {
           }}
         />
       </Box>
+      <Divider/>
     </Box>
   );
 };
