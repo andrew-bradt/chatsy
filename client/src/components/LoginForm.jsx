@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { Box, Button, Avatar, Typography, TextField, Grid, Link } from "@mui/material";
 import axios from 'axios';
-
 const {REACT_APP_BACKEND_API} = process.env;
 
-export default function LoginForm({onSubmit}) {
+export default function LoginForm({onSubmit, formRef}) {
+
   const [email, setEmail] = useState('');
 
   const login = e => {
@@ -22,7 +22,6 @@ export default function LoginForm({onSubmit}) {
   return (
     <Box
           sx={{
-            marginBottom: 40,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -33,7 +32,7 @@ export default function LoginForm({onSubmit}) {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Box component="form" onSubmit={login} sx={{ mt: 1 }}>
+      <Box ref={formRef} component="form" onSubmit={login} sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required

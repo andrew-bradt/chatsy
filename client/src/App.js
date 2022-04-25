@@ -10,6 +10,7 @@ import useMode from './hooks/useMode';
 import { CssBaseline, Grid, Stack, Paper } from "@mui/material";
 import TopBar from "./components/TopBar";
 import LoginForm from './components/LoginForm';
+import WaitingIndicator from "./components/WaitingIndicator";
 import Chat from './components/Chat';
 import InterestsList from './components/InterestsList';
 import SharedInterests from './components/SharedInterests';
@@ -22,15 +23,15 @@ function App() {
   const [remoteSocketId, setRemoteSocketId] = useState(null);
   const [sharedInterests, setSharedInterests] = useState([]);
   const [inLobby, toggleLobbyState] = useState(false);
-  const { videoRef, remoteVideoRef, endCall, handleLogin, socket } = useConnections({userId, setRemoteSocketId, setUserId, setSharedInterests, setInterests});
+  const { videoRef, remoteVideoRef, endCall, handleLogin, socket, loginFormElements, waitingElement } = useConnections({userId, setRemoteSocketId, setUserId, setSharedInterests, setInterests});
 
-  const {mode, SIGNED_OUT, OUTSIDE_LOBBY, IN_CALL, IN_LOBBY} = useMode({userId, remoteSocketId, inLobby});
+  const { mode, SIGNED_OUT, OUTSIDE_LOBBY, IN_CALL, IN_LOBBY } = useMode({ userId, remoteSocketId, inLobby });
 
   console.log('sharedInterests in App component: ', sharedInterests);
   return (
     <>
       <CssBaseline />
-      <TopBar userId={userId} socket={socket}/>
+      <TopBar userId={userId} socket={socket} />
 
       <Grid container component="main" sx={{ height: "100vh" }}>
         {/* LEFT COLUMN */}
@@ -52,7 +53,8 @@ function App() {
           >
             {mode === SIGNED_OUT && (
               <>
-                <LoginForm onSubmit={handleLogin} />
+                <LoginForm formRef={loginFormElements} onSubmit={handleLogin} />
+                <WaitingIndicator elRef={waitingElement} />
               </>
             )}
             {mode === OUTSIDE_LOBBY && (
@@ -67,8 +69,8 @@ function App() {
             )}
             {mode === IN_CALL && (
               <>
-                <SharedInterests sharedInterests = {sharedInterests}/>
-                <Chat socket = {socket.current} remoteSocketId={remoteSocketId}/>
+                <SharedInterests sharedInterests={sharedInterests} />
+                <Chat socket={socket.current} remoteSocketId={remoteSocketId} />
               </>
             )}
             {mode === IN_LOBBY && (
@@ -98,7 +100,11 @@ function App() {
             alignItems="center"
             sx={{ height: "100%" }}
           >
-            <Video videoRef={videoRef} remoteVideoRef={remoteVideoRef} remoteSocketId={remoteSocketId }/>
+            <Video
+              videoRef={videoRef}
+              remoteVideoRef={remoteVideoRef}
+              remoteSocketId={remoteSocketId}
+            />
           </Stack>
         </Grid>
       </Grid>
