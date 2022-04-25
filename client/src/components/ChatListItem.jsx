@@ -4,19 +4,27 @@ import React from 'react'
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 
-const styles = {
-  message: ({fromPeer}) => css`
-  width: 30%;
-  ${!fromPeer && `
-    align-self: flex-end;
-  `}
-`
-};
+const message = css({
+  width: '66%',
+  padding: '2%',
+  margin: '2%'
+});
+
+const peerMessage = css(message, {
+  borderRadius: '0px 5px 5px 5px',
+});
+
+const clientMessage = css(message, {
+  borderRadius: '5px 0px 5px 5px',
+  alignSelf: 'flex-end',
+  marginRight: '4%'
+});
 
 export default function ChatListItem({text, fromPeer}) {
   return (
     <Paper
-      css = {styles.message({fromPeer})}
+      elevation={3}
+      css = {(fromPeer) ? peerMessage : clientMessage}
     >
       <Typography>{text}</Typography>
     </Paper>
