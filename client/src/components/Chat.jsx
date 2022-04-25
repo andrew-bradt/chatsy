@@ -5,7 +5,8 @@ import React, {useState, useEffect} from 'react';
 import ChatListItem from './ChatListItem';
 import Box from '@mui/material/Box';
 
-import {TextField } from '@mui/material';
+import {InputAdornment, TextField } from '@mui/material';
+import SendIcon from '@mui/icons-material/Send';
 
 export default function Chat({socket, remoteSocketId}) {
   const [messages, setMessages] = useState([]);
@@ -44,6 +45,12 @@ export default function Chat({socket, remoteSocketId}) {
           multiline
           maxRows={3}
           onChange={(e) => setValue(e.target.value)}
+          InputProps={{
+            endAdornment:
+            <InputAdornment position='start'>
+              <SendIcon/>
+            </InputAdornment>
+          }}
         />
       </Box>
     </Box>
