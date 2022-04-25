@@ -44,13 +44,13 @@ export default function Chat({socket, remoteSocketId}) {
           value={value}
           multiline
           variant='standard'
-          maxRows={4}
+          maxRows={2}
           onChange={(e) => setValue(e.target.value)}
           InputProps={{
             variant: 'filled',
             disableUnderline: true,
             endAdornment:
-              <InputAdornment position='start'>
+              <InputAdornment position='start' css={adornment}>
                 <SendIcon/>
               </InputAdornment>
           }}
@@ -81,4 +81,8 @@ const msgBox = css(wrapperChildren, {
 
 const textField = css(wrapperChildren, {
   padding: '15px'
+});
+
+const adornment = css({
+  marginTop: 5
 });
