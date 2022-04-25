@@ -13,7 +13,7 @@ export default function LoginForm({ onSubmit, formRef }) {
     flexDirection: 'column',
     alignItems: 'center',
     width: '90%',
-    marginTop: '45%'
+    marginTop: '35%'
   })
 
   const buttonStyle = css({
