@@ -7,7 +7,7 @@ import {useState} from 'react';
 import useConnections from './hooks/useConnections';
 import useMode from './hooks/useMode';
 
-import { CssBaseline, Grid, Stack, Paper } from "@mui/material";
+import { CssBaseline, Grid, Stack, createTheme, ThemeProvider } from "@mui/material";
 import TopBar from "./components/TopBar";
 import LoginForm from './components/LoginForm';
 import WaitingIndicator from "./components/WaitingIndicator";
@@ -38,6 +38,14 @@ const columns = css({
   borderRadius: '10px'
 });
 
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#ff4400'
+    }
+  }
+})
+
 function App() {
   const [userId, setUserId] = useState(null);
   const [interests, setInterests] = useState([]);
@@ -50,7 +58,7 @@ function App() {
 
   console.log('sharedInterests in App component: ', sharedInterests);
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <CssBaseline />
       <TopBar userId={userId} socket={socket} />
 
@@ -111,7 +119,7 @@ function App() {
           </Stack>
         </Grid>
       </Grid>
-    </>
+    </ThemeProvider >
   );
 }
 
