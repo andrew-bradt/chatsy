@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { Box, Button, Avatar, Typography, TextField, Grid, Link } from "@mui/material";
 import axios from 'axios';
+const {REACT_APP_BACKEND_API} = process.env;
 
 export default function LoginForm({onSubmit, formRef}) {
+
   const [email, setEmail] = useState('');
 
   const login = e => {
@@ -11,7 +13,7 @@ export default function LoginForm({onSubmit, formRef}) {
   }
 
   const oauth = () => {
-    axios.get('/oauth')
+    axios.get(`${REACT_APP_BACKEND_API}/oauth`)
       .then(res => {
         window.location = res.data;
       });
