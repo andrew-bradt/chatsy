@@ -29,10 +29,11 @@ export default function LoginForm({onSubmit, formRef}) {
         >
           <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
           </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
+          
       <Box ref={formRef} component="form" onSubmit={login} sx={{ mt: 1 }}>
+            <Typography component="h1" variant="h5">
+              Sign In
+            </Typography>
             <TextField
               margin="normal"
               required
