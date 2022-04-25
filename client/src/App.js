@@ -17,6 +17,19 @@ import SharedInterests from './components/SharedInterests';
 import CallControllers from './components/CallControllers';
 import Video from './components/Video';
 
+const grid = css({
+  height: 'calc(100vh - 48px)',
+  marginTop: '48px'
+});
+
+const rightColumn = css({
+  height: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-around',
+  padding: '20px'
+});
+
 function App() {
   const [userId, setUserId] = useState(null);
   const [interests, setInterests] = useState([]);
@@ -33,7 +46,7 @@ function App() {
       <CssBaseline />
       <TopBar userId={userId} socket={socket} />
 
-      <Grid container component="main" sx={{ height: "100vh" }}>
+      <Grid container component="main" css={grid}>
         {/* LEFT COLUMN */}
         <Grid
           item
@@ -94,11 +107,11 @@ function App() {
           </Stack>
         </Grid>
         {/* RIGHT COLUMN */}
-        <Grid item xs={8} sx={{ height: "100%" }}>
+        <Grid item xs={8} sx={{height: '100%'}}>
           <Stack
             justifyContent="center"
             alignItems="center"
-            sx={{ height: "100%" }}
+            css={rightColumn}
           >
             <Video
               videoRef={videoRef}
