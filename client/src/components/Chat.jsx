@@ -68,15 +68,16 @@ const wrapper = css({
 });
 
 const wrapperChildren = css({
-  overflowY: 'scroll',
   width: '100%'
 });
 
 const msgBox = css(wrapperChildren, {
+  overflowY: 'scroll',
+  border: '1px solid green',
   height: '90%',
   display: 'flex',
   flexDirection: 'column',
-  padding: '15px'
+  padding: '15px',
 });
 
 const textField = css(wrapperChildren, {
