@@ -11,7 +11,7 @@ export default function WaitingIndicator(props) {
       alignItems: 'center',
       gap: 3
     }}>
-      <Typography component="h1" variant="h5">Anaylzing your interests</Typography>
+      <Typography component="h1" variant="h5">Analyzing your interests</Typography>
       <img style={{width: '10%'}} src="https://acegif.com/wp-content/uploads/loading-13.gif" alt="placeholder"></img>
     </Box>
   )
