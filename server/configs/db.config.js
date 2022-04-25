@@ -1,20 +1,33 @@
 // Database connections
-const { Pool } = require('pg');
+const { Pool, Client } = require("pg");
+let dbConnection;
 
-const {DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE, DB_PORT} = process.env;
+const { DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE, DB_PORT, DATABASE_URL } =
+  process.env;
 
-const pool = new Pool({
-	user: DB_USER,
-	host: DB_HOST,
-	password: DB_PASSWORD,
-	port: DB_PORT,
-	database: DB_DATABASE,
-})
+if (DATABASE_URL) {
+  dbConnection = new Client({
+    connectionString: process.env.DATABASE_URL,
+    ssl: { rejectUnauthorized: false }
+  });
+} else {
+  dbConnection = new Pool({
+    user: DB_USER,
+    host: DB_HOST,
+    password: DB_PASSWORD,
+    port: DB_PORT,
+    database: DB_DATABASE
+  });
+}
 
-pool.connect().then(() => {
-	console.log("Database connection established.")
-}).catch( e => {
-	throw new Error(e);
-})
+dbConnection
+  .connect()
+  .then(() => {
+    console.log("Database connection established.");
+  })
+  .catch(e => {
+    throw new Error(e);
+  });
 
-module.exports = pool;
+module.exports = dbConnection;
+
