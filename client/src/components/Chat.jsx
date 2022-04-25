@@ -44,8 +44,7 @@ export default function Chat({socket, remoteSocketId}) {
           value={value}
           multiline
           variant='standard'
-          minRows={2}
-          maxRows={2}
+          maxRows={4}
           onChange={(e) => setValue(e.target.value)}
           InputProps={{
             variant: 'filled',
@@ -64,7 +63,8 @@ export default function Chat({socket, remoteSocketId}) {
 const wrapper = css({
   width: '100%',
   height: '75%',
-  border: '1px solid red'
+  display: 'flex',
+  flexDirection: 'column'
 });
 
 const wrapperChildren = css({
@@ -73,14 +73,12 @@ const wrapperChildren = css({
 
 const msgBox = css(wrapperChildren, {
   overflowY: 'scroll',
-  border: '1px solid green',
   height: '90%',
   display: 'flex',
   flexDirection: 'column',
-  padding: '15px',
+  padding: '15px'
 });
 
 const textField = css(wrapperChildren, {
-  padding: '15px',
-  border: '1px solid purple'
+  padding: '15px'
 });
