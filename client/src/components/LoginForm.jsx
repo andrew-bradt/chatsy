@@ -38,18 +38,19 @@ export default function LoginForm({ onSubmit, formRef }) {
     <Box sx={formStyle}>
       <Avatar sx={{ m: 1, bgcolor: 'primary.main' }} />
       <Box ref={formRef} component="form" onSubmit={login} sx={formStyle}>
-            <Typography component="h1" variant="h5">
-              Sign In
-            </Typography>
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              type="email"
-              autoComplete='email'
-              label="Email Address"
-              onChange={e => setEmail(e.target.value)}
-            />
+        <Typography component="h1" variant="h5" color={'primary.main'}>
+          Sign In
+        </Typography>
+        <TextField
+          variant='standard'
+          margin="normal"
+          required
+          type="email"
+          autoComplete='email'
+          label="Email Address"
+          sx={{width: '97%'}}
+          onChange={e => setEmail(e.target.value)}
+        />
             <Button
               type="submit"
               fullWidth
