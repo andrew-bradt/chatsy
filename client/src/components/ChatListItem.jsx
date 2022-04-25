@@ -4,6 +4,17 @@ import React from 'react'
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 
+export default function ChatListItem({text, fromPeer}) {
+  return (
+    <Paper
+      elevation={1}
+      css = {(fromPeer) ? peerMessage(text) : clientMessage(text)}
+    >
+      <Typography>{text}</Typography>
+    </Paper>
+  );
+}
+
 const calcPaddingByStringLength = ({paddingShort, paddingLong, lengthThresh}) => {
   return (string) => {
     return (string.length < lengthThresh) ? paddingShort : paddingLong;
@@ -30,14 +41,3 @@ const clientMessage = (text) => css(message, {
   alignSelf: 'flex-end',
   paddingLeft: calcLeftPadding(text)
 });
-
-export default function ChatListItem({text, fromPeer}) {
-  return (
-    <Paper
-      elevation={1}
-      css = {(fromPeer) ? peerMessage(text) : clientMessage(text)}
-    >
-      <Typography>{text}</Typography>
-    </Paper>
-  );
-}
