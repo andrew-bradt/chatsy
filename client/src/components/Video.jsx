@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import {css} from '@emotion/react';
 import React from "react";
+import peerPlaceholder from '../assets/peer_placeholder.gif';
 
 export default function Video(props) {
   const { videoRef, remoteVideoRef, remoteSocketId } = props
@@ -8,7 +9,7 @@ export default function Video(props) {
   return (
     <>
       {videoRef && <video ref={videoRef} autoPlay css={clientVideo}></video>}
-      {!remoteSocketId && <img src="https://cdn.dribbble.com/users/563824/screenshots/3633228/media/d876c7712d969c0656302b16b16af2cc.gif" alt="placeholder" css={peerVideo}></img>}
+      {!remoteSocketId && <img src={peerPlaceholder} alt="placeholder" css={peerVideo}></img>}
       {remoteSocketId && <video ref={remoteVideoRef} autoPlay css={peerVideo}></video>}
       </>
   )
