@@ -10,7 +10,6 @@ const buttonStyle = css({
 })
 
 export default function SharedInterests({sharedInterests}) {
-  console.log('sharedInterests in SharedInterests Component: ', sharedInterests);
   return (
     <Box css={{width: '100%'}}>
       <Typography component="h1" variant="h5" sx={{margin: '0.2rem'}}>Shared Interests</Typography>

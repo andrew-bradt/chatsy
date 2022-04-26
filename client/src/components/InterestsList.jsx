@@ -5,7 +5,7 @@ import InterestsListItem from "./InterestsListItem";
 export default function InterestsList(props) {
   
   const { interests, socket, userId, inLobby } = props;
-  console.log(interests);
+  
   const parsedInterests = interests.map(
     interest =>
       <InterestsListItem

@@ -29,7 +29,6 @@ const matchUsers = (activeUsers, lobby, io) => {
         // use socket.io to send one user the other user's peerId to start call
         if (usersInCall.length === 2) {
           lobby.addMatch(usersInCall[0], usersInCall[1]);
-          console.log(lobby.usersPreviousMatches);
           const pairedUserObjs = usersInCall.map(userId => activeUsers.getUserById(userId));
           const call = new Call(...pairedUserObjs);
           call.start(io);

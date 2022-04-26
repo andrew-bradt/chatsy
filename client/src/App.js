@@ -28,7 +28,6 @@ export default function App() {
 
   const { mode, SIGNED_OUT, OUTSIDE_LOBBY, IN_CALL, IN_LOBBY } = useMode({ userId, remoteSocketId, inLobby });
 
-  console.log('sharedInterests in App component: ', sharedInterests);
   return (
     <>
       <CssBaseline />

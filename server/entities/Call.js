@@ -18,7 +18,6 @@ class Call {
 
   start(io) {
     const usersInCall = this.users;
-    console.log('shared interests from Call class', this.sharedInterests);
     io.to(usersInCall[0].socketId).emit("callThisPeer", {
       peerId: usersInCall[1].peerId,
       remoteSocketId: usersInCall[1].socketId,
