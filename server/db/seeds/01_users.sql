@@ -1,5 +1,3 @@
--- seeds/01_users.sql
--- users seeds
 INSERT INTO users (id, email) VALUES (DEFAULT, 'rick.sandchez@gmail.com');
 INSERT INTO users (id, email) VALUES (DEFAULT, 'lisa.simpson@gmail.com');
 INSERT INTO users (id, email) VALUES (DEFAULT, 'link@yahoo.com');

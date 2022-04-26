@@ -17,7 +17,6 @@ const matchUsers = (activeUsers, lobby, io) => {
         usersInCall.push(value);
         const userIdLookup = usersInCall[0];
 
-        let userIdToCheck = value;
         let shouldEndLoop = done;
 
         while ((usersInCall.length !== 2) && !shouldEndLoop) {
