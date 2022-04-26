@@ -7,7 +7,7 @@ import {useState} from 'react';
 import useConnections from './hooks/useConnections';
 import useMode from './hooks/useMode';
 
-import { CssBaseline, Grid, Stack, Paper } from "@mui/material";
+import { CssBaseline, Grid, Stack } from "@mui/material";
 import TopBar from "./components/TopBar";
 import LoginForm from './components/LoginForm';
 import WaitingIndicator from "./components/WaitingIndicator";
@@ -118,5 +118,9 @@ const leftColumn = css(columns, {
 });
 
 const rightColumn = css(columns, {
-  position: 'relative'
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  alignItems: 'center',
+  height: '100%'
 });
