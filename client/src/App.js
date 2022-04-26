@@ -115,6 +115,7 @@ const leftColumn = css(columns, {
   alignItems: "center",
   flexDirection: 'column',
   justifyContent: 'space-around',
+  padding: '20px'
 });
 
 const rightColumn = css(columns, {
