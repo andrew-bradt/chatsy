@@ -30,3 +30,5 @@ INSERT INTO interests (id, label) VALUES (DEFAULT, 'Pop Culture');
 INSERT INTO interests (id, label) VALUES (DEFAULT, 'Physics');
 INSERT INTO interests (id, label) VALUES (DEFAULT, 'Sports');
 INSERT INTO interests (id, label) VALUES (DEFAULT, 'Computer Peripherals');
+INSERT INTO interests (id, label) VALUES (DEFAULT, 'Microcontrollers');
+INSERT INTO interests (id, label) VALUES (DEFAULT, 'Sky Diving');
