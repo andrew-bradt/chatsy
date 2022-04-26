@@ -68,7 +68,8 @@ const wrapper = css({
   width: '100%',
   height: '75%',
   display: 'flex',
-  flexDirection: 'column'
+  flexDirection: 'column',
+  marginTop: '2%'
 });
 
 const wrapperChildren = css({
