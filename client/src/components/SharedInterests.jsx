@@ -12,7 +12,7 @@ const buttonStyle = css({
 export default function SharedInterests({sharedInterests}) {
   console.log('sharedInterests in SharedInterests Component: ', sharedInterests);
   return (
-    <Box>
+    <Box css={{width: '100%'}}>
       <Typography component="h1" variant="h5">Shared Interests</Typography>
       {sharedInterests.map(interest => <Button sx={buttonStyle} disabled variant='contained' key={interest}>{interest}</Button>)}
     </Box>
