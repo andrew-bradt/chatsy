@@ -34,6 +34,10 @@ class Lobby {
 
   addUser(user) {
     user.interests.forEach((interest) => this.addInterest(interest, user.userId));
+    
+    if (!this.usersPreviousMatches[user.userId]) {
+      this.usersPreviousMatches[user.userId] = new Set();
+    }
   }
 
   removeUser(user) {
