@@ -11,7 +11,7 @@ export default function Video(props) {
       {videoRef && <video ref={videoRef} autoPlay css={clientVideo}></video>}
       {!remoteSocketId && <img src={peerPlaceholder} alt="placeholder" css={peerVideo}></img>}
       {remoteSocketId && <video ref={remoteVideoRef} autoPlay css={peerVideo}></video>}
-      </>
+    </>
   )
 };
 

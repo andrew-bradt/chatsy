@@ -29,7 +29,7 @@ export default function useConnections({ userId, setRemoteSocketId, setUserId, s
       peer.current = new Peer(peerId);
     });
   };
-
+  
   // check oauth code from URL and do api calls
   useEffect(() => {
     const url = window.location.search;

@@ -1,12 +1,10 @@
 /** @jsxImportSource @emotion/react */
 import {css} from '@emotion/react';
 
-import './App.css';
 import {useState} from 'react';
 
 import useConnections from './hooks/useConnections';
 import changeMode from './helpers/change-mode';
-
 
 import { CssBaseline, Grid, Stack} from "@mui/material";
 import TopBar from "./components/TopBar";
