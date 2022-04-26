@@ -17,28 +17,7 @@ import SharedInterests from './components/SharedInterests';
 import CallControllers from './components/CallControllers';
 import Video from './components/Video';
 
-const grid = css({
-  height: '100vh',
-  padding: '3rem 1.5rem 1.5rem 1.5rem',
-  backgroundColor: "white",
-});
-
-const gridItem = css({
-  height: "100%",
-})
-
-const columns = css({
-  height: '100%',
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'space-around',
-  alignItems: "center",
-  padding: '20px',
-  backgroundColor: "rgb(246, 245, 241)",
-  borderRadius: '10px'
-});
-
-function App() {
+export default function App() {
   const [userId, setUserId] = useState(null);
   const [interests, setInterests] = useState([]);
   const [remoteSocketId, setRemoteSocketId] = useState(null);
@@ -57,7 +36,7 @@ function App() {
       <Grid container component="main" columnSpacing={3} css={grid}>
         {/* LEFT COLUMN */}
         <Grid item xs={5} sx={gridItem}>
-          <Stack sx={columns}>
+          <Stack sx={leftColumn}>
             {mode === SIGNED_OUT && (
               <>
                 <LoginForm formRef={loginFormElements} onSubmit={handleLogin} />
@@ -102,7 +81,7 @@ function App() {
         </Grid>
         {/* RIGHT COLUMN */}
         <Grid item xs={7} sx={gridItem}>
-          <Stack css={columns}>
+          <Stack css={rightColumn}>
             <Video
               videoRef={videoRef}
               remoteVideoRef={remoteVideoRef}
@@ -115,4 +94,29 @@ function App() {
   );
 }
 
-export default App;
+const grid = css({
+  height: '100vh',
+  padding: '3rem 1.5rem 1.5rem 1.5rem',
+  backgroundColor: "white",
+});
+
+const gridItem = css({
+  height: "100%",
+})
+
+const columns = css({
+  height: '100%',
+  backgroundColor: "rgb(246, 245, 241)",
+  borderRadius: '10px',
+});
+
+const leftColumn = css(columns, {
+  display: 'flex',
+  alignItems: "center",
+  flexDirection: 'column',
+  justifyContent: 'space-around',
+});
+
+const rightColumn = css(columns, {
+  position: 'relative'
+});
