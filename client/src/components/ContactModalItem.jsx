@@ -11,7 +11,8 @@ export default function ContactModalItem(props) {
         align="center"
         sx={{
           padding: 1,
-          borderTop: '1px solid rgb(246, 245, 241)'  
+          borderTop: "1px solid",
+          borderColor: 'action.disabled'
         }}
       >
         {contact}

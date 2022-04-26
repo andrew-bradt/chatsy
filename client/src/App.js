@@ -7,7 +7,8 @@ import {useState} from 'react';
 import useConnections from './hooks/useConnections';
 import useMode from './hooks/useMode';
 
-import { CssBaseline, Grid, Stack } from "@mui/material";
+
+import { CssBaseline, Grid, Stack, createTheme, ThemeProvider } from "@mui/material";
 import TopBar from "./components/TopBar";
 import LoginForm from './components/LoginForm';
 import WaitingIndicator from "./components/WaitingIndicator";
@@ -29,7 +30,7 @@ export default function App() {
 
   console.log('sharedInterests in App component: ', sharedInterests);
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <CssBaseline />
       <TopBar userId={userId} socket={socket} />
 
@@ -90,9 +91,20 @@ export default function App() {
           </Stack>
         </Grid>
       </Grid>
-    </>
+    </ThemeProvider >
   );
 }
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#3f51b5'
+    },
+    text: {
+      primary: '#3f51b5' 
+    }
+  }
+});
 
 const grid = css({
   height: '100vh',

@@ -7,7 +7,7 @@ const getTags = function(auth) {
       auth: auth,
       part: "snippet,contentDetails,statistics",
       myRating: "like",
-      maxResults: 50
+      maxResults: 10
     })
     .then(res => {
       const videoData = res.data.items;
