@@ -3,7 +3,7 @@ const OUTSIDE_LOBBY = 'OUTSIDE_LOBBY';
 const IN_LOBBY = 'IN_LOBBY';
 const IN_CALL = 'IN_CALL';
 
-export default function useMode({userId, remoteSocketId, inLobby}) {
+export default function changeMode({userId, remoteSocketId, inLobby}) {
   const mode = (() => {
     switch(true) {
       case !userId:

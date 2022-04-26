@@ -5,7 +5,7 @@ import './App.css';
 import {useState} from 'react';
 
 import useConnections from './hooks/useConnections';
-import useMode from './hooks/useMode';
+import changeMode from './helpers/change-mode';
 
 
 import { CssBaseline, Grid, Stack} from "@mui/material";
@@ -26,7 +26,7 @@ export default function App() {
   const [inLobby, toggleLobbyState] = useState(false);
   const { videoRef, remoteVideoRef, endCall, handleLogin, socket, loginFormElements, waitingElement } = useConnections({userId, setRemoteSocketId, setUserId, setSharedInterests, setInterests});
 
-  const { mode, SIGNED_OUT, OUTSIDE_LOBBY, IN_CALL, IN_LOBBY } = useMode({ userId, remoteSocketId, inLobby });
+  const { mode, SIGNED_OUT, OUTSIDE_LOBBY, IN_CALL, IN_LOBBY } = changeMode({ userId, remoteSocketId, inLobby });
 
   return (
     <>
