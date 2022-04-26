@@ -8,10 +8,11 @@ class Lobby {
 
   addMatch(userIdKey, connectedUserId) {
     this.usersPreviousMatches[userIdKey].add(connectedUserId);
+    this.usersPreviousMatches[connectedUserId].add(userIdKey);
   }
 
-  getUserWhoHasNotMatched (userIdLookup, userIdToCompare) {
-    return !this.usersPreviousMatches[userIdLookup].has(userIdToCompare) && userIdToCompare;
+  haveUsersPreviouslyMatched (userIdLookup, userIdToCompare) {
+    return this.usersPreviousMatches[userIdLookup].has(userIdToCompare);
   }
 
   addInterest(interest, userId) {
@@ -34,7 +35,7 @@ class Lobby {
 
   addUser(user) {
     user.interests.forEach((interest) => this.addInterest(interest, user.userId));
-    
+
     if (!this.usersPreviousMatches[user.userId]) {
       this.usersPreviousMatches[user.userId] = new Set();
     }
