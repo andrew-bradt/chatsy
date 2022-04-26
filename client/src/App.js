@@ -7,6 +7,7 @@ import {useState} from 'react';
 import useConnections from './hooks/useConnections';
 import useMode from './hooks/useMode';
 
+
 import { CssBaseline, Grid, Stack, createTheme, ThemeProvider } from "@mui/material";
 import TopBar from "./components/TopBar";
 import LoginForm from './components/LoginForm';
@@ -17,39 +18,7 @@ import SharedInterests from './components/SharedInterests';
 import CallControllers from './components/CallControllers';
 import Video from './components/Video';
 
-const grid = css({
-  height: '100vh',
-  padding: '3rem 1.5rem 1.5rem 1.5rem',
-  backgroundColor: "white",
-});
-
-const gridItem = css({
-  height: "100%",
-})
-
-const columns = css({
-  height: '100%',
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'space-around',
-  alignItems: "center",
-  padding: '20px',
-  backgroundColor: "rgb(246, 245, 241)",
-  borderRadius: '10px'
-});
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#3f51b5'
-    },
-    text: {
-      primary: '#3f51b5' 
-    }
-  }
-})
-
-function App() {
+export default function App() {
   const [userId, setUserId] = useState(null);
   const [interests, setInterests] = useState([]);
   const [remoteSocketId, setRemoteSocketId] = useState(null);
@@ -68,7 +37,7 @@ function App() {
       <Grid container component="main" columnSpacing={3} css={grid}>
         {/* LEFT COLUMN */}
         <Grid item xs={5} sx={gridItem}>
-          <Stack sx={columns}>
+          <Stack sx={leftColumn}>
             {mode === SIGNED_OUT && (
               <>
                 <LoginForm formRef={loginFormElements} onSubmit={handleLogin} />
@@ -113,7 +82,7 @@ function App() {
         </Grid>
         {/* RIGHT COLUMN */}
         <Grid item xs={7} sx={gridItem}>
-          <Stack css={columns}>
+          <Stack css={rightColumn}>
             <Video
               videoRef={videoRef}
               remoteVideoRef={remoteVideoRef}
@@ -126,4 +95,45 @@ function App() {
   );
 }
 
-export default App;
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#3f51b5'
+    },
+    text: {
+      primary: '#3f51b5' 
+    }
+  }
+});
+
+const grid = css({
+  height: '100vh',
+  padding: '3rem 1.5rem 1.5rem 1.5rem',
+  backgroundColor: "white",
+});
+
+const gridItem = css({
+  height: "100%",
+})
+
+const columns = css({
+  height: '100%',
+  backgroundColor: "rgb(246, 245, 241)",
+  borderRadius: '10px',
+});
+
+const leftColumn = css(columns, {
+  display: 'flex',
+  alignItems: "center",
+  flexDirection: 'column',
+  justifyContent: 'space-around',
+  padding: '20px'
+});
+
+const rightColumn = css(columns, {
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  alignItems: 'center',
+  height: '100%'
+});
