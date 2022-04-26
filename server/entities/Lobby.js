@@ -26,7 +26,7 @@ class Lobby {
   removeUserInterest(interest, userId) {
     const usersWithInterest = this.usersByInterest[interest];
 
-    if (usersWithInterest && usersWithInterest.length) {
+    if (usersWithInterest && usersWithInterest.size) {
       usersWithInterest.delete(userId);
     } else {
       delete this.usersByInterest[interest];
