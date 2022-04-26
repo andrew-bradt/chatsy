@@ -1,6 +1,17 @@
+// TBD: add a removeMatch method
+
 class Lobby {
   constructor() {
     this.usersByInterest = {};
+    this.usersPreviousMatches = {};
+  }
+
+  addMatch(userIdKey, connectedUserId) {
+    this.usersPreviousMatches[userIdKey].add(connectedUserId);
+  }
+
+  getUserWhoHasNotMatched (userIdLookup, userIdToCompare) {
+    return !this.usersPreviousMatches[userIdLookup].has(userIdToCompare) && userIdToCompare;
   }
 
   addInterest(interest, userId) {
