@@ -12,12 +12,7 @@ const matchUsers = (activeUsers, lobby, io) => {
         const usersInCall = [];
         const usersHasInterestIter = usersHasInterest.values();
         // put those two users in a call
-
-        // TODO
-          // while usersInCall is not length 2, 
-          // get the next user in the set and check if they've matched w previous user
-          // if they have not, push that user and invoke addMatch
-        // const {value: userIdToCompare, done} = usersHasInterestIter.next();
+          
         const {value, done} = usersHasInterestIter.next();
         usersInCall.push(value);
         const userIdLookup = usersInCall[0];
@@ -31,10 +26,6 @@ const matchUsers = (activeUsers, lobby, io) => {
           shouldEndLoop = done;
         }
 
-        // for (let i = 0; i < 2; i++) {
-        //   const user = activeUsers.users[usersHasInterestsIter.next().value];
-        //   usersInCall.push(user);
-        // }
         // use socket.io to send one user the other user's peerId to start call
         if (usersInCall.length === 2) {
           lobby.addMatch(usersInCall[0], usersInCall[1]);
