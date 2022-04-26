@@ -28,6 +28,7 @@ const message = css({
   padding: '2%',
   marginBottom: '2%',
   borderRadius: '15px',
+  wordWrap: 'break-word'
 });
 
 const peerMessage = (text) => css(message, {
