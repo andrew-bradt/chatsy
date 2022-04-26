@@ -20,3 +20,13 @@ INSERT INTO interests (id, label) VALUES (DEFAULT, 'Mental Health');
 INSERT INTO interests (id, label) VALUES (DEFAULT, 'Environment');
 INSERT INTO interests (id, label) VALUES (DEFAULT, 'Operating Systems');
 INSERT INTO interests (id, label) VALUES (DEFAULT, 'Social Networking');
+
+INSERT INTO interests (id, label) VALUES (DEFAULT, 'Musical Instruments');
+INSERT INTO interests (id, label) VALUES (DEFAULT, 'Careers');
+INSERT INTO interests (id, label) VALUES (DEFAULT, 'Rock Music');
+INSERT INTO interests (id, label) VALUES (DEFAULT, 'Books and Literature');
+INSERT INTO interests (id, label) VALUES (DEFAULT, 'Cats');
+INSERT INTO interests (id, label) VALUES (DEFAULT, 'Pop Culture');
+INSERT INTO interests (id, label) VALUES (DEFAULT, 'Physics');
+INSERT INTO interests (id, label) VALUES (DEFAULT, 'Sports');
+INSERT INTO interests (id, label) VALUES (DEFAULT, 'Computer Peripherals');
