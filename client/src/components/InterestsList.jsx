@@ -18,7 +18,7 @@ export default function InterestsList(props) {
 
   return (
     <Box>
-      <Typography component="h1" variant="h5">Interests For Matching</Typography>
+      <Typography component="h1" variant="h5" sx={{margin: '0.2rem'}}>Interests For Matching</Typography>
       {parsedInterests}
     </Box>
   )
