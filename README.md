@@ -8,7 +8,7 @@ A web application for enabling video and text chat between random users based on
 
 ## Directions
 
-The easiest way to try the application is to enter one of our seeded email addresses into the "Email Address" field and clicking "Sign In".  Here are the seeded email addresses:
+[Visit the application](https://chatsy-client2.herokuapp.com/) and enter one of the following email addresses into the "Email Address" field and click "Sign In":
   - rick.sandchez@gmail.com
   - lisa.simpson@gmail.com
   - link@yahoo.com
@@ -20,8 +20,6 @@ The easiest way to try the application is to enter one of our seeded email addre
   - test3@test.com
   - chatsytest@gmail.com
 
-- TODO: Mention that you can ask to use your email for testing if you wish to try with your own account
-- TODO: Mention Using Free Tier of Heroku so Server may take longer to start-up at beginning of use
-
+Disclaimer: This app is hosted using free dynamos on Heroku and may be in a sleep state when you first navigate to the application or sign-in.  This may initially impact loading times at these stages.  
 
 
