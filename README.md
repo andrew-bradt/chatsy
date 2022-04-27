@@ -32,4 +32,7 @@ A web application for enabling video and text chat between random users based on
   - Back-to-Back pairing capability when a connection ends between two users
   - Sending contact info to a connected peer and maintaining a history of received contact info during a session
   
-## Future Development
+## Future Features
+  - Leverage more data API's to gain further insights of user interests
+  - Group matchmaking
+  - Make received contact info persistant
