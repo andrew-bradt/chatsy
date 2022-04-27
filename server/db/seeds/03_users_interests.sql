@@ -48,3 +48,30 @@ INSERT INTO users_interests (user_id, interest_id) VALUES (4, 19) ON CONFLICT(us
 INSERT INTO users_interests (user_id, interest_id) VALUES (3, 7) ON CONFLICT(user_id, interest_id) DO NOTHING;
 INSERT INTO users_interests (user_id, interest_id) VALUES (5, 1) ON CONFLICT(user_id, interest_id) DO NOTHING;
 INSERT INTO users_interests (user_id, interest_id) VALUES (6, 6) ON CONFLICT(user_id, interest_id) DO NOTHING;
+
+
+INSERT INTO users_interests (user_id, interest_id) VALUES (7, 2) ON CONFLICT (user_id, interest_id) DO NOTHING;
+INSERT INTO users_interests (user_id, interest_id) VALUES (7, 24) ON CONFLICT (user_id, interest_id) DO NOTHING;
+INSERT INTO users_interests (user_id, interest_id) VALUES (7, 25) ON CONFLICT (user_id, interest_id) DO NOTHING;
+INSERT INTO users_interests (user_id, interest_id) VALUES (7, 26) ON CONFLICT (user_id, interest_id) DO NOTHING;
+INSERT INTO users_interests (user_id, interest_id) VALUES (7, 27) ON CONFLICT (user_id, interest_id) DO NOTHING;
+INSERT INTO users_interests (user_id, interest_id) VALUES (7, 28) ON CONFLICT (user_id, interest_id) DO NOTHING;
+INSERT INTO users_interests (user_id, interest_id) VALUES (7, 29) ON CONFLICT (user_id, interest_id) DO NOTHING;
+INSERT INTO users_interests (user_id, interest_id) VALUES (7, 20) ON CONFLICT (user_id, interest_id) DO NOTHING;
+INSERT INTO users_interests (user_id, interest_id) VALUES (7, 31) ON CONFLICT (user_id, interest_id) DO NOTHING;
+INSERT INTO users_interests (user_id, interest_id) VALUES (7, 32) ON CONFLICT (user_id, interest_id) DO NOTHING;
+INSERT INTO users_interests (user_id, interest_id) VALUES (7, 33) ON CONFLICT (user_id, interest_id) DO NOTHING;
+
+INSERT INTO users_interests (user_id, interest_id) VALUES (8, 2) ON CONFLICT (user_id, interest_id) DO NOTHING;
+INSERT INTO users_interests (user_id, interest_id) VALUES (8, 24) ON CONFLICT (user_id, interest_id) DO NOTHING;
+INSERT INTO users_interests (user_id, interest_id) VALUES (8, 25) ON CONFLICT (user_id, interest_id) DO NOTHING;
+INSERT INTO users_interests (user_id, interest_id) VALUES (8, 26) ON CONFLICT (user_id, interest_id) DO NOTHING;
+
+INSERT INTO users_interests (user_id, interest_id) VALUES (9, 27) ON CONFLICT (user_id, interest_id) DO NOTHING;
+INSERT INTO users_interests (user_id, interest_id) VALUES (9, 28) ON CONFLICT (user_id, interest_id) DO NOTHING;
+INSERT INTO users_interests (user_id, interest_id) VALUES (9, 29) ON CONFLICT (user_id, interest_id) DO NOTHING;
+INSERT INTO users_interests (user_id, interest_id) VALUES (9, 20) ON CONFLICT (user_id, interest_id) DO NOTHING;
+
+INSERT INTO users_interests (user_id, interest_id) VALUES (10, 31) ON CONFLICT (user_id, interest_id) DO NOTHING;
+INSERT INTO users_interests (user_id, interest_id) VALUES (10, 32) ON CONFLICT (user_id, interest_id) DO NOTHING;
+INSERT INTO users_interests (user_id, interest_id) VALUES (10, 33) ON CONFLICT (user_id, interest_id) DO NOTHING;

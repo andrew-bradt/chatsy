@@ -29,7 +29,7 @@ export default function useConnections({ userId, setRemoteSocketId, setUserId, s
       peer.current = new Peer(peerId);
     });
   };
-
+  
   // check oauth code from URL and do api calls
   useEffect(() => {
     const url = window.location.search;
@@ -74,15 +74,8 @@ export default function useConnections({ userId, setRemoteSocketId, setUserId, s
         socket.current.emit("add-socket-id", { userId });
       });
 
-      socket.current.on("contact-info", ({ email }) => console.log(email));
-
       // listen for call event, and answer
       peer.current.on("call", call => {
-        console.log(call.metadata);
-        console.log(
-          "shared interests from peer on call: ",
-          call.metadata.sharedInterests
-        );
         setRemoteSocketId(call.metadata.remoteSocketId);
         setSharedInterests(call.metadata.sharedInterests);
 
@@ -99,10 +92,6 @@ export default function useConnections({ userId, setRemoteSocketId, setUserId, s
 
         const socketId = socket.current.id;
         setRemoteSocketId(remoteSocketId);
-        console.log(
-          "shared interests from socket callThisPeer: ",
-          sharedInterests
-        );
         setSharedInterests(sharedInterests);
 
         const data = {
@@ -126,7 +115,6 @@ export default function useConnections({ userId, setRemoteSocketId, setUserId, s
 
       // end the peer call after getting endCall event from server
       socket.current.on("endCall", () => {
-        console.log("the other user ended the call");
         socket.current.emit("enter-lobby", { userId });
         endCall();
       });

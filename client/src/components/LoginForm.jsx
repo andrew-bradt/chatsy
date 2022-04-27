@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios';
-import { Box, Button, Avatar, Typography, TextField, Grid, Link } from "@mui/material";
+import { Box, Button, Avatar, Typography, TextField, Grid} from "@mui/material";
 import { Google } from "@mui/icons-material";
 import {css} from '@emotion/react';
 
@@ -12,7 +12,8 @@ export default function LoginForm({ onSubmit, formRef }) {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    width: '90%'
+    width: '90%',
+    marginTop: '35%'
   })
 
   const buttonStyle = css({
@@ -37,8 +38,8 @@ export default function LoginForm({ onSubmit, formRef }) {
   return (
     <Box sx={formStyle}>
       <Avatar sx={{ m: 1, bgcolor: 'primary.main' }} />
-      <Box ref={formRef} component="form" onSubmit={login} sx={formStyle}>
-        <Typography component="h1" variant="h5" color={'primary.main'}>
+      <Box ref={formRef} component="form" onSubmit={login} fullWidth>
+        <Typography component="h1" variant="h5" color={'primary.main'} align='center'>
           Sign In
         </Typography>
         <TextField
