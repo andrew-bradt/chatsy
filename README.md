@@ -13,7 +13,7 @@ A web application for enabling video and text chat between random users based on
 
 #### Login demo
 <p align="center">
-  <img src="https://github.com/Roy7384/chatsy/blob/docs/docs/login-demo.gif?raw=true" />
+  <img src="https://github.com/Roy7384/chatsy/blob/docs/docs/login-demo.gif?raw=true" width='900'/>
 </p>
 
 ## Authors
