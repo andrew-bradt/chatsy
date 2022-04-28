@@ -54,7 +54,7 @@ export default function useConnections({ userId, setRemoteSocketId, setUserId, s
   useEffect(() => {
     const constraints = {
       video: true,
-      audio: false
+      audio: true
     };
     navigator.mediaDevices
       .getUserMedia(constraints)
