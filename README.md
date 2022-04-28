@@ -2,16 +2,16 @@
 A web application for enabling video and text chat between random users based on their interests.
 
 ## Screenshots
-#### Landing page
-!["landing-page"](https://github.com/Roy7384/chatsy/blob/docs/docs/landing-page.png?raw=true)
 
-#### Waiting for match
+### Lobby
 !["while-matching"](https://github.com/Roy7384/chatsy/blob/docs/docs/while-matching.png?raw=true)
 
-#### In chat
+### Connected
 !["in-chat"](https://github.com/Roy7384/chatsy/blob/docs/docs/in-chat.png?raw=true)
+### Logged Out
+!["landing-page"](https://github.com/Roy7384/chatsy/blob/docs/docs/landing-page.png?raw=true)
 
-#### Login demo
+### Login
 <p align="center">
   <img src="https://github.com/Roy7384/chatsy/blob/docs/docs/login-demo.gif?raw=true" width='750'/>
 </p>
