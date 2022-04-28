@@ -1,6 +1,9 @@
 # Chatsy
 A web application for enabling video and text chat between random users based on their interests.
 
+## Authors
+[Andrew Bradt](https://github.com/andrew-bradt), [Roy Liu](https://github.com/Roy7384)
+
 ## Screenshots
 
 ### Lobby
@@ -16,9 +19,6 @@ A web application for enabling video and text chat between random users based on
 <p align="center">
   <img src="/docs/login-demo.gif" width='750'/>
 </p>
-
-## Authors
-[Andrew Bradt](https://github.com/andrew-bradt), [Roy Liu](https://github.com/Roy7384)
 
 ## Directions
 
