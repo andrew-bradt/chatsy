@@ -4,16 +4,17 @@ A web application for enabling video and text chat between random users based on
 ## Screenshots
 
 ### Lobby
-!["while-matching"](https://github.com/Roy7384/chatsy/blob/docs/docs/while-matching.png?raw=true)
+!["while-matching"](docs/while-matching.png)
 
 ### Connected
-!["in-chat"](https://github.com/Roy7384/chatsy/blob/docs/docs/in-chat.png?raw=true)
+!["in-chat"](docs/in-chat.png)
+
 ### Logged Out
-!["landing-page"](https://github.com/Roy7384/chatsy/blob/docs/docs/landing-page.png?raw=true)
+!["landing-page"](/docs/landing-page.png)
 
 ### Login
 <p align="center">
-  <img src="https://github.com/Roy7384/chatsy/blob/docs/docs/login-demo.gif?raw=true" width='750'/>
+  <img src="/docs/login-demo.gif" width='750'/>
 </p>
 
 ## Authors
