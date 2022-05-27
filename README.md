@@ -32,7 +32,6 @@ A web application for enabling video and text chat between random users based on
   - <span>test1</span>@test.com
   - <span>test2</span>@test.com
   - <span>test3</span>@test.com
-  - <span>chatsytest</span>@gmail.com
 
 *Disclaimer: This app is hosted using free dynamos on Heroku and may be in a sleep state when you first navigate to the application or sign in. This may initially impact loading times at these stages.*
 
